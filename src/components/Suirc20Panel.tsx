@@ -261,11 +261,10 @@ export function Suirc20Panel() {
               <table className="table">
                 <thead>
                   <tr>
-                    <th className="tick-col">Tick</th>
+                    <th className="tick-col">名称</th>
                     <th>铸造进度</th>
-                    <th className="num">持有</th>
-                    <th className="num hide-narrow">限额</th>
-                    <th className="hide-narrow">部署</th>
+                    <th className="num">持有者</th>
+                    <th>创建时间</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -316,8 +315,7 @@ export function Suirc20Panel() {
                         </div>
                       </td>
                       <td className="num">{t.holderCount}</td>
-                      <td className="num hide-narrow">{formatCompactAmount(t.lim)}</td>
-                      <td className="muted hide-narrow">{formatShortDate(t.deployTimeUtc ?? t.deployTimeBeijing ?? t.createdTs)}</td>
+                      <td>{formatShortDate(t.deployTimeUtc ?? t.deployTimeBeijing ?? t.createdTs)}</td>
                     </tr>
                     );
                   })}

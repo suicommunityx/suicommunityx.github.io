@@ -1,5 +1,5 @@
 import type { TickInfo } from '../lib/sui';
-import { formatCompactAmount, formatShortDate, mistToSui, progressPct } from '../lib/format';
+import { formatCompactAmount, formatShortDate, progressPct } from '../lib/format';
 
 type Props = {
   ticks: TickInfo[];
@@ -30,9 +30,8 @@ export function TickList({ ticks, loading, onSelect, onView, selected, holderCou
           <tr>
             <th className="tick-col">名称</th>
             <th>铸造进度</th>
-            <th className="num">持有</th>
-            <th className="num hide-narrow">费</th>
-            <th className="hide-narrow">创建</th>
+            <th className="num">持有者</th>
+            <th>创建时间</th>
           </tr>
         </thead>
         <tbody>
@@ -71,10 +70,7 @@ export function TickList({ ticks, loading, onSelect, onView, selected, holderCou
                   </div>
                 </td>
                 <td className="num">{holders == null ? '—' : holders}</td>
-                <td className="num hide-narrow">
-                  {t.mintFee == null ? '—' : t.mintFee === 0n ? '0' : mistToSui(t.mintFee)}
-                </td>
-                <td className="hide-narrow">{formatShortDate(t.startTimeMs)}</td>
+                <td>{formatShortDate(t.startTimeMs)}</td>
               </tr>
             );
           })}

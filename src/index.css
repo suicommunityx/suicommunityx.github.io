@@ -168,7 +168,7 @@ h3 { font-size: 20px; font-weight: 600; }
   width: 100%;
   min-width: 0;
   border-collapse: collapse;
-  table-layout: auto;
+  table-layout: fixed;
   font-size: 13px;
 }
 .table th, .table td {
@@ -177,8 +177,14 @@ h3 { font-size: 20px; font-weight: 600; }
   border-bottom: 1px solid var(--line);
   vertical-align: middle;
   white-space: nowrap;
-  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+/* Inscription list col widths: 名称 | 铸造进度(flex) | 持有者 | 创建时间 */
+.table thead th.tick-col { width: 18%; }
+.table thead th:nth-child(2) { width: auto; }
+.table thead th.num { width: 16%; }
+.table thead th:nth-child(4) { width: 28%; }
 .table th { color: var(--muted); font-weight: 500; background: #fafafa; position: sticky; top: 0; }
 .table td.num, .table th.num {
   text-align: right;
@@ -340,8 +346,11 @@ code { font-size: 12px; background: #eee; padding: 1px 6px; border-radius: 6px; 
     color: var(--muted);
     padding: 8px 12px 0;
   }
-  .table { min-width: 0; width: 100%; font-size: 12px; }
-  .table th, .table td { padding: 6px 8px; white-space: nowrap; }
+  .table { min-width: 0; width: 100%; font-size: 11px; table-layout: fixed; }
+  .table th, .table td { padding: 6px 6px; white-space: nowrap; }
+  .table thead th.tick-col { width: 16%; }
+  .table thead th.num { width: 18%; }
+  .table thead th:nth-child(4) { width: 26%; }
   .table-wrap:not(.market-table-wrap)::before { display: none; }
   .table .hide-narrow { display: none; }
   .tag.v2, .tag { font-size: 10px; padding: 0 5px; margin-left: 4px; }
@@ -389,7 +398,7 @@ code { font-size: 12px; background: #eee; padding: 1px 6px; border-radius: 6px; 
 /* Mint progress column (Apple-style) — flexible, fills leftover table width */
 .mint-progress-cell {
   width: auto;
-  min-width: 140px;
+  min-width: 0;
   white-space: normal;
 }
 .mint-progress {
@@ -409,8 +418,8 @@ code { font-size: 12px; background: #eee; padding: 1px 6px; border-radius: 6px; 
 .mint-progress-amt { color: var(--fg); font-variant-numeric: tabular-nums; }
 .mint-progress-pct { color: var(--muted); font-variant-numeric: tabular-nums; }
 @media (max-width: 720px) {
-  .mint-progress-cell { min-width: 100px; padding-right: 6px; }
+  .mint-progress-cell { min-width: 0; padding-right: 4px; }
   .mint-progress { gap: 3px; }
-  .mint-progress-meta { font-size: 10px; gap: 4px; }
+  .mint-progress-meta { font-size: 10px; gap: 4px; overflow: hidden; }
   .table .tick .tag, .table td .tag { display: none; }
 }
