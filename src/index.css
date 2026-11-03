@@ -428,11 +428,19 @@ code { font-size: 12px; background: #eee; padding: 1px 6px; border-radius: 6px; 
 /* Exact-by-default amounts; compact only when this box overflows */
 .smart-amount {
   display: block;
+  position: relative;
   max-width: 100%;
   overflow: hidden;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
   text-align: inherit;
+}
+.smart-amount-probe {
+  position: absolute;
+  left: 0; top: 0;
+  visibility: hidden;
+  pointer-events: none;
+  white-space: nowrap;
 }
 td.num .smart-amount { text-align: right; margin-left: auto; }
 .mint-progress-amt {
@@ -507,3 +515,12 @@ td.num .smart-amount { text-align: right; margin-left: auto; }
 .wallet-list-meta { font-size: 12px; white-space: nowrap; }
 .wallet-list-empty { padding: 16px 8px; text-align: center; font-size: 13px; }
 .wallet-modal-err { color: #b00020; font-size: 13px; margin: 10px 0 0; }
+
+
+.infinite-sentinel {
+  height: 1px; width: 100%; pointer-events: none;
+}
+.infinite-status {
+  text-align: center; font-size: 12px; color: var(--muted);
+  padding: 10px 8px 4px;
+}

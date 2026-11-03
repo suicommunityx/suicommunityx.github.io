@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useInfiniteSlice } from '../hooks/useInfiniteSlice';
 import { useCurrentAccount, useSignAndExecuteTransaction } from '@mysten/dapp-kit';
 import { ConnectWalletButton } from './ConnectWalletButton';
 import type { Transaction } from '@mysten/sui/transactions';
@@ -91,6 +92,14 @@ export function Suirc20Panel() {
     if (!s) return ticks;
     return ticks.filter((t) => t.tick.toLowerCase().includes(s.toLowerCase()));
   }, [ticks, q]);
+
+  const {
+    visible: listVisible,
+    hasMore: listHasMore,
+    sentinelRef: listSentinelRef,
+    shown: listShown,
+    total: listTotal,
+  } = useInfiniteSlice(filtered, PAGE);
 
   const loadHolders = useCallback(async (tick: string, preferV2 = false) => {
     setLoadingHolders(true);
@@ -270,7 +279,7 @@ export function Suirc20Panel() {
                   </tr>
                 </thead>
                 <tbody>
-                  {filtered.map((t) => {
+                  {listVisible.map((t) => {
                     const max = BigInt(t.max || '0');
                     const minted = BigInt(t.minted || '0');
                     const pct =
@@ -323,6 +332,14 @@ export function Suirc20Panel() {
                   })}
                 </tbody>
               </table>
+              {listHasMore ? <div ref={listSentinelRef} className="infinite-sentinel" aria-hidden /> : null}
+              <div className="infinite-status">
+                {listHasMore
+                  ? `已显示 ${listShown} / ${listTotal} · 上滑加载更多`
+                  : listTotal
+                    ? `共 ${listTotal} 条`
+                    : '暂无数据'}
+              </div>
             </div>
           )}
 

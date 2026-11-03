@@ -6,46 +6,61 @@ type Value = string | number | bigint;
 type Props = {
   value: Value;
   className?: string;
-  /** Optional title override; defaults to exact full string. */
   title?: string;
 };
 
-function overflows(el: HTMLElement): boolean {
-  return el.scrollWidth > el.clientWidth + 1;
-}
-
-/** Exact amount by default; switches to K/M/B… only when this element overflows. */
+/** Exact by default; compact only when the box is too narrow. Stable — no observer loops. */
 export function SmartAmount({ value, className, title }: Props) {
-  const ref = useRef<HTMLSpanElement>(null);
+  const boxRef = useRef<HTMLSpanElement>(null);
+  const probeRef = useRef<HTMLSpanElement>(null);
   const full = useMemo(() => formatExactAmount(value), [value]);
   const short = useMemo(() => formatCompactAmount(value), [value]);
   const [compact, setCompact] = useState(false);
+  const compactRef = useRef(false);
 
   useLayoutEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+    const box = boxRef.current;
+    const probe = probeRef.current;
+    if (!box || !probe) return;
 
+    let raf = 0;
     const sync = () => {
-      // Measure with full text against the constrained box.
-      el.textContent = full;
-      const need = overflows(el);
-      el.textContent = need ? short : full;
-      setCompact((prev) => (prev === need ? prev : need));
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const room = box.clientWidth;
+        if (room <= 0) return;
+        const need = probe.scrollWidth > room + 1;
+        // Hysteresis: only expand back when there is clear spare room
+        let next = compactRef.current;
+        if (!compactRef.current && need) next = true;
+        else if (compactRef.current && probe.scrollWidth < room - 12) next = false;
+        if (next !== compactRef.current) {
+          compactRef.current = next;
+          setCompact(next);
+        }
+      });
     };
 
     sync();
+    // Observe the constraining ancestor (cell), never the text node we mutate.
+    const target = box.parentElement || box;
     const ro = new ResizeObserver(sync);
-    ro.observe(el);
-    if (el.parentElement) ro.observe(el.parentElement);
-    return () => ro.disconnect();
+    ro.observe(target);
+    return () => {
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+    };
   }, [full, short]);
 
   return (
     <span
-      ref={ref}
+      ref={boxRef}
       className={['smart-amount', className].filter(Boolean).join(' ')}
       title={title ?? full}
     >
+      <span ref={probeRef} className="smart-amount-probe" aria-hidden>
+        {full}
+      </span>
       {compact ? short : full}
     </span>
   );
@@ -57,9 +72,9 @@ type RangeProps = {
   className?: string;
 };
 
-/** "minted / max" as one measurable unit — both sides compact together if the pair overflows. */
 export function SmartAmountRange({ minted, max, className }: RangeProps) {
-  const ref = useRef<HTMLSpanElement>(null);
+  const boxRef = useRef<HTMLSpanElement>(null);
+  const probeRef = useRef<HTMLSpanElement>(null);
   const fullA = useMemo(() => formatExactAmount(minted), [minted]);
   const fullB = useMemo(() => formatExactAmount(max), [max]);
   const shortA = useMemo(() => formatCompactAmount(minted), [minted]);
@@ -67,31 +82,49 @@ export function SmartAmountRange({ minted, max, className }: RangeProps) {
   const full = `${fullA} / ${fullB}`;
   const short = `${shortA} / ${shortB}`;
   const [compact, setCompact] = useState(false);
+  const compactRef = useRef(false);
 
   useLayoutEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+    const box = boxRef.current;
+    const probe = probeRef.current;
+    if (!box || !probe) return;
 
+    let raf = 0;
     const sync = () => {
-      el.textContent = full;
-      const need = overflows(el);
-      el.textContent = need ? short : full;
-      setCompact((prev) => (prev === need ? prev : need));
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const room = box.clientWidth;
+        if (room <= 0) return;
+        const need = probe.scrollWidth > room + 1;
+        let next = compactRef.current;
+        if (!compactRef.current && need) next = true;
+        else if (compactRef.current && probe.scrollWidth < room - 12) next = false;
+        if (next !== compactRef.current) {
+          compactRef.current = next;
+          setCompact(next);
+        }
+      });
     };
 
     sync();
+    const target = box.parentElement || box;
     const ro = new ResizeObserver(sync);
-    ro.observe(el);
-    if (el.parentElement) ro.observe(el.parentElement);
-    return () => ro.disconnect();
+    ro.observe(target);
+    return () => {
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+    };
   }, [full, short]);
 
   return (
     <span
-      ref={ref}
+      ref={boxRef}
       className={['smart-amount', 'smart-amount-range', className].filter(Boolean).join(' ')}
       title={full}
     >
+      <span ref={probeRef} className="smart-amount-probe" aria-hidden>
+        {full}
+      </span>
       {compact ? short : full}
     </span>
   );
