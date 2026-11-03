@@ -264,10 +264,10 @@ export function Suirc20Panel() {
                     <th className="tick-col">Tick</th>
                     <th className="num">进度</th>
                     <th className="num">已铸</th>
-                    <th className="num">上限</th>
-                    <th className="num">限额</th>
-                    <th className="num hide-narrow">持有</th>
-                    <th>部署</th>
+                    <th className="num">持有</th>
+                    <th className="num hide-narrow">上限</th>
+                    <th className="num hide-narrow">限额</th>
+                    <th className="hide-narrow">部署</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -299,10 +299,10 @@ export function Suirc20Panel() {
                       </td>
                       <td className="num">{t.progress.toFixed(1)}%</td>
                       <td className="num">{formatCompactAmount(t.minted)}</td>
-                      <td className="num">{formatCompactAmount(t.max)}</td>
-                      <td className="num">{formatCompactAmount(t.lim)}</td>
-                      <td className="num hide-narrow">{t.holderCount}</td>
-                      <td className="muted">{formatShortDate(t.deployTimeUtc ?? t.deployTimeBeijing ?? t.createdTs)}</td>
+                      <td className="num">{t.holderCount}</td>
+                      <td className="num hide-narrow">{formatCompactAmount(t.max)}</td>
+                      <td className="num hide-narrow">{formatCompactAmount(t.lim)}</td>
+                      <td className="muted hide-narrow">{formatShortDate(t.deployTimeUtc ?? t.deployTimeBeijing ?? t.createdTs)}</td>
                     </tr>
                   ))}
                 </tbody>

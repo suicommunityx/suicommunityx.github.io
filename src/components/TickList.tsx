@@ -18,11 +18,12 @@ export function TickList({ ticks, loading, onSelect, onView, selected }: Props) 
         <thead>
           <tr>
             <th className="tick-col">名称</th>
-            <th className="num">总量</th>
-            <th className="num">已铸/剩余</th>
             <th className="num">进度</th>
-            <th>创建</th>
-            <th className="num">费</th>
+            <th className="num">已铸</th>
+            <th className="num hide-narrow">剩余</th>
+            <th className="num hide-narrow">总量</th>
+            <th className="hide-narrow">创建</th>
+            <th className="num hide-narrow">费</th>
           </tr>
         </thead>
         <tbody>
@@ -47,16 +48,15 @@ export function TickList({ ticks, loading, onSelect, onView, selected }: Props) 
                     {t.tick}
                   </button>
                 </td>
-                <td className="num">{formatCompactAmount(t.totalSupply)}</td>
-                <td className="num">
-                  {formatCompactAmount(t.currentSupply)}/{formatCompactAmount(t.remain)}
-                </td>
                 <td className="num">
                   <span className="bar-label">{pct.toFixed(1)}%</span>
-                  {closed && <span className="pill danger">罄</span>}
+                  {closed ? <span className="pill danger">罄</span> : null}
                 </td>
-                <td>{formatShortDate(t.startTimeMs)}</td>
-                <td className="num">
+                <td className="num">{formatCompactAmount(t.currentSupply)}</td>
+                <td className="num hide-narrow">{formatCompactAmount(t.remain)}</td>
+                <td className="num hide-narrow">{formatCompactAmount(t.totalSupply)}</td>
+                <td className="hide-narrow">{formatShortDate(t.startTimeMs)}</td>
+                <td className="num hide-narrow">
                   {t.mintFee == null ? '—' : t.mintFee === 0n ? '0' : mistToSui(t.mintFee)}
                 </td>
               </tr>

@@ -164,16 +164,30 @@ h3 { font-size: 20px; font-weight: 600; }
 
 .table-wrap { overflow: auto; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; -webkit-overflow-scrolling: touch; }
 .table {
-  width: max-content; min-width: 100%; max-width: none;
-  border-collapse: collapse; table-layout: auto; font-size: 13px;
+  /* Content-sized: do NOT stretch to 100% (avoids one column eating leftover space) */
+  width: max-content;
+  min-width: 0;
+  max-width: none;
+  border-collapse: collapse;
+  table-layout: auto;
+  font-size: 13px;
 }
 .table th, .table td {
-  padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--line);
-  vertical-align: middle; white-space: nowrap; width: 1%;
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+  white-space: nowrap;
+  width: auto;
 }
 .table th { color: var(--muted); font-weight: 500; background: #fafafa; position: sticky; top: 0; }
-.table td.num, .table th.num { text-align: right; font-variant-numeric: tabular-nums; }
-.table td.tick, .table th.tick-col { width: auto; }
+.table td.num, .table th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  padding-left: 12px;
+  padding-right: 10px;
+}
+.table td.tick, .table th.tick-col { text-align: left; }
 .table tr:hover { background: #fafafa; cursor: pointer; }
 .table tr.selected { background: #eef5ff; }
 .tick { font-weight: 600; letter-spacing: 0.02em; }
