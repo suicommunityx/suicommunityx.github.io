@@ -5,7 +5,7 @@ on:
     branches: [main]
   workflow_dispatch:
   workflow_run:
-    workflows: ['Refresh holders snapshot']
+    workflows: ['Refresh holders snapshot', 'Refresh SUIRC-20 index']
     types: [completed]
 
 permissions:

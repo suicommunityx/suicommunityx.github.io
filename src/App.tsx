@@ -3,6 +3,7 @@ import { ConnectButton, useCurrentAccount } from '@mysten/dapp-kit';
 import { TickList } from './components/TickList';
 import { ConfirmModal } from './components/ConfirmModal';
 import { HoldersPanel } from './components/HoldersPanel';
+import { Suirc20Panel } from './components/Suirc20Panel';
 import type { TickInfo, MovescriptionHolding, MarketListing } from './lib/sui';
 import {
   loadAllTicks,
@@ -25,28 +26,35 @@ import { useSignAndExecuteTransaction } from '@mysten/dapp-kit';
 import type { Transaction } from '@mysten/sui/transactions';
 
 
-type Tab = 'ticks' | 'deploy' | 'mine' | 'market' | 'holders';
+type Section = 'suimint' | 'moves';
+type Tab = 'suimint' | 'ticks' | 'deploy' | 'mine' | 'market' | 'holders';
 
-const TAB_SET = new Set<Tab>(['ticks', 'deploy', 'mine', 'market', 'holders']);
+const TAB_SET = new Set<Tab>(['suimint', 'ticks', 'deploy', 'mine', 'market', 'holders']);
 
-function parseRoute(): { tab: Tab; holdersTick: string | null } {
+function parseRoute(): { section: Section; tab: Tab; holdersTick: string | null } {
   const raw = (window.location.hash || '').replace(/^#\/?/, '');
-  if (!raw) return { tab: 'ticks', holdersTick: null };
+  if (!raw || raw === 'suimint' || raw.startsWith('suimint/')) {
+    return { section: 'suimint', tab: 'suimint', holdersTick: null };
+  }
   const holdersMatch = raw.match(/^holders(?:\/([A-Za-z0-9_]+))?$/i);
   if (holdersMatch) {
     return {
+      section: 'moves',
       tab: 'holders',
       holdersTick: holdersMatch[1] ? holdersMatch[1].toUpperCase() : null,
     };
   }
   const tab = raw.split('/')[0].toLowerCase() as Tab;
-  if (TAB_SET.has(tab)) return { tab, holdersTick: null };
-  return { tab: 'ticks', holdersTick: null };
+  if (tab === 'suimint') return { section: 'suimint', tab: 'suimint', holdersTick: null };
+  if (TAB_SET.has(tab)) return { section: 'moves', tab, holdersTick: null };
+  return { section: 'suimint', tab: 'suimint', holdersTick: null };
 }
 
 function writeRoute(tab: Tab, holdersTick?: string | null) {
   let next = '';
-  if (tab === 'holders') {
+  if (tab === 'suimint') {
+    next = '#/suimint';
+  } else if (tab === 'holders') {
     next = holdersTick ? `#/holders/${holdersTick}` : '#/holders';
   } else if (tab !== 'ticks') {
     next = `#/${tab}`;
@@ -70,6 +78,7 @@ export default function App() {
   const { mutateAsync: signAndExecute } = useSignAndExecuteTransaction();
 
   const initialRoute = parseRoute();
+  const [section, setSection] = useState<Section>(initialRoute.section);
   const [tab, setTab] = useState<Tab>(initialRoute.tab);
   const [ticks, setTicks] = useState<TickInfo[]>([]);
   const [loadingTicks, setLoadingTicks] = useState(true);
@@ -158,6 +167,7 @@ export default function App() {
   useEffect(() => {
     const onHash = () => {
       const r = parseRoute();
+      setSection(r.section);
       setTab(r.tab);
       if (r.holdersTick) {
         setHoldersTick(r.holdersTick);
@@ -274,9 +284,20 @@ export default function App() {
       </header>
       <nav className="tabbar" aria-label="主导航">
         <div className="tabbar-inner">
+          <button
+            type="button"
+            className={`tab-btn ${section === 'suimint' ? 'active' : ''}`}
+            onClick={() => {
+              setSection('suimint');
+              setTab('suimint');
+              writeRoute('suimint');
+            }}
+          >
+            SuiMint 铭文
+          </button>
           {(
             [
-              ['ticks', '铭文列表'],
+              ['ticks', 'Movescriptions'],
               ['deploy', '创建铭文'],
               ['mine', '我的铭文'],
               ['market', '市场'],
@@ -286,8 +307,9 @@ export default function App() {
             <button
               key={k}
               type="button"
-              className={`tab-btn ${tab === k ? 'active' : ''}`}
+              className={`tab-btn ${section === 'moves' && tab === k ? 'active' : ''}`}
               onClick={() => {
+                setSection('moves');
                 setTab(k);
                 if (k === 'holders') {
                   const t = holdersTick || selected?.tick || 'SUIS';
@@ -305,9 +327,13 @@ export default function App() {
       </nav>
 
       <main className="main">
+        {section === 'suimint' ? (
+          <Suirc20Panel />
+        ) : (
+          <>
         <section className="hero">
           <h1>{SITE_NAME}</h1>
-          <p className="subtitle">简洁的链上铭文浏览器与交易面板</p>
+          <p className="subtitle">Movescriptions 铭文浏览器与交易面板</p>
         </section>
 
         {err && (
@@ -886,14 +912,17 @@ export default function App() {
             }}
           />
         )}
+          </>
+        )}
       </main>
 
       <footer className="footer">
         <p>
-          <strong>{SITE_NAME}</strong> 是独立的社区前端，仅与链上 Movescriptions
-          合约交互；与 SuiMint、Movescriptions 官方无隶属或合作关系。
+          <strong>{SITE_NAME}</strong> 是独立的社区前端：首页为 SuiMint SUIRC-20
+          索引浏览器；Movescriptions 标签页与链上 Movescriptions / market
+          合约交互。与 SuiMint、Movescriptions 官方无隶属或合作关系。
         </p>
-        <p className="muted">交易由你的钱包签名发送 · Mainnet · 不托管私钥</p>
+        <p className="muted">交易由你的钱包签名发送 · Mainnet · 不托管私钥 · 无 SuiMint 市场</p>
       </footer>
 
       <ConfirmModal

@@ -1,0 +1,439 @@
+{
+  "tick": "suis",
+  "updatedAtBeijing": "2026-11-03 10:29:42 Asia/Shanghai",
+  "totalHolders": 108,
+  "holders": [
+    {
+      "owner": "0xd3c8ad0b04ef36c817a75d2c44e8ffa13ebfbf59a606ade4445f9f1a01418b71",
+      "balance": "8460000"
+    },
+    {
+      "owner": "0x72ab4be61ca3691382e958f31e876113d5937452016ae5899b8ed25275a720b0",
+      "balance": "5810000"
+    },
+    {
+      "owner": "0x66bbe144d750770bbfd5d9f99cd6d7c22263cb520b72d3ea8400c9a3467b8aed",
+      "balance": "5810000"
+    },
+    {
+      "owner": "0xad0dd128c64a3671dee3e7c3409cc2ae63ad598ea996c366e278717c3977643e",
+      "balance": "5810000"
+    },
+    {
+      "owner": "0x216182aaa66a2a0a4797ad78fa70b38607ff6b7ad0732fa6ca996effcd363427",
+      "balance": "5810000"
+    },
+    {
+      "owner": "0xe6fbf99f7196d1b422b2da79c4f7fa466fa070a3a0ca92546d2a57201f8a1d12",
+      "balance": "5810000"
+    },
+    {
+      "owner": "0x2e713cd68c5c8f06a3bb76d0cd329073087e7f0265f3891c54dfabdddfff47d6",
+      "balance": "5810000"
+    },
+    {
+      "owner": "0x822ab95f219b7c08a089103aaddd398ca5caf44549680a8a9855d4289889bba5",
+      "balance": "5810000"
+    },
+    {
+      "owner": "0x1768d3e34835f8deebd94b50d2c06db4220bfa836048ba2db223f950d6d8e90f",
+      "balance": "5810000"
+    },
+    {
+      "owner": "0xf3e6172318b10cc70934ade4a827cf87fd48ffbef41b46bd84965a28c83ddbbd",
+      "balance": "5810000"
+    },
+    {
+      "owner": "0xa2c3d81653f3809bfcd274d5fdb083d8199cb6e5a9e45725784ca684e9ccbd46",
+      "balance": "5810000"
+    },
+    {
+      "owner": "0x1bd86822341262af11993a0f65f1cedb5eed45f530b7a742a0d2c9740044b538",
+      "balance": "4430000"
+    },
+    {
+      "owner": "0x945d34592dd2101b50788734dea4f86f71af8eda64460240ba0dab413aff36d7",
+      "balance": "4360000"
+    },
+    {
+      "owner": "0x234ac43eb8f528947a7f0fb01629d18c4afdd6ea09c163b8829f0b1ec6d2313d",
+      "balance": "4030000"
+    },
+    {
+      "owner": "0xbb53580efcce7fbaabd60defb5541ecec4831245fb3f046ed9fb633e4783da93",
+      "balance": "2837000"
+    },
+    {
+      "owner": "0xb62ac52f7a9f7b53be6dfeb2b1914da52ef90c4b4c61fc847db941049ec548ad",
+      "balance": "2823000"
+    },
+    {
+      "owner": "0xdcf5a37c9d5e6c5407a602ccf8cc9a6de5ece50854924febf16a8a1b1abd5df8",
+      "balance": "2752000"
+    },
+    {
+      "owner": "0x5b5ab5b056367c1c78ae61eead6ce00c2529acd0dd4f1883b3b2277fbf578df0",
+      "balance": "2734000"
+    },
+    {
+      "owner": "0xf497c154a24c56f145f0b5f11df9d71073a1108762e6d9a6bbff6be9478f08cc",
+      "balance": "2733000"
+    },
+    {
+      "owner": "0x6fd3c7d34e6d43bf29c097f01cd48f0572ce736aea50ffadc5cfcdb73f06a6bb",
+      "balance": "2724000"
+    },
+    {
+      "owner": "0x82c009c3a3b09cba355513ec31ccf3484a6fe7cb5438d707fb58b1e5c6ee25db",
+      "balance": "2712000"
+    },
+    {
+      "owner": "0xe54fb98246728c2d21490a64e11dbcfbe5c8c6c056a2d91b97fba789343f6b64",
+      "balance": "2695000"
+    },
+    {
+      "owner": "0x9ad9a7e3a815b749be150e852ee60b88eb08843c36a1c3d65467e271a87cec64",
+      "balance": "2510000"
+    },
+    {
+      "owner": "0x9d22423412d0248ca8bdbd70c46eab70d9e9de739558294a873a8052fe3f068f",
+      "balance": "2317000"
+    },
+    {
+      "owner": "0x69ba102b4105926d7b06e1a9d5972e26d1b23c16f5fb1fa9781c6ae7bd8f33c7",
+      "balance": "2309000"
+    },
+    {
+      "owner": "0xa93d04a2bce81990d619731d561508ef8ba130166f628c4eb7a1a6fdc19fb6b5",
+      "balance": "2300000"
+    },
+    {
+      "owner": "0x9f668c01238b319416a83d45a013aa802c8b10aae8c1503cf923984aa8b36d4c",
+      "balance": "2298000"
+    },
+    {
+      "owner": "0x9a149ecffd2ed62b6f1817313410f24d7f86780d7d925a940d13d9af8ff1e60e",
+      "balance": "2288000"
+    },
+    {
+      "owner": "0x290efa91eadc68e17c9cb375d67f4d132a1622f1ce1c431ae4bd3be59715db43",
+      "balance": "2279000"
+    },
+    {
+      "owner": "0x6cf462e6e35c1550d9fc68e3f8797d3d59687c2337cd2cba13f27e94ca4d180f",
+      "balance": "2275000"
+    },
+    {
+      "owner": "0xb003d122d31dd6ae757ee83f97c4e39aa653de3888bdeae7350199b269699cde",
+      "balance": "2260000"
+    },
+    {
+      "owner": "0xad36bbb9371faa2023583f8e6319ce312eaf286a4a416bb2703c9cfcec880c90",
+      "balance": "2248000"
+    },
+    {
+      "owner": "0xad09e784daf2ff2a1191997831021a19b2dc4b973717f0979a516fd62416113f",
+      "balance": "2180000"
+    },
+    {
+      "owner": "0xcd7b1d8cc804d5929d88c045da5e97e1c07c4420e45c176de0b2a4b7d34d1a02",
+      "balance": "2150000"
+    },
+    {
+      "owner": "0x21c566af6d98436694e40defffa72b0fa26b570ff82fa69ecf8748ff92a0fdf7",
+      "balance": "2050000"
+    },
+    {
+      "owner": "0xade436237f676a0a4ec724e01667217b6f8d5e83d78f6f16f654f0eadab85768",
+      "balance": "2030000"
+    },
+    {
+      "owner": "0xbc3dae7d001f4043a88d15bb9fb46b08e8559b5913461dadf21876262af08f37",
+      "balance": "1999998"
+    },
+    {
+      "owner": "0xdfd15b8e1d5cda59063213ff35af05e6bcc476324e40c99402d46afda3fb3756",
+      "balance": "1939000"
+    },
+    {
+      "owner": "0xc8a50259ddc251590f5a3eac3f5b77786f09ff03efbec937aa3f4faea459fd98",
+      "balance": "1899996"
+    },
+    {
+      "owner": "0xd8f00d5840ca61c82317377202d389ebc59a2801f933e15bbc1878485861d01f",
+      "balance": "1762000"
+    },
+    {
+      "owner": "0xd294a8938fa189c033b6a4ad16b2b63a77ffd99d078dfa52fff6127bb78f7b1f",
+      "balance": "1659996"
+    },
+    {
+      "owner": "0x3a93e5ed3be0ec0ea3a833f080681febbd763d10e5f8129493e7bad2d398bd20",
+      "balance": "1559996"
+    },
+    {
+      "owner": "0xa7d258ec29fd43f1ec184e09c46e6fe3ff426b5f14ce289e10b09b28188315e3",
+      "balance": "1540000"
+    },
+    {
+      "owner": "0x1301a9f5d61e91d6afa4a4f67ea639775a350f9d02e215b45fd1322d2667c19f",
+      "balance": "1540000"
+    },
+    {
+      "owner": "0x63597b24f5bcadac3c01a9fd9078f837c27ad02bb3a259503481cc67d6ebc8e1",
+      "balance": "1479997"
+    },
+    {
+      "owner": "0x3bcacea205fdec00370241fc90831736e06bee9e594b3b02a11e02c952502b2d",
+      "balance": "1447000"
+    },
+    {
+      "owner": "0xbbe4f9d92bd86d6fe9bd14a929b90840246a64d838f3460837d6781b395bf824",
+      "balance": "1370000"
+    },
+    {
+      "owner": "0x7829c55fc5bd24bfdbe86af3cce75eb9c26350b4ed9a6644ea248cd6646b005a",
+      "balance": "1220000"
+    },
+    {
+      "owner": "0xb306295505ea814820ee5450c9c5fe3195a263071dad41c2623d128140d8c3e9",
+      "balance": "1090000"
+    },
+    {
+      "owner": "0xfacc0cc1bb9f39a857185a6ce9bd424c80ebe58600f3284dbd76c11fca08ead0",
+      "balance": "1060000"
+    },
+    {
+      "owner": "0x8acbfc783cf5a78f718e508894e431ee687eec69e1f89c30a962cc4a14a90edd",
+      "balance": "860000"
+    },
+    {
+      "owner": "0xcb83437b08efc88d61b900ed2ee35a54667610dee644ff1950a0605e5487093d",
+      "balance": "846000"
+    },
+    {
+      "owner": "0x2bee03725094f42c834f0d85e7f17b99c3d66419c9cb2648359a76195b157eb6",
+      "balance": "820000"
+    },
+    {
+      "owner": "0x88e643f4c22f018c776acab794f18a2e425adf23df8831b80512343a103d56f8",
+      "balance": "765000"
+    },
+    {
+      "owner": "0xfa88bcb74d357ff241774712317f9abc0e3a36081237eea1ee6c9fc5c399bcb4",
+      "balance": "710000"
+    },
+    {
+      "owner": "0xe5669c8b0a74069027fbc35b6b2fda48827e0a05682e301b95423a08fd2fd3ea",
+      "balance": "690000"
+    },
+    {
+      "owner": "0xc5823d61a5f963f9e3481cee75726a8f022cc639f4e40e1abd5f4f9aed22ea86",
+      "balance": "580000"
+    },
+    {
+      "owner": "0x452e61c312b9d8dbbd3f84ef672389026859a37870b156c91e48831bdf267392",
+      "balance": "540000"
+    },
+    {
+      "owner": "0x4125123d4f622ef68f1bb9d26c00d761bf24e7499e5744ec9ca9e1f5ebf83c55",
+      "balance": "540000"
+    },
+    {
+      "owner": "0x353ae41f6110ec71b431a70a0499ed2d5ecf841d31dde33d98db6167ea22bb39",
+      "balance": "530000"
+    },
+    {
+      "owner": "0x0f6a871ca3ea3f07389d43d209625a37d2b526628270ccb29fc01054c0150de7",
+      "balance": "370000"
+    },
+    {
+      "owner": "0x19c4bad45d2db005128cb93b8951c0e933df9b9435ce75ac5e3a7a1bab5863a4",
+      "balance": "290000"
+    },
+    {
+      "owner": "0x7a5c17c7a0c09850c92ab1728a255631ecc5fbcbbc16a8149a9a8e76ceb11fb3",
+      "balance": "260000"
+    },
+    {
+      "owner": "0xfef59610e27a2b9257393a7792dac51297c893a3e414a19104f8875b43d5b412",
+      "balance": "239982"
+    },
+    {
+      "owner": "0xdc4f636cea779a57962656978e30c8a5ad412467e185aed13bd89ba65604b179",
+      "balance": "210000"
+    },
+    {
+      "owner": "0x4784532e1a7e092fe1fa70ada21d1f56d2222e666cdc53dee75a1c2d898c5419",
+      "balance": "200000"
+    },
+    {
+      "owner": "0x4ba1f0ab8d6bd654839b309646959735e7d50f70b9b0056ffb8547f10dadfa74",
+      "balance": "200000"
+    },
+    {
+      "owner": "0x60eab501fc35736b05bc622b73bb25f9eb7147f91cd2bf95a9c2e202345067ed",
+      "balance": "200000"
+    },
+    {
+      "owner": "0x8fb9f9fd168e3099a2c41a3e12f82ffd4f7089e458c2b332fbe5b5295f500c39",
+      "balance": "190000"
+    },
+    {
+      "owner": "0xdc5814a42a09b0f7a446019bdfe632336ca6fd8a10ccf67ac2761228345ead57",
+      "balance": "180000"
+    },
+    {
+      "owner": "0x482ae9599bdf2db4b5f8b5a4dc14f0724e79598e2e0654b0af0af1e5293292ca",
+      "balance": "170000"
+    },
+    {
+      "owner": "0x144dcdce794c0a43317be66ab3f526e4faf5ff2da33500c8792a6d3c991a4855",
+      "balance": "150000"
+    },
+    {
+      "owner": "0x96a046ddfd0eb16c65bc6b036f0f426823cdaa6ac50ea3c221733ba8908bb5cc",
+      "balance": "141000"
+    },
+    {
+      "owner": "0x45e47344233d03875ef4444606bfc9c1b7ff96a154544a456bbc24f79a1aff7f",
+      "balance": "140000"
+    },
+    {
+      "owner": "0x22db3556ad1e405b88bc8581343087b3dd0dd510ac30a99c995e1eaf5233f32d",
+      "balance": "131000"
+    },
+    {
+      "owner": "0x08956d67a6974cd3cb6e4365e6e1a54bd899ff98325201a749cfeac3c9e486c9",
+      "balance": "120000"
+    },
+    {
+      "owner": "0x3e3b5207941209922e8b8633b22ac70e5818d6e9082546cb817b9e5e0747ece5",
+      "balance": "80000"
+    },
+    {
+      "owner": "0xf7cad8c0cc9bbe8bc6821c7db46872e1cf6e59b5a4c22a19676bfa4eab18e52c",
+      "balance": "61000"
+    },
+    {
+      "owner": "0x66ab868a9f04401a969ba33db4711bfe6e895140cb8bac90c5a15df35d58945e",
+      "balance": "36000"
+    },
+    {
+      "owner": "0xb4c18017881d3707f2ddcfe282972fb1f57b98c63c114bbff01a9e8f529a5ee0",
+      "balance": "35000"
+    },
+    {
+      "owner": "0xc1eefb184d6806ebc1b7be0b07ed199c083e5fc5867bd800455d8e2692c0aa89",
+      "balance": "35000"
+    },
+    {
+      "owner": "0x646e982094f9ee75e4b3627481d7cae7c2edabded77e77c3cf2f1c423a0e2e75",
+      "balance": "34000"
+    },
+    {
+      "owner": "0x4d4944fef05c9859cb16de4811aa49dc28f8999b0726453af40f6e946f1156d0",
+      "balance": "31000"
+    },
+    {
+      "owner": "0xf5427e0fa001a8f238802ed14db036078fb0a889db1dc0b80fe8624c82e459dc",
+      "balance": "31000"
+    },
+    {
+      "owner": "0x7785e4e1080871c1b624ba48f30bb947a8886e6fba9df1d80b0543f9471dc9e8",
+      "balance": "30000"
+    },
+    {
+      "owner": "0x6b1efe2bc3663115aeb01d1a5d5f98e6043b0d47aa6791b9cfbc66fd24688232",
+      "balance": "30000"
+    },
+    {
+      "owner": "0xd9ad4dde608140620cb6884e227deb59bbf35f23844efda8e28d439a6030eb8a",
+      "balance": "30000"
+    },
+    {
+      "owner": "0xf14786d48edeea066eacbc53ca426eb6e541f381bba732c5c7ddd3108ed57c35",
+      "balance": "29000"
+    },
+    {
+      "owner": "0x295a654f93e0775a3647bf6fad1ba46dccc9e6a98dd709a5346790215b549bc0",
+      "balance": "28000"
+    },
+    {
+      "owner": "0x70476ff572b1d4f5ac32253d7f50c032177abd00c017376bfd74b23f921b2738",
+      "balance": "28000"
+    },
+    {
+      "owner": "0xa66fa668a88f9c9fd4bc288af4f077bf484759ccc7a9060c7a2bbec58efe30fe",
+      "balance": "28000"
+    },
+    {
+      "owner": "0xbc1321c824f7ec21e147706fbe1fbbd45f2afa19bd361c61c49e83673037b330",
+      "balance": "19000"
+    },
+    {
+      "owner": "0x327defbfaeb56770917b1e1c96a791237779ab1784ac405d87972c3487823724",
+      "balance": "19000"
+    },
+    {
+      "owner": "0xed8a0bbb90fe55d3a5dc3b868fda9676e0bafff3215a87c8c5fe49f22551635e",
+      "balance": "18000"
+    },
+    {
+      "owner": "0xc5a9f88e0e7006786ea832146e23220cc42defaa8b2df5f980f83470cf70ee79",
+      "balance": "10000"
+    },
+    {
+      "owner": "0x5fa92c44349ea5642d591b6a920614c5d6f4986a22a5f19b4027dbabf5226eac",
+      "balance": "10000"
+    },
+    {
+      "owner": "0x1ac004157ce81426d7b9e9fac43aadb86239829b12285bc2a549269c185fd6df",
+      "balance": "10000"
+    },
+    {
+      "owner": "0x89b19feea62783f0bad52219d60029b042a3e20125d7463c73f3fc4c964a35aa",
+      "balance": "10000"
+    },
+    {
+      "owner": "0xc782ef01409c3512fb1dfa40bd69e4088517b598d3ff4d8fb5c6bdf03f691b04",
+      "balance": "10000"
+    },
+    {
+      "owner": "0x8aeb98b94682c4c04a4eb33bae539dbb9f7e8ca92a200b1fd223ffb2447728a0",
+      "balance": "10000"
+    },
+    {
+      "owner": "0x7bf4e7e862f7aa109016aabaf4870a69e9ad1593f59b0a3d82632da3cb621542",
+      "balance": "10000"
+    },
+    {
+      "owner": "0x7a1d0334af3acd9fad04d8f6d5c7252346de1f3c33b5a07cbb2667413da83bc6",
+      "balance": "10000"
+    },
+    {
+      "owner": "0xeccc7a57b2870923a771e3eb5828d95970471486084124ca3b2190e98aaa34c5",
+      "balance": "10000"
+    },
+    {
+      "owner": "0x7fa326c0ff0a17f1997c0cfb1b098cf4f7b3f25cb6c82c66652ac49f078aaf14",
+      "balance": "10000"
+    },
+    {
+      "owner": "0x522c56d9fe74a4a095a566f818cf10bbfe3c4b82f42552577d8d8ec6388bbc94",
+      "balance": "10000"
+    },
+    {
+      "owner": "0x48d429e0c93a39a90e722a0a92520ee3c130d22e393b91f4851d7b4d378a94c8",
+      "balance": "2000"
+    },
+    {
+      "owner": "0xfe979847ab9aaa5535b4f3910ca0738dddf302e149957bac45c43de911b1f3c6",
+      "balance": "1996"
+    },
+    {
+      "owner": "0xfcf0d3841a9dfe07726ef400002337fd2aef693725c6e86a7016db6d95a73c9a",
+      "balance": "1000"
+    }
+  ]
+}

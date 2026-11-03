@@ -1,0 +1,36 @@
+{
+  "protocol": "suirc-20",
+  "packages": [
+    "0xe09b37505173ae119a0ae3b1fdf9050a6b029391f9d9f10a3fff27e3f3115727",
+    "0x2dd4e2523c0121c7e8405977e1d3909a8631df313934e965c472efc941ee3484"
+  ],
+  "cb5Note": "0xcb5bd7a2… is also SuiMint (archived app mainnet package) with on-chain SUIRC20Tick; not merged into this Operation-witness ledger. Index Operation JSON only.",
+  "rules": {
+    "caseSensitive": true,
+    "firstDeployWins": true,
+    "mintOverLimIgnored": true,
+    "mintOverMaxIgnored": true,
+    "partialLastMint": false,
+    "transferRequiresBalanceAndTo": true
+  },
+  "pinOrder": [
+    "suis",
+    "dgen"
+  ],
+  "progressPct": 2,
+  "progressLabel": "索引进度 2%（扫描到 2023-12-16 00:39:24 Asia/Shanghai）",
+  "stats": {
+    "mintTx": 20400,
+    "transferTx": 0,
+    "deployTx": 1430,
+    "mintAccepted": 20252,
+    "mintIgnored": 148,
+    "transferAccepted": 0,
+    "transferIgnored": 0,
+    "lastTs": "2023-12-15T16:39:24.842Z",
+    "startedAt": "2026-11-03T02:22:48.240Z"
+  },
+  "tickCount": 1430,
+  "updatedAtBeijing": "2026-11-03 10:29:42 Asia/Shanghai",
+  "complete": false
+}

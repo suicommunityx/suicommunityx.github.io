@@ -250,3 +250,18 @@ code { font-size: 12px; background: #eee; padding: 1px 6px; border-radius: 6px; 
   .holders-table-wrap { display: none; }
   .holders-cards { display: block; }
 }
+
+/* SuiMint helpers */
+.field-input, .search-input {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font: inherit;
+  background: #fff;
+}
+.row-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.table tbody tr.selected { background: #eef5ff; }
+.section-nav {
+  display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 0;
+}
+.section-nav .tab-btn { border: 1px solid var(--line); }
