@@ -428,9 +428,9 @@ useEffect(() => {
           <section className="section">
             <div className="section-head">
               <h2>铭文列表</h2>
-              <div className="row gap wrap" style={{ alignItems: 'center' }}>
+              <div className="suirc-search-row">
                 <SearchClearInput value={tickQuery} onChange={setTickQuery} />
-                <button className="btn ghost small" onClick={() => refreshTicks(true)} disabled={loadingTicks} title="从链上刷新（可能较慢）">
+                <button className="btn ghost small suirc-refresh" onClick={() => refreshTicks(true)} disabled={loadingTicks} title="从链上刷新（可能较慢）">
                   刷新
                 </button>
               </div>
