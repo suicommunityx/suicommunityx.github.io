@@ -17,20 +17,20 @@
     "suis",
     "dgen"
   ],
-  "progressPct": 30.9,
-  "progressLabel": "索引进度 30.9%（扫描到 2023-12-16 02:58:44 Asia/Shanghai）",
+  "progressPct": 39.5,
+  "progressLabel": "索引进度 39.5%（扫描到 2023-12-16 03:22:47 Asia/Shanghai）",
   "stats": {
-    "mintTx": 309400,
+    "mintTx": 395400,
     "transferTx": 0,
     "deployTx": 1430,
-    "mintAccepted": 302742,
-    "mintIgnored": 6658,
+    "mintAccepted": 378907,
+    "mintIgnored": 16493,
     "transferAccepted": 0,
     "transferIgnored": 0,
-    "lastTs": "2023-12-15T18:58:44.251Z",
+    "lastTs": "2023-12-15T19:22:47.857Z",
     "startedAt": "2026-11-03T02:22:48.240Z"
   },
   "tickCount": 1430,
-  "updatedAtBeijing": "2026-11-03 12:38:47 Asia/Shanghai",
+  "updatedAtBeijing": "2026-11-03 14:02:36 Asia/Shanghai",
   "complete": false
 }

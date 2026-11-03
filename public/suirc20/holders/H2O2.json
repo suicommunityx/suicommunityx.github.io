@@ -1,11 +1,11 @@
 {
   "tick": "H2O2",
-  "updatedAtBeijing": "2026-11-03 12:38:47 Asia/Shanghai",
-  "totalHolders": 487,
+  "updatedAtBeijing": "2026-11-03 14:02:36 Asia/Shanghai",
+  "totalHolders": 490,
   "holders": [
     {
       "owner": "0xfacc0cc1bb9f39a857185a6ce9bd424c80ebe58600f3284dbd76c11fca08ead0",
-      "balance": "881996"
+      "balance": "882103"
     },
     {
       "owner": "0xe5669c8b0a74069027fbc35b6b2fda48827e0a05682e301b95423a08fd2fd3ea",
@@ -1916,12 +1916,20 @@
       "balance": "200"
     },
     {
+      "owner": "0xa5bb20e96e4eb32561bcfb08bdedc20bc75d3ee5bd6cc3005b0f0917a2ccb35c",
+      "balance": "100"
+    },
+    {
       "owner": "0xc48b968b88f88c7493d550303c9d1226ae923b52ef106607f71b411dd2ee23c5",
       "balance": "90"
     },
     {
       "owner": "0xd30e62c54f195d38a8960b91830268b38e72eaa7ebcc28296b09d6fd11fe3b16",
       "balance": "69"
+    },
+    {
+      "owner": "0x8dd3265091b8a5d3e048dddd213cdaa62bc8192007a65b4cd53d1a26cede7c0b",
+      "balance": "40"
     },
     {
       "owner": "0x05c977b39e1bea6d380db82d40e01fb641b3ca4ecce591c2ce7e5a5a35a5e02b",
@@ -1949,6 +1957,10 @@
     },
     {
       "owner": "0x76f07c9f4208132b2011aead74f29d8f41e35c11d830106cb5118131d2732e8a",
+      "balance": "1"
+    },
+    {
+      "owner": "0x23adf67f6dcd249bda812ae1f8a811f648b8c9b50a596f0a17a764bf3dceedb4",
       "balance": "1"
     }
   ]
