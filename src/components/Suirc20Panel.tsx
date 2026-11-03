@@ -7,6 +7,7 @@ import { ConfirmModal } from './ConfirmModal';
 import { formatAmount, formatShortDate, isValidSuiAddress, shortAddr } from '../lib/format';
 import { SmartAmount, SmartAmountRange } from './SmartAmount';
 import { dryRun, friendlyRpcError } from '../lib/sui';
+import { useToast } from '../lib/toast';
 import {
   buildSuirc20DeployTx,
   buildSuirc20MintTx,
@@ -35,6 +36,8 @@ const PAGE = 50;
 export function Suirc20Panel() {
   const account = useCurrentAccount();
   const { mutateAsync: signAndExecute } = useSignAndExecuteTransaction();
+  const toastApi = useToast();
+
 
   const [sub, setSub] = useState<SubTab>('list');
   const [meta, setMeta] = useState<Suirc20Meta | null>(null);
@@ -42,8 +45,6 @@ export function Suirc20Panel() {
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<Suirc20Tick | null>(null);
   const [q, setQ] = useState('');
-  const [err, setErr] = useState<string | null>(null);
-  const [toast, setToast] = useState<string | null>(null);
   const [pending, setPending] = useState<Pending | null>(null);
   const [busy, setBusy] = useState(false);
 
@@ -67,7 +68,6 @@ export function Suirc20Panel() {
 
   const refresh = useCallback(async () => {
     setLoading(true);
-    setErr(null);
     try {
       const data = await loadSuirc20Ticks();
       setMeta(data.meta);
@@ -77,11 +77,11 @@ export function Suirc20Panel() {
         return data.ticks.find((t) => t.tick === 'suis') || data.ticks[0] || null;
       });
     } catch (e: any) {
-      setErr(friendlyRpcError(e));
+      toastApi.error(friendlyRpcError(e));
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [toastApi]);
 
   useEffect(() => {
     refresh();
@@ -103,7 +103,6 @@ export function Suirc20Panel() {
 
   const loadHolders = useCallback(async (tick: string, preferV2 = false) => {
     setLoadingHolders(true);
-    setErr(null);
     try {
       const data = await loadSuirc20Holders(tick, preferV2);
       setHolders(data.holders || []);
@@ -112,11 +111,11 @@ export function Suirc20Panel() {
     } catch (e: any) {
       setHolders([]);
       setHoldersTotal(0);
-      setErr(friendlyRpcError(e));
+      toastApi.error(friendlyRpcError(e));
     } finally {
       setLoadingHolders(false);
     }
-  }, []);
+  }, [toastApi]);
 
   useEffect(() => {
     if (sub === 'holders' && selected) {
@@ -135,11 +134,11 @@ export function Suirc20Panel() {
     try {
       setMyBal(await loadSuirc20Balances(account.address));
     } catch (e: any) {
-      setErr(friendlyRpcError(e));
+      toastApi.error(friendlyRpcError(e));
     } finally {
       setLoadingMine(false);
     }
-  }, [account]);
+  }, [account, toastApi]);
 
   useEffect(() => {
     if (sub === 'mine' || sub === 'actions') refreshMine();
@@ -163,14 +162,12 @@ export function Suirc20Panel() {
   }, [myBal]);
 
   function ask(p: Pending) {
-    setErr(null);
     setPending(p);
   }
 
   async function confirmSign() {
     if (!pending || !account) return;
     setBusy(true);
-    setErr(null);
     try {
       const tx = pending.build();
       tx.setSender(account.address);
@@ -180,11 +177,11 @@ export function Suirc20Panel() {
       }
       const tx2 = pending.build();
       const res = await signAndExecute({ transaction: tx2 });
-      setToast(`交易已提交：${res.digest}`);
+      toastApi.success(`交易已提交：${res.digest}`);
       setPending(null);
       await Promise.all([refreshMine(), refresh()]);
     } catch (e: any) {
-      setErr(friendlyRpcError(e));
+      toastApi.error(friendlyRpcError(e));
     } finally {
       setBusy(false);
     }
@@ -203,7 +200,7 @@ export function Suirc20Panel() {
       </section>
 
       {meta && (
-        <div className="banner ok" style={{ cursor: 'default' }}>
+        <div className="banner ok progress-card" style={{ cursor: 'default' }}>
           {meta.progressLabel}
           {meta.tickCount != null ? ` · 合并 ${meta.tickCount} ticks` : ''}
           {meta.v2?.tickCount != null ? ` · 新版注册表 ${meta.v2.tickCount}` : ''}
@@ -215,18 +212,7 @@ export function Suirc20Panel() {
         </div>
       )}
 
-      {err && (
-        <div className="banner error" onClick={() => setErr(null)}>
-          {err}
-        </div>
-      )}
-      {toast && (
-        <div className="banner ok" onClick={() => setToast(null)}>
-          {toast}
-        </div>
-      )}
-
-      <nav className="tabbar tabbar-sub suirc-subnav" aria-label="SuiMint 子导航">
+<nav className="tabbar tabbar-sub suirc-subnav" aria-label="SuiMint 子导航">
         <div className="tabbar-inner tabbar-sub-inner">
           {(
             [
@@ -571,9 +557,26 @@ export function Suirc20Panel() {
                 const amt = aAmt;
                 const fee = feeForTick(tick);
                 const t = ticks.find((x) => x.tick === tick);
+                try {
+                  const amtN = BigInt(amt || '0');
+                  if (amtN <= 0n) {
+                    toastApi.error('铸造数量须为正整数');
+                    return;
+                  }
+                  if (t?.lim) {
+                    const limN = BigInt(t.lim);
+                    if (amtN > limN) {
+                      toastApi.error(`铸造数量超过单次上限 lim=${t.lim}`);
+                      return;
+                    }
+                  }
+                } catch {
+                  toastApi.error('铸造数量须为正整数');
+                  return;
+                }
                 if (t?.version === 'v2') {
                   if (!t.tickId) {
-                    setErr('该新版 tick 缺少 tickId，无法铸造');
+                    toastApi.error('该新版 tick 缺少 tickId，无法铸造');
                     return;
                   }
                   const tickId = t.tickId;
@@ -617,7 +620,7 @@ export function Suirc20Panel() {
               disabled={!account || busy}
               onClick={() => {
                 if (!isValidSuiAddress(aTo)) {
-                  setErr('收款地址无效');
+                  toastApi.error('收款地址无效');
                   return;
                 }
                 const tick = aTick;
@@ -693,6 +696,22 @@ export function Suirc20Panel() {
               style={{ marginTop: 10 }}
               disabled={!account || busy}
               onClick={() => {
+                const tickBytes = new TextEncoder().encode(dTick);
+                if (tickBytes.length !== 4) {
+                  toastApi.error('新版部署要求 tick 名称恰好 4 个字符（按字节，例如 suis）');
+                  return;
+                }
+                try {
+                  const maxN = BigInt(dMax || '0');
+                  const limN = BigInt(dLim || '0');
+                  if (limN > maxN) {
+                    toastApi.error('lim 不能大于 max');
+                    return;
+                  }
+                } catch {
+                  toastApi.error('max/lim 须为非负整数');
+                  return;
+                }
                 ask({
                   title: '确认部署（新版 suirc20）',
                   summary: (

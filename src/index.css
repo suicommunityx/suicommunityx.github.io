@@ -682,3 +682,95 @@ td.num .smart-amount { text-align: right; margin-left: auto; }
   max-width: calc(100vw - 40px);
   box-sizing: border-box;
 }
+
+/* —— Global toasts (bottom-center, safe-area aware) —— */
+.toast-viewport {
+  position: fixed;
+  left: 50%;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 10px;
+  width: min(560px, 92vw);
+  pointer-events: none;
+  padding: 0;
+}
+.toast {
+  pointer-events: auto;
+  width: 100%;
+  max-width: min(560px, 92vw);
+  border-radius: 14px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.18);
+  overflow: hidden;
+  animation: toast-in 220ms ease-out;
+  backdrop-filter: blur(8px);
+}
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.toast-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 12px 10px 14px;
+}
+.toast-text {
+  flex: 1;
+  min-width: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+}
+.toast-close {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  opacity: 0.7;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 0;
+}
+.toast-close:hover { opacity: 1; background: rgba(0,0,0,0.06); }
+.toast-progress {
+  height: 3px;
+  width: 100%;
+  background: rgba(0,0,0,0.08);
+}
+.toast-progress-bar {
+  height: 100%;
+  width: 100%;
+  transform-origin: left center;
+  will-change: transform;
+}
+.toast-error {
+  background: #ffe5e3;
+  color: #b00020;
+  border: 1px solid #ffc5c0;
+}
+.toast-error .toast-progress-bar { background: #d32f2f; }
+.toast-success {
+  background: #e3f8ea;
+  color: #0b6b2d;
+  border: 1px solid #b7ebc6;
+}
+.toast-success .toast-progress-bar { background: #2e7d32; }
+.toast-info {
+  background: #f2f3f5;
+  color: #1a1a1a;
+  border: 1px solid #e0e0e0;
+}
+.toast-info .toast-progress-bar { background: #666; }
+
+/* Index progress card keeps .banner.ok; message banners removed from flow */
+.banner.progress-card { cursor: default; }

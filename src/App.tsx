@@ -26,6 +26,7 @@ import {
 } from './lib/sui';
 import { formatAmount, formatShanghai, isValidSuiAddress, mistToSui, shortAddr } from './lib/format';
 import { SITE_NAME } from './lib/constants';
+import { useToast } from './lib/toast';
 import { useSignAndExecuteTransaction } from '@mysten/dapp-kit';
 import type { Transaction } from '@mysten/sui/transactions';
 
@@ -81,6 +82,9 @@ type Pending = {
 export default function App() {
   const account = useCurrentAccount();
   const { mutateAsync: signAndExecute } = useSignAndExecuteTransaction();
+  const toastApi = useToast();
+  const showErr = (m: string) => toastApi.error(m);
+
 
   const initialRoute = parseRoute();
   const [section, setSection] = useState<Section>(initialRoute.section);
@@ -101,8 +105,6 @@ export default function App() {
 
   const [pending, setPending] = useState<Pending | null>(null);
   const [busy, setBusy] = useState(false);
-  const [toast, setToast] = useState<string | null>(null);
-  const [err, setErr] = useState<string | null>(null);
 
   // deploy form (requires burning a TICK-name Movescription)
   const [dTickObj, setDTickObj] = useState('');
@@ -142,7 +144,6 @@ export default function App() {
 
   const refreshTicks = useCallback(async (deep = false) => {
     setLoadingTicks(true);
-    setErr(null);
     try {
       // Snapshot first — avoids flooding public RPC (429). Live crawl only on explicit deep refresh.
       try {
@@ -186,11 +187,11 @@ export default function App() {
         });
       }
     } catch (e: any) {
-      setErr(friendlyRpcError(e));
+      toastApi.error(friendlyRpcError(e));
     } finally {
       setLoadingTicks(false);
     }
-  }, []);
+  }, [toastApi]);
 
   useEffect(() => {
     refreshTicks();
@@ -229,11 +230,11 @@ export default function App() {
     try {
       setHoldings(await loadOwnedMovescriptions(account.address));
     } catch (e: any) {
-      setErr(friendlyRpcError(e));
+      toastApi.error(friendlyRpcError(e));
     } finally {
       setLoadingMine(false);
     }
-  }, [account]);
+  }, [account, toastApi]);
 
     useEffect(() => {
     if (selected?.tick) setATick(selected.tick);
@@ -257,12 +258,12 @@ useEffect(() => {
     } catch (e: any) {
       const msg = friendlyRpcError(e);
       setListingsError(msg);
-      setErr(msg);
+      toastApi.error(msg);
       // Keep previous listings if any; never pretend "暂无挂单" on failure
     } finally {
       setLoadingListings(false);
     }
-  }, []);
+  }, [toastApi]);
 
   useEffect(() => {
     if (tab === 'market' && selected?.marketId) refreshListings(selected.marketId);
@@ -305,14 +306,12 @@ useEffect(() => {
   }, [ticks, tickQuery]);
 
   function ask(p: Pending) {
-    setErr(null);
     setPending(p);
   }
 
   async function confirmSign() {
     if (!pending || !account) return;
     setBusy(true);
-    setErr(null);
     try {
       const tx = pending.build();
       tx.setSender(account.address);
@@ -323,12 +322,12 @@ useEffect(() => {
       // rebuild because previous build was consumed
       const tx2 = pending.build();
       const res = await signAndExecute({ transaction: tx2 });
-      setToast(`交易已提交：${res.digest}`);
+      toastApi.success(`交易已提交：${res.digest}`);
       setPending(null);
       await Promise.all([refreshMine(), refreshTicks()]);
       if (selected?.marketId) refreshListings(selected.marketId);
     } catch (e: any) {
-      setErr(friendlyRpcError(e));
+      toastApi.error(friendlyRpcError(e));
     } finally {
       setBusy(false);
     }
@@ -423,17 +422,6 @@ useEffect(() => {
             ))}
           </div>
         </nav>
-
-        {err && (
-          <div className="banner error" onClick={() => setErr(null)}>
-            {err}
-          </div>
-        )}
-        {toast && (
-          <div className="banner ok" onClick={() => setToast(null)}>
-            {toast}
-          </div>
-        )}
 
         {tab === 'ticks' && (
           <section className="section">
@@ -611,11 +599,11 @@ useEffect(() => {
                 onClick={() => {
                   const tck = ticks.find((x) => x.tick === aTick) || selected;
                   if (!tck) {
-                    setErr('请选择 tick');
+                    showErr('请选择 tick');
                     return;
                   }
                   if (tck.remain === 0n) {
-                    setErr('该 tick 已铸完');
+                    showErr('该 tick 已铸完');
                     return;
                   }
                   ask({
@@ -699,14 +687,14 @@ useEffect(() => {
                 disabled={!account || busy || !xferObj || !xferTo}
                 onClick={() => {
                   if (!isValidSuiAddress(xferTo)) {
-                    setErr('收款地址无效');
+                    showErr('收款地址无效');
                     return;
                   }
                   const amtStr = xferAmt.trim();
                   if (amtStr) {
                     const amt = BigInt(amtStr);
                     if (amt <= 0n) {
-                      setErr('拆分数量须为正整数');
+                      showErr('拆分数量须为正整数');
                       return;
                     }
                     ask({
@@ -969,13 +957,12 @@ useEffect(() => {
             {!selected?.marketId && <div className="card muted">该铭文没有已注册的 Marketplace</div>}
             {loadingListings && <div className="card muted">加载挂单…</div>}
             {!loadingListings && listingsError && (
-              <div className="card error-card">
-                <p>{listingsError}</p>
+              <div className="card muted">
                 <button
                   className="btn small primary"
                   onClick={() => selected?.marketId && refreshListings(selected.marketId, true)}
                 >
-                  重试加载挂单
+                  挂单加载失败，点击重试
                 </button>
               </div>
             )}
@@ -1227,11 +1214,11 @@ useEffect(() => {
                   try {
                     amt = BigInt(amtStr);
                   } catch {
-                    setErr('拆分数量须为正整数');
+                    showErr('拆分数量须为正整数');
                     return;
                   }
                   if (amt <= 0n || amt > h.amount) {
-                    setErr('拆分数量须大于 0 且不超过持有数量');
+                    showErr('拆分数量须大于 0 且不超过持有数量');
                     return;
                   }
                   ask({

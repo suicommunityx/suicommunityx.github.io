@@ -321,7 +321,10 @@ export function buildSuirc20TransferTx(
   return tx;
 }
 
-/** v2: suirc20::deploy(GlobalConfig, tick, max, lim, fee, dec, freq, Clock, Ctx) */
+/**
+ * v2: suirc20::deploy(GlobalConfig, tick, lim, fee, max, dec, freq, Clock, Ctx)
+ * On-chain arg order is lim/fee/max (NOT max/lim/fee) — verified via bytecode + dry-run.
+ */
 export function buildSuirc20V2DeployTx(opts: {
   tick: string;
   max: string;
@@ -336,9 +339,9 @@ export function buildSuirc20V2DeployTx(opts: {
     arguments: [
       tx.object(SUIRC20_V2_GLOBAL_CONFIG),
       tx.pure.string(opts.tick),
-      tx.pure.u64(BigInt(opts.max || '0')),
       tx.pure.u64(BigInt(opts.lim || '0')),
       tx.pure.u64(BigInt(opts.fee || '0')),
+      tx.pure.u64(BigInt(opts.max || '0')),
       tx.pure.u8(opts.dec ?? 0),
       tx.pure.u64(BigInt(opts.freq || '0')),
       tx.object(SUI_CLOCK_OBJECT_ID),

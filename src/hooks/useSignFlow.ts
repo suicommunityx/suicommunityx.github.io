@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useSignAndExecuteTransaction, useCurrentAccount } from '@mysten/dapp-kit';
 import type { Transaction } from '@mysten/sui/transactions';
 import { dryRun } from '../lib/sui';
+import { friendlyRpcError } from '../lib/rpc';
 
 export function useSignFlow() {
   const account = useCurrentAccount();
@@ -28,7 +29,7 @@ export function useSignFlow() {
       setLastDigest(result.digest);
       return result;
     } catch (e: any) {
-      const msg = e?.message || String(e);
+      const msg = friendlyRpcError(e);
       setError(msg);
       throw e;
     } finally {

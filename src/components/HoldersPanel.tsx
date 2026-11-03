@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { formatAmount, formatShanghai, mistToSui, progressPct, shortAddr } from '../lib/format';
 import { SmartAmount } from './SmartAmount';
 import type { TickInfo } from '../lib/sui';
+import { useToast } from '../lib/toast';
 
 export type HolderRow = {
   address: string;
@@ -39,6 +40,7 @@ type Props = {
 const PAGE = 50;
 
 export function HoldersPanel({ tick, tickInfo, tickOptions, onTickChange }: Props) {
+  const toastApi = useToast();
   const [data, setData] = useState<HoldersSnapshot | null>(null);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState<string | null>(null);
@@ -67,11 +69,13 @@ export function HoldersPanel({ tick, tickInfo, tickOptions, onTickChange }: Prop
       setPage(0);
     } catch (e: any) {
       setData(null);
-      setErr(e?.message || String(e));
+      const msg = e?.message || String(e);
+      setErr(msg);
+      toastApi.error(msg);
     } finally {
       setLoading(false);
     }
-  }, [tick]);
+  }, [tick, toastApi]);
 
   useEffect(() => {
     load();
@@ -238,10 +242,9 @@ export function HoldersPanel({ tick, tickInfo, tickOptions, onTickChange }: Prop
         </div>
       )}
       {err && !missing && (
-        <div className="card error-card">
-          <p>{err}</p>
+        <div className="card muted">
           <button className="btn small primary" onClick={load}>
-            重试
+            加载失败，点击重试
           </button>
         </div>
       )}
