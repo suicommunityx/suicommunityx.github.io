@@ -19,20 +19,20 @@
       "dgen"
     ],
     "progressPct": 99.9,
-    "progressLabel": "索引进度 99.9%（扫描到 2023-12-16 06:36:16 Asia/Shanghai）",
+    "progressLabel": "索引进度 99.9%（扫描到 2023-12-16 06:48:21 Asia/Shanghai）",
     "stats": {
-      "mintTx": 1516400,
+      "mintTx": 1585400,
       "transferTx": 0,
       "deployTx": 1430,
-      "mintAccepted": 1027597,
-      "mintIgnored": 488803,
+      "mintAccepted": 1027612,
+      "mintIgnored": 557788,
       "transferAccepted": 0,
       "transferIgnored": 0,
-      "lastTs": "2023-12-15T22:36:16.290Z",
+      "lastTs": "2023-12-15T22:48:21.229Z",
       "startedAt": "2026-11-03T02:22:48.240Z"
     },
     "tickCount": 1430,
-    "updatedAtBeijing": "2026-11-04 00:30:28 Asia/Shanghai",
+    "updatedAtBeijing": "2026-11-04 00:50:40 Asia/Shanghai",
     "complete": false
   },
   "ticks": [
@@ -47,9 +47,9 @@
       "deployTimeBeijing": "2023-12-15 23:34:13 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T15:34:13.517Z",
       "digest": "2VyEi7pLvrieZgg3TisppDMtPm8B2unvWHLunhshofhZ",
-      "minted": "9999999730",
-      "mintCount": 1005949,
-      "holderCount": 1966,
+      "minted": "9999999731",
+      "mintCount": 1005950,
+      "holderCount": 1967,
       "progress": 99.99
     },
     {
@@ -9439,9 +9439,9 @@
       "deployTimeBeijing": "2023-12-15 23:40:52 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T15:40:52.464Z",
       "digest": "2Wj2mK4WP6CG4JiYjKFWdHV8rCGCBcL4AvJaFyYjJHeQ",
-      "minted": "20999994",
-      "mintCount": 21253,
-      "holderCount": 493,
+      "minted": "20999995",
+      "mintCount": 21254,
+      "holderCount": 494,
       "progress": 99.99
     },
     {
@@ -19519,10 +19519,10 @@
       "deployTimeBeijing": "2023-12-16 00:29:15 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T16:29:15Z",
       "digest": "59vfLFF7khaAbRs2KgvbAai42rVEgc7pHpZWQt8iwVmL",
-      "minted": "237",
-      "mintCount": 237,
+      "minted": "250",
+      "mintCount": 250,
       "holderCount": 8,
-      "progress": 2.37
+      "progress": 2.5
     },
     {
       "tick": "suit",
