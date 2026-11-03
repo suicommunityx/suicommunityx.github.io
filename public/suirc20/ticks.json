@@ -19,20 +19,20 @@
       "dgen"
     ],
     "progressPct": 99.9,
-    "progressLabel": "索引进度 99.9%（扫描到 2023-12-16 07:22:26 Asia/Shanghai）",
+    "progressLabel": "索引进度 99.9%（扫描到 2023-12-16 07:39:53 Asia/Shanghai）",
     "stats": {
-      "mintTx": 1771400,
+      "mintTx": 1856400,
       "transferTx": 0,
       "deployTx": 1430,
-      "mintAccepted": 1027707,
-      "mintIgnored": 743693,
+      "mintAccepted": 1027736,
+      "mintIgnored": 828664,
       "transferAccepted": 0,
       "transferIgnored": 0,
-      "lastTs": "2023-12-15T23:22:26.243Z",
+      "lastTs": "2023-12-15T23:39:53.887Z",
       "startedAt": "2026-11-03T02:22:48.240Z"
     },
     "tickCount": 1430,
-    "updatedAtBeijing": "2026-11-04 01:59:52 Asia/Shanghai",
+    "updatedAtBeijing": "2026-11-04 02:19:53 Asia/Shanghai",
     "complete": false
   },
   "ticks": [
@@ -47,8 +47,8 @@
       "deployTimeBeijing": "2023-12-15 23:34:13 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T15:34:13.517Z",
       "digest": "2VyEi7pLvrieZgg3TisppDMtPm8B2unvWHLunhshofhZ",
-      "minted": "9999999733",
-      "mintCount": 1005952,
+      "minted": "9999999933",
+      "mintCount": 1005954,
       "holderCount": 1969,
       "progress": 99.99
     },
@@ -12399,10 +12399,10 @@
       "deployTimeBeijing": "2023-12-16 04:21:20 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T20:21:20.113Z",
       "digest": "AeUnd94YKbf2VKXqFMDUxYHxQX1WjJBSDgveuv83cwLr",
-      "minted": "520",
-      "mintCount": 52,
+      "minted": "780",
+      "mintCount": 78,
       "holderCount": 1,
-      "progress": 5.2
+      "progress": 7.8
     },
     {
       "tick": "mEmE",
@@ -19519,10 +19519,10 @@
       "deployTimeBeijing": "2023-12-16 00:29:15 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T16:29:15Z",
       "digest": "59vfLFF7khaAbRs2KgvbAai42rVEgc7pHpZWQt8iwVmL",
-      "minted": "277",
-      "mintCount": 277,
+      "minted": "278",
+      "mintCount": 278,
       "holderCount": 8,
-      "progress": 2.77
+      "progress": 2.78
     },
     {
       "tick": "suit",
