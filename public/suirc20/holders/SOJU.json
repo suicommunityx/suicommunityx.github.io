@@ -1,6 +1,6 @@
 {
   "tick": "SOJU",
-  "updatedAtBeijing": "2026-11-03 11:15:31 Asia/Shanghai",
+  "updatedAtBeijing": "2026-11-03 11:46:18 Asia/Shanghai",
   "totalHolders": 2,
   "holders": [
     {
@@ -9,7 +9,7 @@
     },
     {
       "owner": "0x156e257c8ffd11ade99af5583eaafc6ae6a7bf6e54ddfcc41cf72ff92e8d9226",
-      "balance": "1000"
+      "balance": "1100"
     }
   ]
 }
