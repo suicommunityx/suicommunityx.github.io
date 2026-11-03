@@ -1,0 +1,11 @@
+{
+  "tick": "bonk",
+  "updatedAtBeijing": "2026-11-04 01:59:52 Asia/Shanghai",
+  "totalHolders": 1,
+  "holders": [
+    {
+      "owner": "0x1970e556fe5b5f7e87eb953705137fbbb270ba2bc40083cccc7ea5552507f823",
+      "balance": "110000"
+    }
+  ]
+}
