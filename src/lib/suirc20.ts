@@ -227,7 +227,14 @@ async function fetchHolders(path: string, tick: string) {
   const base = import.meta.env.BASE_URL;
   const res = await fetch(`${base}${path}/${encodeURIComponent(tick)}.json`);
   if (!res.ok) return null;
-  return res.json();
+  // Vite SPA fallback is 200 text/html when that case-sensitive snapshot file is absent.
+  const type = res.headers.get('content-type') || '';
+  if (!type.includes('json')) return null;
+  try {
+    return await res.json();
+  } catch {
+    return null;
+  }
 }
 
 export async function loadSuirc20Holders(
@@ -238,6 +245,7 @@ export async function loadSuirc20Holders(
   totalHolders: number;
   holders: Suirc20Holder[];
   source?: string;
+  updatedAtBeijing?: string;
 }> {
   const order = preferV2
     ? ['suirc20v2/holders', 'suirc20/holders']

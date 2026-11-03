@@ -1,10 +1,18 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useInfiniteSlice } from '../hooks/useInfiniteSlice';
 import { useCurrentAccount, useSignAndExecuteTransaction } from '@mysten/dapp-kit';
 import { ConnectWalletButton } from './ConnectWalletButton';
 import type { Transaction } from '@mysten/sui/transactions';
 import { ConfirmModal } from './ConfirmModal';
-import { formatAmount, formatShortDate, isValidSuiAddress, shortAddr } from '../lib/format';
+import {
+  formatAmount,
+  formatShanghai,
+  formatShortDate,
+  isValidSuiAddress,
+  mistToSui,
+  progressPct,
+  shortAddr,
+} from '../lib/format';
 import { SmartAmount, SmartAmountRange } from './SmartAmount';
 import { dryRun, friendlyRpcError } from '../lib/sui';
 import {
@@ -32,6 +40,59 @@ type Pending = {
 
 const PAGE = 50;
 
+/** Same source order as the list's 创建时间: UTC, then Beijing string, then on-chain createdTs. */
+function tickTimeMs(
+  t: Pick<Suirc20Tick, 'deployTimeUtc' | 'deployTimeBeijing' | 'createdTs'>,
+): number | null {
+  if (t.deployTimeUtc) {
+    const n = Date.parse(t.deployTimeUtc);
+    if (Number.isFinite(n)) return n;
+  }
+  if (t.deployTimeBeijing) {
+    const m = String(t.deployTimeBeijing).match(/^(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2}:\d{2})/);
+    if (m) {
+      const n = Date.parse(`${m[1]}T${m[2]}+08:00`);
+      if (Number.isFinite(n)) return n;
+    }
+  }
+  if (t.createdTs != null && t.createdTs !== '') {
+    const n = Number(t.createdTs);
+    if (Number.isFinite(n) && n > 0) return n;
+  }
+  return null;
+}
+
+function formatFeeSui(fee: string | null | undefined): string {
+  if (fee == null || String(fee).trim() === '') return '—';
+  try {
+    const v = BigInt(String(fee).trim());
+    return v === 0n ? '0 SUI' : `${mistToSui(v)} SUI`;
+  } catch {
+    return '—';
+  }
+}
+
+/** Snapshot stamps are already Beijing clock time; render like Movescriptions. */
+function formatStamp(raw: string | null | undefined): string {
+  if (!raw) return '—';
+  const m = String(raw).match(/^(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2}:\d{2})/);
+  if (m) {
+    const n = Date.parse(`${m[1]}T${m[2]}+08:00`);
+    if (Number.isFinite(n)) return formatShanghai(n);
+  }
+  const n = Date.parse(raw);
+  return Number.isFinite(n) ? formatShanghai(n) : raw;
+}
+
+function asBig(v: string | number | null | undefined): bigint {
+  try {
+    const raw = String(v ?? '0').trim();
+    return BigInt(raw || '0');
+  } catch {
+    return 0n;
+  }
+}
+
 export function Suirc20Panel() {
   const account = useCurrentAccount();
   const { mutateAsync: signAndExecute } = useSignAndExecuteTransaction();
@@ -49,8 +110,11 @@ export function Suirc20Panel() {
 
   const [holders, setHolders] = useState<Suirc20Holder[]>([]);
   const [holdersTotal, setHoldersTotal] = useState(0);
+  const [holdersUpdatedAt, setHoldersUpdatedAt] = useState<string | null>(null);
+  const [holdersReady, setHoldersReady] = useState(false);
   const [holderPage, setHolderPage] = useState(0);
   const [loadingHolders, setLoadingHolders] = useState(false);
+  const holdersReq = useRef(0);
 
   const [myBal, setMyBal] = useState<Record<string, string>>({});
   const [loadingMine, setLoadingMine] = useState(false);
@@ -102,19 +166,28 @@ export function Suirc20Panel() {
   } = useInfiniteSlice(filtered, PAGE);
 
   const loadHolders = useCallback(async (tick: string, preferV2 = false) => {
+    const req = ++holdersReq.current;
     setLoadingHolders(true);
+    setHoldersReady(false);
+    setHoldersUpdatedAt(null);
     setErr(null);
     try {
       const data = await loadSuirc20Holders(tick, preferV2);
+      if (req !== holdersReq.current) return;
       setHolders(data.holders || []);
       setHoldersTotal(data.totalHolders || data.holders?.length || 0);
+      setHoldersUpdatedAt(data.updatedAtBeijing ?? null);
+      setHoldersReady(true);
       setHolderPage(0);
     } catch (e: any) {
+      if (req !== holdersReq.current) return;
       setHolders([]);
       setHoldersTotal(0);
+      setHoldersUpdatedAt(null);
+      setHoldersReady(false);
       setErr(friendlyRpcError(e));
     } finally {
-      setLoadingHolders(false);
+      if (req === holdersReq.current) setLoadingHolders(false);
     }
   }, []);
 
@@ -149,6 +222,12 @@ export function Suirc20Panel() {
     const start = holderPage * PAGE;
     return holders.slice(start, start + PAGE);
   }, [holders, holderPage]);
+
+  const holderTickOptions = useMemo(() => {
+    const head = ticks.slice(0, 80);
+    if (selected && !head.some((t) => t.tick === selected.tick)) return [selected, ...head];
+    return head;
+  }, [ticks, selected]);
 
   const myRows = useMemo(() => {
     return Object.entries(myBal)
@@ -414,29 +493,57 @@ export function Suirc20Panel() {
       {sub === 'holders' && (
         <section className="section">
           <div className="section-head">
-            <h2>持有者 · {selected?.tick || '—'}</h2>
-            <label className="field" style={{ maxWidth: 200 }}>
-              选择 tick
+            <h2>持有者榜单 {selected?.tick ? `· ${selected.tick}` : ''}</h2>
+            <div className="row gap wrap">
               <select
                 className="select"
                 value={selected?.tick || ''}
+                aria-label="选择铭文"
                 onChange={(e) => {
                   const t = ticks.find((x) => x.tick === e.target.value);
                   if (t) setSelected(t);
                 }}
               >
-                {ticks.slice(0, 80).map((t) => (
+                {holderTickOptions.map((t) => (
                   <option key={t.tick} value={t.tick}>
                     {t.tick}
                   </option>
                 ))}
               </select>
-            </label>
+              <button
+                className="btn ghost small"
+                type="button"
+                onClick={() => selected && loadHolders(selected.tick)}
+                disabled={loadingHolders || !selected}
+              >
+                刷新
+              </button>
+            </div>
           </div>
+          {!selected ? (
+            <div className="card muted">{loading ? '加载中…' : '暂无 tick'}</div>
+          ) : (
+            <Suirc20HolderStats
+              tick={selected}
+              holderCount={holdersReady ? holdersTotal : selected.holderCount}
+            />
+          )}
           {loadingHolders ? (
             <div className="card muted">加载持有者…</div>
           ) : (
             <>
+              {holdersReady && (
+                <p className="hint">
+                  更新于 {formatStamp(holdersUpdatedAt)} · 共 {holdersTotal.toLocaleString()} 个地址
+                  {meta?.complete === false
+                    ? meta.progressLabel
+                      ? ` · ${meta.progressLabel}`
+                      : ' · 索引未完成'
+                    : meta?.complete
+                      ? ' · 完整快照'
+                      : ''}
+                </p>
+              )}
               <div className="table-wrap">
                 <table className="table">
                   <thead>
@@ -730,5 +837,95 @@ export function Suirc20Panel() {
         onConfirm={confirmSign}
       />
     </>
+  );
+}
+
+/** Holders summary, parallel to Movescriptions HoldersPanel. SUIRC-20 has no epoch factory or TickRecord. */
+function Suirc20HolderStats({ tick, holderCount }: { tick: Suirc20Tick; holderCount: number }) {
+  const max = asBig(tick.max);
+  const minted = asBig(tick.minted);
+  const pct = progressPct(minted, max);
+  const remain = max > minted ? max - minted : 0n;
+  const closed = remain === 0n;
+  const deployer = tick.deployer?.trim() || '';
+
+  return (
+    <div className="card detail holders-detail">
+      <h3>
+        {tick.tick || '—'}
+        {tick.badge ? <span className="tag v2">{tick.badge}</span> : null}
+      </h3>
+      <dl className="grid-dl">
+        <div>
+          <dt>总量</dt>
+          <dd>{max > 0n ? formatAmount(max) : '—'}</dd>
+        </div>
+        <div>
+          <dt>已铸造</dt>
+          <dd>
+            {formatAmount(minted)}
+            {max > 0n ? <span className="muted">（{pct.toFixed(2)}%）</span> : null}
+          </dd>
+        </div>
+        <div>
+          <dt>进度</dt>
+          <dd>
+            <div className="bar" style={{ width: 120 }}>
+              <div className="bar-fill" style={{ width: `${pct}%` }} />
+            </div>
+            <span className="bar-label">{pct.toFixed(1)}%</span>
+          </dd>
+        </div>
+        <div>
+          <dt>状态</dt>
+          <dd>
+            {closed ? (
+              <span className="pill danger">已结束铸造</span>
+            ) : (
+              <span className="pill ok">铸造中</span>
+            )}
+          </dd>
+        </div>
+        <div>
+          <dt>创建时间</dt>
+          <dd>{formatShanghai(tickTimeMs(tick) ?? undefined)}</dd>
+        </div>
+        <div>
+          <dt>部署者</dt>
+          <dd className="mono">
+            {deployer ? (
+              <a
+                className="addr-link"
+                href={`https://suiscan.xyz/mainnet/account/${deployer}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {shortAddr(deployer, 8)}
+              </a>
+            ) : (
+              '—'
+            )}
+          </dd>
+        </div>
+        <div>
+          <dt>持有地址数</dt>
+          <dd>
+            <SmartAmount value={holderCount} />
+          </dd>
+        </div>
+        <div>
+          <dt>铸造费</dt>
+          <dd>{formatFeeSui(tick.fee)}</dd>
+        </div>
+        <div>
+          <dt>铸造工厂 / Epoch</dt>
+          <dd>—</dd>
+        </div>
+        <div>
+          <dt>TickRecord</dt>
+          <dd>—</dd>
+        </div>
+      </dl>
+    </div>
   );
 }

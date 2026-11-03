@@ -247,6 +247,15 @@ h3 { font-size: 20px; font-weight: 600; }
 .pill.danger { background: #ffe5e3; color: var(--danger); }
 .small-wrap { word-break: break-all; font-size: 12px; }
 .holders-detail h3 { margin-top: 0; }
+/* Match the holders summary: four stats across, two on a phone. */
+.holders-detail .grid-dl {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+@media (max-width: 720px) {
+  .holders-detail .grid-dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
 
 .btn {
   appearance: none; border: 0; border-radius: 980px; padding: 10px 18px;
