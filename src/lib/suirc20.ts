@@ -63,13 +63,14 @@ function suirc20DeployMs(t: {
   deployTimeBeijing?: string | null;
   createdTs?: number | string | null;
 }): number {
+  const times: number[] = [];
   if (t.createdTs != null && t.createdTs !== '') {
     const n = Number(t.createdTs);
-    if (Number.isFinite(n) && n > 0) return n;
+    if (Number.isFinite(n) && n > 0) times.push(n);
   }
   if (t.deployTimeUtc) {
     const n = Date.parse(t.deployTimeUtc);
-    if (Number.isFinite(n)) return n;
+    if (Number.isFinite(n)) times.push(n);
   }
   if (t.deployTimeBeijing) {
     // "2023-12-15 23:34:13 Asia/Shanghai" → treat as +08:00
@@ -78,10 +79,11 @@ function suirc20DeployMs(t: {
     );
     if (m) {
       const n = Date.parse(`${m[1]}T${m[2]}+08:00`);
-      if (Number.isFinite(n)) return n;
+      if (Number.isFinite(n)) times.push(n);
     }
   }
-  return Number.POSITIVE_INFINITY;
+  if (!times.length) return Number.POSITIVE_INFINITY;
+  return Math.min(...times);
 }
 
 /** SuiMint: suis #1, dgen #2 pinned; then oldest deploy first. */

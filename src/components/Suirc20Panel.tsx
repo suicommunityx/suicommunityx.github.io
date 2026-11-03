@@ -266,7 +266,7 @@ export function Suirc20Panel() {
                     <th className="num">已铸</th>
                     <th className="num">上限</th>
                     <th className="num">限额</th>
-                    <th className="num">持有</th>
+                    <th className="num hide-narrow">持有</th>
                     <th>部署</th>
                   </tr>
                 </thead>
@@ -301,7 +301,7 @@ export function Suirc20Panel() {
                       <td className="num">{formatCompactAmount(t.minted)}</td>
                       <td className="num">{formatCompactAmount(t.max)}</td>
                       <td className="num">{formatCompactAmount(t.lim)}</td>
-                      <td className="num">{t.holderCount}</td>
+                      <td className="num hide-narrow">{t.holderCount}</td>
                       <td className="muted">{formatShortDate(t.createdTs ?? t.deployTimeUtc ?? t.deployTimeBeijing)}</td>
                     </tr>
                   ))}

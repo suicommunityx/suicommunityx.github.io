@@ -316,6 +316,8 @@ code { font-size: 12px; background: #eee; padding: 1px 6px; border-radius: 6px; 
   .table { min-width: 0; width: max-content; font-size: 12px; }
   .table th, .table td { padding: 6px 8px; white-space: nowrap; }
   .table-wrap:not(.market-table-wrap)::before { display: none; }
+  .table .hide-narrow { display: none; }
+  .tag.v2, .tag { font-size: 10px; padding: 0 5px; margin-left: 4px; }
 }
 
 @media (min-width: 721px) {
