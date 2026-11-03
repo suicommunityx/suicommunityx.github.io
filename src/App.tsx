@@ -3,6 +3,7 @@ import { useCurrentAccount } from '@mysten/dapp-kit';
 import { ConnectWalletButton } from './components/ConnectWalletButton';
 import { TickList } from './components/TickList';
 import { ConfirmModal } from './components/ConfirmModal';
+import { FormModal } from './components/FormModal';
 import { HoldersPanel } from './components/HoldersPanel';
 import { Suirc20Panel } from './components/Suirc20Panel';
 import type { TickInfo, MovescriptionHolding, MarketListing } from './lib/sui';
@@ -121,7 +122,23 @@ export default function App() {
   const [xferTo, setXferTo] = useState('');
   const [xferObj, setXferObj] = useState('');
   const [xferAmt, setXferAmt] = useState(''); // empty = whole object
-  const [listPrice, setListPrice] = useState('1000'); // mist per unit
+
+  /** Dedicated transfer / list sheets (我的铭文) — not always-visible page fields */
+  const [xferSheet, setXferSheet] = useState<null | {
+    objectId: string;
+    tick: string;
+    amount: bigint;
+  }>(null);
+  const [listSheet, setListSheet] = useState<null | {
+    objectId: string;
+    tick: string;
+    amount: bigint;
+    marketId: string;
+  }>(null);
+  const [sheetTo, setSheetTo] = useState('');
+  const [sheetAmt, setSheetAmt] = useState('');
+  const [sheetPrice, setSheetPrice] = useState('1000');
+  const [sheetErr, setSheetErr] = useState<string | null>(null);
 
   const refreshTicks = useCallback(async (deep = false) => {
     setLoadingTicks(true);
@@ -666,10 +683,14 @@ useEffect(() => {
               </label>
               <label className="field">
                 收款地址
-                <input
+                <textarea
+                  className="addr-input"
+                  rows={2}
                   value={xferTo}
-                  onChange={(e) => setXferTo(e.target.value.trim())}
+                  onChange={(e) => setXferTo(e.target.value.replace(/\s+/g, ''))}
                   placeholder="0x…"
+                  spellCheck={false}
+                  autoComplete="off"
                 />
               </label>
               <button
@@ -874,22 +895,13 @@ useEffect(() => {
                           <button
                             className="btn small"
                             onClick={() => {
-                              const to = xferTo || account!.address;
-                              if (!isValidSuiAddress(to)) {
-                                setErr('请输入合法的 0x + 64 位十六进制地址');
-                                return;
-                              }
-                              ask({
-                                title: '转账铭文',
-                                summary: (
-                                  <ul className="summary">
-                                    <li>对象：{h.objectId}</li>
-                                    <li>Tick：{h.tick}</li>
-                                    <li>数量：{formatAmount(h.amount)}</li>
-                                    <li>收款地址：{to}</li>
-                                  </ul>
-                                ),
-                                build: () => buildTransferTx(h.objectId, to),
+                              setSheetErr(null);
+                              setSheetTo('');
+                              setSheetAmt('');
+                              setXferSheet({
+                                objectId: h.objectId,
+                                tick: h.tick,
+                                amount: h.amount,
                               });
                             }}
                           >
@@ -901,18 +913,13 @@ useEffect(() => {
                             title={marketId ? '' : '该 tick 暂无已知市场'}
                             onClick={() => {
                               if (!marketId) return;
-                              const unit = BigInt(listPrice || '0');
-                              ask({
-                                title: `挂单 ${h.tick}`,
-                                summary: (
-                                  <ul className="summary">
-                                    <li>对象：{h.objectId}</li>
-                                    <li>单价：{mistToSui(unit)} SUI / 单位</li>
-                                    <li>总价：{mistToSui(unit * h.amount)} SUI</li>
-                                    <li>市场：{shortAddr(marketId, 10)}</li>
-                                  </ul>
-                                ),
-                                build: () => buildListTx(marketId, h.objectId, unit),
+                              setSheetErr(null);
+                              setSheetPrice('1000');
+                              setListSheet({
+                                objectId: h.objectId,
+                                tick: h.tick,
+                                amount: h.amount,
+                                marketId,
                               });
                             }}
                           >
@@ -925,22 +932,6 @@ useEffect(() => {
                 </div>
               );
             })}
-            {account && (
-              <div className="card form">
-                <label className="field">
-                  转账目标地址（留空则转给自己，用于测试）
-                  <input
-                    value={xferTo}
-                    onChange={(e) => setXferTo(e.target.value.trim())}
-                    placeholder={account.address}
-                  />
-                </label>
-                <label className="field">
-                  挂单单价（MIST / 单位）
-                  <input value={listPrice} onChange={(e) => setListPrice(e.target.value)} />
-                </label>
-              </div>
-            )}
           </section>
         )}
 
@@ -1190,6 +1181,255 @@ useEffect(() => {
         </p>
         <p className="muted">交易由你的钱包签名发送 · Mainnet · 不托管私钥 · 无 SuiMint 市场</p>
       </footer>
+
+
+      <FormModal
+        open={!!xferSheet}
+        title="转账铭文"
+        subtitle={xferSheet ? `${xferSheet.tick} · 数量 ${formatAmount(xferSheet.amount)}` : undefined}
+        busy={busy}
+        onClose={() => {
+          if (!busy) {
+            setXferSheet(null);
+            setSheetErr(null);
+          }
+        }}
+        footer={
+          <>
+            <button
+              type="button"
+              className="btn ghost"
+              disabled={busy}
+              onClick={() => {
+                setXferSheet(null);
+                setSheetErr(null);
+              }}
+            >
+              取消
+            </button>
+            <button
+              type="button"
+              className="btn primary"
+              disabled={busy || !xferSheet || !account}
+              onClick={() => {
+                if (!xferSheet || !account) return;
+                const to = (sheetTo.trim() || account.address).trim();
+                if (!isValidSuiAddress(to)) {
+                  setSheetErr('请输入合法的 0x + 64 位十六进制地址');
+                  return;
+                }
+                const amtStr = sheetAmt.trim();
+                const h = xferSheet;
+                setXferSheet(null);
+                setSheetErr(null);
+                if (amtStr) {
+                  let amt: bigint;
+                  try {
+                    amt = BigInt(amtStr);
+                  } catch {
+                    setErr('拆分数量须为正整数');
+                    return;
+                  }
+                  if (amt <= 0n || amt > h.amount) {
+                    setErr('拆分数量须大于 0 且不超过持有数量');
+                    return;
+                  }
+                  ask({
+                    title: '拆分并转账',
+                    summary: (
+                      <ul className="summary">
+                        <li>Tick：{h.tick}</li>
+                        <li>
+                          对象：<span className="mono-break">{h.objectId}</span>
+                        </li>
+                        <li>拆分数量：{formatAmount(amt)}</li>
+                        <li>
+                          收款：<span className="mono-break">{to}</span>
+                        </li>
+                      </ul>
+                    ),
+                    build: () => buildSplitTransferTx(h.objectId, amt, to),
+                  });
+                  return;
+                }
+                ask({
+                  title: '转账铭文',
+                  summary: (
+                    <ul className="summary">
+                      <li>Tick：{h.tick}</li>
+                      <li>
+                        对象：<span className="mono-break">{h.objectId}</span>
+                      </li>
+                      <li>数量：{formatAmount(h.amount)}（整枚）</li>
+                      <li>
+                        收款：<span className="mono-break">{to}</span>
+                      </li>
+                    </ul>
+                  ),
+                  build: () => buildTransferTx(h.objectId, to),
+                });
+              }}
+            >
+              下一步
+            </button>
+          </>
+        }
+      >
+        {xferSheet && (
+          <>
+            <div className="sheet-meta">
+              <div className="sheet-meta-row">
+                <span className="label">铭文</span>
+                <span className="value">{xferSheet.tick}</span>
+              </div>
+              <div className="sheet-meta-row">
+                <span className="label">数量</span>
+                <span className="value">{formatAmount(xferSheet.amount)}</span>
+              </div>
+              <div className="sheet-meta-row">
+                <span className="label">对象</span>
+                <span className="value mono">{xferSheet.objectId}</span>
+              </div>
+            </div>
+            <label className="field">
+              收款地址
+              <textarea
+                className="addr-input"
+                rows={2}
+                value={sheetTo}
+                onChange={(e) => setSheetTo(e.target.value.replace(/\s+/g, ''))}
+                placeholder={account?.address || '0x…'}
+                spellCheck={false}
+                autoComplete="off"
+              />
+              <p className="field-help">留空则转给当前连接的钱包（便于自测）。地址会完整换行显示，不会被裁切。</p>
+            </label>
+            <label className="field">
+              转账数量（可选）
+              <input
+                value={sheetAmt}
+                onChange={(e) => setSheetAmt(e.target.value)}
+                placeholder={`留空=整枚 ${formatAmount(xferSheet.amount)}`}
+                inputMode="numeric"
+              />
+              <p className="field-help">填写后会先拆分再转移；留空则转移整枚对象。</p>
+            </label>
+            {sheetErr && <p className="wallet-modal-err">{sheetErr}</p>}
+          </>
+        )}
+      </FormModal>
+
+      <FormModal
+        open={!!listSheet}
+        title={listSheet ? `挂单 ${listSheet.tick}` : '挂单'}
+        subtitle="设置单价后确认签名"
+        busy={busy}
+        onClose={() => {
+          if (!busy) {
+            setListSheet(null);
+            setSheetErr(null);
+          }
+        }}
+        footer={
+          <>
+            <button
+              type="button"
+              className="btn ghost"
+              disabled={busy}
+              onClick={() => {
+                setListSheet(null);
+                setSheetErr(null);
+              }}
+            >
+              取消
+            </button>
+            <button
+              type="button"
+              className="btn primary"
+              disabled={busy || !listSheet || !account}
+              onClick={() => {
+                if (!listSheet) return;
+                let unit: bigint;
+                try {
+                  unit = BigInt((sheetPrice || '0').trim());
+                } catch {
+                  setSheetErr('单价须为非负整数（MIST）');
+                  return;
+                }
+                if (unit < 0n) {
+                  setSheetErr('单价须为非负整数（MIST）');
+                  return;
+                }
+                const h = listSheet;
+                setListSheet(null);
+                setSheetErr(null);
+                ask({
+                  title: `挂单 ${h.tick}`,
+                  summary: (
+                    <ul className="summary">
+                      <li>
+                        对象：<span className="mono-break">{h.objectId}</span>
+                      </li>
+                      <li>单价：{mistToSui(unit)} SUI / 单位</li>
+                      <li>总价：{mistToSui(unit * h.amount)} SUI</li>
+                      <li>
+                        市场：<span className="mono-break">{h.marketId}</span>
+                      </li>
+                    </ul>
+                  ),
+                  build: () => buildListTx(h.marketId, h.objectId, unit),
+                });
+              }}
+            >
+              下一步
+            </button>
+          </>
+        }
+      >
+        {listSheet && (
+          <>
+            <div className="sheet-meta">
+              <div className="sheet-meta-row">
+                <span className="label">铭文</span>
+                <span className="value">{listSheet.tick}</span>
+              </div>
+              <div className="sheet-meta-row">
+                <span className="label">数量</span>
+                <span className="value">{formatAmount(listSheet.amount)}</span>
+              </div>
+              <div className="sheet-meta-row">
+                <span className="label">对象</span>
+                <span className="value mono">{listSheet.objectId}</span>
+              </div>
+            </div>
+            <label className="field">
+              挂单单价（MIST / 单位）
+              <input
+                value={sheetPrice}
+                onChange={(e) => setSheetPrice(e.target.value)}
+                inputMode="numeric"
+                placeholder="1000"
+              />
+              <p className="field-help">1 SUI = 1,000,000,000 MIST。下方会实时换算总价。</p>
+            </label>
+            <div className="sheet-preview">
+              <span>预估总价</span>
+              <strong>
+                {(() => {
+                  try {
+                    const u = BigInt((sheetPrice || '0').trim() || '0');
+                    return `${mistToSui(u * listSheet.amount)} SUI`;
+                  } catch {
+                    return '—';
+                  }
+                })()}
+              </strong>
+            </div>
+            {sheetErr && <p className="wallet-modal-err">{sheetErr}</p>}
+          </>
+        )}
+      </FormModal>
+
 
       <ConfirmModal
         open={!!pending}

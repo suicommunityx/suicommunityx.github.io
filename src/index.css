@@ -533,3 +533,134 @@ td.num .smart-amount { text-align: right; margin-left: auto; }
   text-align: center; font-size: 12px; color: var(--muted);
   padding: 10px 8px 4px;
 }
+
+/* —— Form / transfer sheet —— */
+.form-modal {
+  width: min(420px, 100%);
+  padding: 0;
+  overflow: hidden;
+  border-radius: 20px;
+}
+.form-modal-wide { width: min(480px, 100%); }
+.form-modal-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 18px 10px;
+}
+.form-modal-titles { min-width: 0; flex: 1; }
+.form-modal-titles h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+.form-modal-sub {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.35;
+}
+.form-modal-body {
+  padding: 4px 18px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.form-modal-footer {
+  padding: 12px 18px 18px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--line);
+  margin-top: 6px;
+}
+.form-modal-footer .btn { min-width: 96px; }
+
+.sheet-meta {
+  display: grid;
+  gap: 10px;
+  padding: 12px 14px;
+  background: #f5f5f7;
+  border-radius: 14px;
+}
+.sheet-meta-row {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 8px;
+  align-items: start;
+  font-size: 13px;
+}
+.sheet-meta-row .label {
+  color: var(--muted);
+  padding-top: 1px;
+}
+.sheet-meta-row .value {
+  color: var(--fg);
+  font-weight: 500;
+  min-width: 0;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+  line-height: 1.4;
+}
+.sheet-meta-row .value.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 450;
+}
+
+.field input.addr-input,
+.field textarea.addr-input {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12.5px;
+  line-height: 1.45;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+  overflow-x: auto;
+  resize: vertical;
+  min-height: 44px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.field textarea.addr-input {
+  min-height: 64px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--fg);
+  background: #fff;
+}
+.field-help {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.35;
+}
+.sheet-preview {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #eef5ff;
+  color: #003d99;
+  font-size: 13px;
+}
+.sheet-preview strong {
+  font-variant-numeric: tabular-nums;
+  font-size: 15px;
+}
+
+/* Confirm modal: long hex must wrap */
+.modal-body .summary li,
+.modal .mono-break {
+  word-break: break-all;
+  overflow-wrap: anywhere;
+}
+.modal {
+  max-width: calc(100vw - 40px);
+  box-sizing: border-box;
+}
