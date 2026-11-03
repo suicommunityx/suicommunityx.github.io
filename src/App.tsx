@@ -19,6 +19,7 @@ import {
   dryRun,
   friendlyRpcError,
   pinTicksFirst,
+  enrichTickStartTimes,
 } from './lib/sui';
 import { formatAmount, formatShanghai, isValidSuiAddress, mistToSui, shortAddr } from './lib/format';
 import { SITE_NAME } from './lib/constants';
@@ -109,6 +110,7 @@ export default function App() {
 
   // mint
   const [mintMist, setMintMist] = useState('100000000'); // 0.1 SUI
+  const [tickQuery, setTickQuery] = useState('');
 
   // transfer / list
   const [xferTo, setXferTo] = useState('');
@@ -132,8 +134,13 @@ export default function App() {
             totalTx: x.totalTx == null ? null : BigInt(x.totalTx),
             deployer: x.deployer || null,
           }));
-          setTicks(pinTicksFirst(mapped));
+          const pinned = pinTicksFirst(mapped as TickInfo[]);
+          setTicks(pinned);
           setLoadingTicks(false);
+          // Fill missing deploy times in background (cached)
+          enrichTickStartTimes(pinned)
+            .then((enriched) => setTicks(enriched))
+            .catch(() => {});
           setSelected((prev) => {
             if (prev) return prev;
             const suis = mapped.find((x: any) => x.tick === 'SUIS');
@@ -145,7 +152,8 @@ export default function App() {
       }
       if (deep) {
         const live = await loadAllTicks({ deep: true });
-        setTicks(pinTicksFirst(live));
+        const livePinned = await enrichTickStartTimes(pinTicksFirst(live));
+        setTicks(livePinned);
         setSelected((prev) => {
           if (prev) {
             return live.find((x) => x.tick === prev.tick) || prev;
@@ -241,6 +249,12 @@ export default function App() {
     }
     return [...m.entries()].sort((a, b) => a[0].localeCompare(b[0]));
   }, [holdings]);
+
+  const filteredMovesTicks = useMemo(() => {
+    const s = tickQuery.trim();
+    if (!s) return ticks;
+    return ticks.filter((t) => t.tick.toLowerCase().includes(s.toLowerCase()));
+  }, [ticks, tickQuery]);
 
   function ask(p: Pending) {
     setErr(null);
@@ -377,12 +391,21 @@ export default function App() {
           <section className="section">
             <div className="section-head">
               <h2>铭文列表</h2>
-              <button className="btn ghost small" onClick={() => refreshTicks(true)} disabled={loadingTicks} title="从链上刷新（可能较慢）">
-                刷新
-              </button>
+              <div className="row gap wrap" style={{ alignItems: 'center' }}>
+                <input
+                  className="search-input"
+                  style={{ maxWidth: 220 }}
+                  placeholder="搜索 tick"
+                  value={tickQuery}
+                  onChange={(e) => setTickQuery(e.target.value)}
+                />
+                <button className="btn ghost small" onClick={() => refreshTicks(true)} disabled={loadingTicks} title="从链上刷新（可能较慢）">
+                  刷新
+                </button>
+              </div>
             </div>
             <TickList
-              ticks={ticks}
+              ticks={filteredMovesTicks}
               loading={loadingTicks}
               selected={selected?.tick}
               onSelect={(t) => {

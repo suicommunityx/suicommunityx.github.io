@@ -1,5 +1,5 @@
 import type { TickInfo } from '../lib/sui';
-import { formatAmount, formatShanghai, mistToSui, progressPct } from '../lib/format';
+import { formatCompactAmount, formatShortDate, mistToSui, progressPct } from '../lib/format';
 
 type Props = {
   ticks: TickInfo[];
@@ -17,12 +17,12 @@ export function TickList({ ticks, loading, onSelect, onView, selected }: Props) 
       <table className="table">
         <thead>
           <tr>
-            <th>名称</th>
-            <th>总量</th>
-            <th>已铸 / 剩余</th>
-            <th>进度</th>
-            <th>创建时间</th>
-            <th>铸造费</th>
+            <th className="tick-col">名称</th>
+            <th className="num">总量</th>
+            <th className="num">已铸/剩余</th>
+            <th className="num">进度</th>
+            <th>创建</th>
+            <th className="num">费</th>
           </tr>
         </thead>
         <tbody>
@@ -47,20 +47,17 @@ export function TickList({ ticks, loading, onSelect, onView, selected }: Props) 
                     {t.tick}
                   </button>
                 </td>
-                <td>{formatAmount(t.totalSupply)}</td>
-                <td>
-                  {formatAmount(t.currentSupply)} / {formatAmount(t.remain)}
+                <td className="num">{formatCompactAmount(t.totalSupply)}</td>
+                <td className="num">
+                  {formatCompactAmount(t.currentSupply)}/{formatCompactAmount(t.remain)}
                 </td>
-                <td>
-                  <div className="bar">
-                    <div className="bar-fill" style={{ width: `${pct}%` }} />
-                  </div>
+                <td className="num">
                   <span className="bar-label">{pct.toFixed(1)}%</span>
-                  {closed && <span className="pill danger">已售罄</span>}
+                  {closed && <span className="pill danger">罄</span>}
                 </td>
-                <td className="nowrap">{formatShanghai(t.startTimeMs ?? undefined)}</td>
-                <td>
-                  {t.mintFee == null ? '—' : t.mintFee === 0n ? '0' : `${mistToSui(t.mintFee)} SUI`}
+                <td>{formatShortDate(t.startTimeMs)}</td>
+                <td className="num">
+                  {t.mintFee == null ? '—' : t.mintFee === 0n ? '0' : mistToSui(t.mintFee)}
                 </td>
               </tr>
             );

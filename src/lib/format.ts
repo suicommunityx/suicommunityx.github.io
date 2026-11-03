@@ -40,3 +40,68 @@ export function progressPct(minted: bigint, supply: bigint): number {
   const p = Number((minted * 10000n) / supply) / 100;
   return Math.min(100, Math.max(0, p));
 }
+
+
+/** Compact amounts for narrow tables: 10B / 21M / 1.2K */
+export function formatCompactAmount(n: string | number | bigint): string {
+  let v: bigint;
+  try {
+    v = typeof n === 'bigint' ? n : BigInt(String(n).replace(/,/g, ''));
+  } catch {
+    return String(n);
+  }
+  const neg = v < 0n;
+  if (neg) v = -v;
+  const sign = neg ? '-' : '';
+  if (v >= 1_000_000_000_000n) {
+    const x = Number(v / 10_000_000_000n) / 100;
+    return sign + trimNum(x) + 'T';
+  }
+  if (v >= 1_000_000_000n) {
+    const x = Number(v / 10_000_000n) / 100;
+    return sign + trimNum(x) + 'B';
+  }
+  if (v >= 1_000_000n) {
+    const x = Number(v / 10_000n) / 100;
+    return sign + trimNum(x) + 'M';
+  }
+  if (v >= 10_000n) {
+    const x = Number(v / 10n) / 100;
+    return sign + trimNum(x) + 'K';
+  }
+  return sign + v.toString();
+}
+
+function trimNum(x: number): string {
+  return String(x).replace(/\.0+$/, '').replace(/(\.[1-9]*)0+$/, '$1');
+}
+
+/** YYYY-MM-DD from ms or Beijing/ISO string; no timezone suffix. */
+export function formatShortDate(
+  input?: string | number | bigint | null,
+): string {
+  if (input == null || input === '') return '—';
+  let ms: number | null = null;
+  if (typeof input === 'bigint' || typeof input === 'number') {
+    ms = Number(input);
+  } else {
+    const s = String(input);
+    const m = s.match(/^(\d{4}-\d{2}-\d{2})/);
+    if (m) return m[1];
+    const n = Date.parse(s.replace(' Asia/Shanghai', '+08:00'));
+    if (Number.isFinite(n)) ms = n;
+  }
+  if (ms == null || !Number.isFinite(ms)) return '—';
+  const d = new Date(ms);
+  // Asia/Shanghai calendar date
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Shanghai',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(d);
+  const y = parts.find((p) => p.type === 'year')?.value;
+  const mo = parts.find((p) => p.type === 'month')?.value;
+  const da = parts.find((p) => p.type === 'day')?.value;
+  return y && mo && da ? `${y}-${mo}-${da}` : '—';
+}

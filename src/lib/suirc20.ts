@@ -36,6 +36,8 @@ export type Suirc20Tick = {
   badge?: string | null;
   source?: string;
   tickId?: string | null;
+  /** v2 on-chain created_ts (ms) when available */
+  createdTs?: number | string | null;
 };
 
 export type Suirc20Meta = {
@@ -56,13 +58,50 @@ export type Suirc20Meta = {
 
 export type Suirc20Holder = { owner: string; balance: string };
 
-export function pinSuirc20Ticks<T extends { tick: string }>(list: T[]): T[] {
+function suirc20DeployMs(t: {
+  deployTimeUtc?: string | null;
+  deployTimeBeijing?: string | null;
+  createdTs?: number | string | null;
+}): number {
+  if (t.createdTs != null && t.createdTs !== '') {
+    const n = Number(t.createdTs);
+    if (Number.isFinite(n) && n > 0) return n;
+  }
+  if (t.deployTimeUtc) {
+    const n = Date.parse(t.deployTimeUtc);
+    if (Number.isFinite(n)) return n;
+  }
+  if (t.deployTimeBeijing) {
+    // "2023-12-15 23:34:13 Asia/Shanghai" → treat as +08:00
+    const m = String(t.deployTimeBeijing).match(
+      /^(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2}:\d{2})/,
+    );
+    if (m) {
+      const n = Date.parse(`${m[1]}T${m[2]}+08:00`);
+      if (Number.isFinite(n)) return n;
+    }
+  }
+  return Number.POSITIVE_INFINITY;
+}
+
+/** SuiMint: suis #1, dgen #2 pinned; then oldest deploy first. */
+export function pinSuirc20Ticks<
+  T extends {
+    tick: string;
+    deployTimeUtc?: string | null;
+    deployTimeBeijing?: string | null;
+    createdTs?: number | string | null;
+  },
+>(list: T[]): T[] {
   return [...list].sort((a, b) => {
     const ra = SUIRC20_PIN.indexOf(a.tick as (typeof SUIRC20_PIN)[number]);
     const rb = SUIRC20_PIN.indexOf(b.tick as (typeof SUIRC20_PIN)[number]);
     const aa = ra === -1 ? 99 : ra;
     const bb = rb === -1 ? 99 : rb;
     if (aa !== bb) return aa - bb;
+    const ta = suirc20DeployMs(a);
+    const tb = suirc20DeployMs(b);
+    if (ta !== tb) return ta - tb;
     return a.tick.localeCompare(b.tick);
   });
 }
@@ -110,6 +149,7 @@ function normV2(t: any): Suirc20Tick {
     badge: t.badge || '新版',
     source: 'suirc20v2',
     tickId: t.tickId || null,
+    createdTs: t.createdTs ?? null,
   };
 }
 
@@ -136,6 +176,8 @@ export function mergeSuirc20Ticks(v1: Suirc20Tick[], v2: Suirc20Tick[]): Suirc20
       // keep Operation deployer/time if v2 missing
       deployer: t.deployer || prev.deployer,
       deployTimeBeijing: t.deployTimeBeijing || prev.deployTimeBeijing,
+      deployTimeUtc: t.deployTimeUtc || prev.deployTimeUtc,
+      createdTs: t.createdTs ?? (prev as any).createdTs ?? null,
       digest: t.digest || prev.digest,
     });
   }

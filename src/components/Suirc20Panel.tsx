@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ConnectButton, useCurrentAccount, useSignAndExecuteTransaction } from '@mysten/dapp-kit';
 import type { Transaction } from '@mysten/sui/transactions';
 import { ConfirmModal } from './ConfirmModal';
-import { formatAmount, isValidSuiAddress, shortAddr } from '../lib/format';
+import { formatAmount, formatCompactAmount, formatShortDate, isValidSuiAddress, shortAddr } from '../lib/format';
 import { dryRun, friendlyRpcError } from '../lib/sui';
 import {
   buildSuirc20DeployTx,
@@ -261,13 +261,13 @@ export function Suirc20Panel() {
               <table className="table">
                 <thead>
                   <tr>
-                    <th>Tick</th>
-                    <th>进度</th>
-                    <th>已铸造</th>
-                    <th>上限</th>
-                    <th>单次限额</th>
-                    <th>持有者</th>
-                    <th>部署时间</th>
+                    <th className="tick-col">Tick</th>
+                    <th className="num">进度</th>
+                    <th className="num">已铸</th>
+                    <th className="num">上限</th>
+                    <th className="num">限额</th>
+                    <th className="num">持有</th>
+                    <th>部署</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -297,12 +297,12 @@ export function Suirc20Panel() {
                           </span>
                         ) : null}
                       </td>
-                      <td>{t.progress.toFixed(2)}%</td>
-                      <td>{formatAmount(BigInt(t.minted))}</td>
-                      <td>{formatAmount(BigInt(t.max))}</td>
-                      <td>{formatAmount(BigInt(t.lim))}</td>
-                      <td>{t.holderCount}</td>
-                      <td className="muted">{t.deployTimeBeijing || '—'}</td>
+                      <td className="num">{t.progress.toFixed(1)}%</td>
+                      <td className="num">{formatCompactAmount(t.minted)}</td>
+                      <td className="num">{formatCompactAmount(t.max)}</td>
+                      <td className="num">{formatCompactAmount(t.lim)}</td>
+                      <td className="num">{t.holderCount}</td>
+                      <td className="muted">{formatShortDate(t.createdTs ?? t.deployTimeUtc ?? t.deployTimeBeijing)}</td>
                     </tr>
                   ))}
                 </tbody>

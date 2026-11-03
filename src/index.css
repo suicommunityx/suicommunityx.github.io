@@ -162,10 +162,18 @@ h3 { font-size: 20px; font-weight: 600; }
 .card.muted { color: var(--muted); text-align: center; }
 .card.form { display: flex; flex-direction: column; gap: 14px; }
 
-.table-wrap { overflow: auto; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; }
-.table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 720px; }
-.table th, .table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.table-wrap { overflow: auto; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; -webkit-overflow-scrolling: touch; }
+.table {
+  width: max-content; min-width: 100%; max-width: none;
+  border-collapse: collapse; table-layout: auto; font-size: 13px;
+}
+.table th, .table td {
+  padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--line);
+  vertical-align: middle; white-space: nowrap; width: 1%;
+}
 .table th { color: var(--muted); font-weight: 500; background: #fafafa; position: sticky; top: 0; }
+.table td.num, .table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.table td.tick, .table th.tick-col { width: auto; }
 .table tr:hover { background: #fafafa; cursor: pointer; }
 .table tr.selected { background: #eef5ff; }
 .tick { font-weight: 600; letter-spacing: 0.02em; }
@@ -305,7 +313,9 @@ code { font-size: 12px; background: #eee; padding: 1px 6px; border-radius: 6px; 
     color: var(--muted);
     padding: 8px 12px 0;
   }
-  .table { min-width: 640px; }
+  .table { min-width: 0; width: max-content; font-size: 12px; }
+  .table th, .table td { padding: 6px 8px; white-space: nowrap; }
+  .table-wrap:not(.market-table-wrap)::before { display: none; }
 }
 
 @media (min-width: 721px) {

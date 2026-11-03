@@ -41,17 +41,86 @@ export type TickInfo = {
   deployer?: string | null;
 };
 
-/** SUIS first, DGEN second, then A–Z. */
-export function pinTickOrder(a: string, b: string): number {
-  const rank = (t: string) => (t === 'SUIS' ? 0 : t === 'DGEN' ? 1 : 2);
+/** Movescriptions: SUIS pinned #1 only; others by creation time oldest→newest. */
+export function pinTickOrder(
+  a: string,
+  b: string,
+  aTime?: bigint | number | null,
+  bTime?: bigint | number | null,
+): number {
+  const rank = (t: string) => (t === 'SUIS' ? 0 : 1);
   const ra = rank(a);
   const rb = rank(b);
   if (ra !== rb) return ra - rb;
+  const ta = aTime == null ? Number.POSITIVE_INFINITY : Number(aTime);
+  const tb = bTime == null ? Number.POSITIVE_INFINITY : Number(bTime);
+  if (ta !== tb) return ta - tb;
   return a.localeCompare(b);
 }
 
-export function pinTicksFirst<T extends { tick: string }>(list: T[]): T[] {
-  return [...list].sort((a, b) => pinTickOrder(a.tick, b.tick));
+export function pinTicksFirst<T extends { tick: string; startTimeMs?: bigint | number | null }>(
+  list: T[],
+): T[] {
+  return [...list].sort((a, b) =>
+    pinTickOrder(a.tick, b.tick, a.startTimeMs ?? null, b.startTimeMs ?? null),
+  ) as T[];
+}
+
+const START_TIME_CACHE = 'moves:tick-start-times:v1';
+
+/** Fill missing startTimeMs from TickRecord start_time_ms or object previousTransaction time. Cached. */
+export async function enrichTickStartTimes(ticks: TickInfo[]): Promise<TickInfo[]> {
+  const cached = cacheGet<Record<string, string>>(START_TIME_CACHE, 7 * 24 * 60 * 60 * 1000) || {};
+  const out = ticks.map((t) => {
+    if (t.startTimeMs != null) return t;
+    const c = cached[t.recordId];
+    return c ? { ...t, startTimeMs: BigInt(c) } : t;
+  });
+  const still = out.filter((t) => t.startTimeMs == null && t.recordId);
+  if (!still.length) return pinTicksFirst(out);
+
+  const GQL = 'https://graphql.mainnet.sui.io/graphql';
+  const map = { ...cached };
+  for (let i = 0; i < still.length; i += 10) {
+    const slice = still.slice(i, i + 10);
+    await Promise.all(
+      slice.map(async (t) => {
+        try {
+          // Prefer on-chain start_time_ms via RPC batch path already used elsewhere
+          const obj = await withRetry((c) =>
+            c.getObject({ id: t.recordId, options: { showContent: true } }),
+          );
+          const f = fieldsOf(obj.data);
+          if (f.start_time_ms != null) {
+            map[t.recordId] = String(f.start_time_ms);
+            return;
+          }
+          const q = `query($id:SuiAddress!){ object(address:$id){ previousTransaction { effects { timestamp } } } }`;
+          const res = await fetch(GQL, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ query: q, variables: { id: t.recordId } }),
+          });
+          const j = await res.json();
+          const ts = j?.data?.object?.previousTransaction?.effects?.timestamp;
+          if (ts) map[t.recordId] = String(Date.parse(ts));
+        } catch {
+          /* ignore one tick */
+        }
+      }),
+    );
+    await new Promise((r) => setTimeout(r, 120));
+  }
+  cacheSet(START_TIME_CACHE, map);
+  return pinTicksFirst(
+    out.map((t) =>
+      t.startTimeMs != null
+        ? t
+        : map[t.recordId]
+          ? { ...t, startTimeMs: BigInt(map[t.recordId]) }
+          : t,
+    ),
+  );
 }
 
 export type MovescriptionHolding = {
@@ -144,7 +213,7 @@ export async function loadAllTicks(opts?: { deep?: boolean }): Promise<TickInfo[
     });
     await new Promise((r) => setTimeout(r, 200));
   }
-  results.sort((a, b) => pinTickOrder(a.tick, b.tick));
+  results.sort((a, b) => pinTickOrder(a.tick, b.tick, a.startTimeMs, b.startTimeMs));
   cacheSet(cacheKey, serializeBig(results));
   return results;
 }
