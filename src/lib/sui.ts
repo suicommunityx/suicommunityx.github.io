@@ -475,6 +475,21 @@ export function buildTransferTx(objectId: string, recipient: string): Transactio
   return tx;
 }
 
+/** Split amount off a Movescription via movescription::do_split, then transfer the piece. */
+export function buildSplitTransferTx(
+  objectId: string,
+  amount: bigint,
+  recipient: string,
+): Transaction {
+  const tx = new Transaction();
+  const piece = tx.moveCall({
+    target: `${CALL_PACKAGE}::movescription::do_split`,
+    arguments: [tx.object(objectId), tx.pure.u64(amount)],
+  });
+  tx.transferObjects([piece], recipient);
+  return tx;
+}
+
 export function buildListTx(marketId: string, objectId: string, unitPriceMist: bigint): Transaction {
   const tx = new Transaction();
   tx.moveCall({

@@ -14,6 +14,7 @@ import {
   buildMintTickNameTx,
   buildMintTx,
   buildTransferTx,
+  buildSplitTransferTx,
   buildListTx,
   buildDelistTx,
   buildBuyTxTo,
@@ -111,12 +112,15 @@ export default function App() {
   const [dNewName, setDNewName] = useState('');
   const [dMoveObj, setDMoveObj] = useState('');
 
-  // mint
+  // mint / actions
   const [mintMist, setMintMist] = useState('100000000'); // 0.1 SUI
+  const [aTick, setATick] = useState('SUIS');
   const [tickQuery, setTickQuery] = useState('');
 
   // transfer / list
   const [xferTo, setXferTo] = useState('');
+  const [xferObj, setXferObj] = useState('');
+  const [xferAmt, setXferAmt] = useState(''); // empty = whole object
   const [listPrice, setListPrice] = useState('1000'); // mist per unit
 
   const refreshTicks = useCallback(async (deep = false) => {
@@ -214,7 +218,11 @@ export default function App() {
     }
   }, [account]);
 
-  useEffect(() => {
+    useEffect(() => {
+    if (selected?.tick) setATick(selected.tick);
+  }, [selected?.tick]);
+
+useEffect(() => {
     if (tab === 'mine' || tab === 'deploy') refreshMine();
   }, [tab, refreshMine]);
 
@@ -372,8 +380,8 @@ export default function App() {
               [
                 ['ticks', '铭文列表'],
                 ['holders', '持有者'],
-                ['deploy', '创建铭文'],
                 ['mine', '我的铭文'],
+                ['deploy', '部署·铸造·转账'],
                 ['market', '市场'],
               ] as [Tab, string][]
             ).map(([k, label]) => (
@@ -525,13 +533,198 @@ export default function App() {
 
         {tab === 'deploy' && (
           <section className="section narrow">
-            <h2>创建铭文</h2>
-            <p className="hint">
-              旧版 <code>movescription::deploy</code> 已废弃。请使用{' '}
-              <code>epoch_bus_factory::deploy</code>：消耗一个 <strong>TICK</strong>{' '}
-              名称铭文对象来创建新 tick（名称写在该对象 metadata 中）。
+            <h2>钱包操作</h2>
+            <p className="muted">
+              Movescriptions 合约：部署用 <code>epoch_bus_factory::deploy</code>，铸造按 tick 工厂路由
+              （默认 <code>epoch_bus_factory::mint</code> / 旧版 <code>movescription::mint</code>），
+              转账用对象转移或 <code>movescription::do_split</code> 后转移。签名前 dry-run。
             </p>
+            {!account && (
+              <div className="card muted" style={{ marginBottom: 16 }}>
+                <ConnectWalletButton connectText="连接钱包" />
+              </div>
+            )}
+
             <div className="card form">
+              <h3>铸造</h3>
+              <label className="field">
+                Tick
+                <select
+                  className="select"
+                  value={aTick}
+                  onChange={(e) => {
+                    setATick(e.target.value);
+                    const tck = ticks.find((x) => x.tick === e.target.value);
+                    if (tck) setSelected(tck);
+                  }}
+                >
+                  {ticks.slice(0, 200).map((tck) => (
+                    <option key={tck.tick} value={tck.tick}>
+                      {tck.tick}
+                      {tck.remain === 0n ? ' · 罄' : ''}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="field">
+                锁定 SUI (MIST)
+                <input value={mintMist} onChange={(e) => setMintMist(e.target.value)} />
+              </label>
+              {(() => {
+                const tck = ticks.find((x) => x.tick === aTick) || selected;
+                if (!tck) return <p className="muted">请选择 tick</p>;
+                const factoryHint = tck.isV2
+                  ? tck.mintFactory?.includes('mint_get')
+                    ? 'mint_get_factory::mint'
+                    : tck.mintFactory?.includes('mint_ratio')
+                      ? 'mint_ratio_50_factory::mint_v2'
+                      : 'epoch_bus_factory::mint'
+                  : 'movescription::mint';
+                return (
+                  <p className="muted">
+                    剩余 {formatAmount(tck.remain)} · 调用 {factoryHint}
+                    {tck.mintFee != null ? ` · 建议锁定 ≥ ${mistToSui(tck.mintFee)} SUI` : ''}
+                  </p>
+                );
+              })()}
+              <button
+                className="btn primary"
+                type="button"
+                disabled={!account || busy || !(ticks.find((x) => x.tick === aTick) || selected)}
+                onClick={() => {
+                  const tck = ticks.find((x) => x.tick === aTick) || selected;
+                  if (!tck) {
+                    setErr('请选择 tick');
+                    return;
+                  }
+                  if (tck.remain === 0n) {
+                    setErr('该 tick 已铸完');
+                    return;
+                  }
+                  ask({
+                    title: `铸造 ${tck.tick}`,
+                    summary: (
+                      <ul className="summary">
+                        <li>Tick：{tck.tick}</li>
+                        <li>记录：{shortAddr(tck.recordId, 10)}</li>
+                        <li>锁定 SUI：{mistToSui(mintMist)} SUI</li>
+                        <li>
+                          调用：
+                          {tck.isV2
+                            ? tck.mintFactory?.includes('mint_get')
+                              ? 'mint_get_factory::mint'
+                              : tck.mintFactory?.includes('mint_ratio')
+                                ? 'mint_ratio_50_factory::mint_v2'
+                                : 'epoch_bus_factory::mint'
+                            : 'movescription::mint'}
+                        </li>
+                      </ul>
+                    ),
+                    build: () =>
+                      buildMintTx({
+                        recordId: tck.recordId,
+                        isV2: tck.isV2,
+                        mintFactory: tck.mintFactory,
+                        lockedSuiMist: BigInt(mintMist || '0'),
+                      }),
+                  });
+                }}
+              >
+                铸造
+              </button>
+            </div>
+
+            <div className="card form" style={{ marginTop: 16 }}>
+              <h3>转账</h3>
+              <label className="field">
+                Movescription 对象 ID
+                <select
+                  className="select"
+                  value={xferObj}
+                  onChange={(e) => setXferObj(e.target.value)}
+                >
+                  <option value="">选择钱包中的铭文对象</option>
+                  {holdings.map((h) => (
+                    <option key={h.objectId} value={h.objectId}>
+                      {h.tick} · {formatAmount(h.amount)} · {shortAddr(h.objectId, 8)}
+                    </option>
+                  ))}
+                </select>
+                <input
+                  value={xferObj}
+                  onChange={(e) => setXferObj(e.target.value.trim())}
+                  placeholder="或粘贴对象 ID"
+                />
+              </label>
+              <label className="field">
+                数量（留空=整枚转移；填写则先 do_split 再转移）
+                <input
+                  value={xferAmt}
+                  onChange={(e) => setXferAmt(e.target.value)}
+                  placeholder="可选"
+                />
+              </label>
+              <label className="field">
+                收款地址
+                <input
+                  value={xferTo}
+                  onChange={(e) => setXferTo(e.target.value.trim())}
+                  placeholder="0x…"
+                />
+              </label>
+              <button
+                className="btn"
+                type="button"
+                disabled={!account || busy || !xferObj || !xferTo}
+                onClick={() => {
+                  if (!isValidSuiAddress(xferTo)) {
+                    setErr('收款地址无效');
+                    return;
+                  }
+                  const amtStr = xferAmt.trim();
+                  if (amtStr) {
+                    const amt = BigInt(amtStr);
+                    if (amt <= 0n) {
+                      setErr('拆分数量须为正整数');
+                      return;
+                    }
+                    ask({
+                      title: '拆分并转账',
+                      summary: (
+                        <ul className="summary">
+                          <li>对象：{xferObj}</li>
+                          <li>拆分数量：{formatAmount(amt)}</li>
+                          <li>收款：{shortAddr(xferTo)}</li>
+                          <li>调用：movescription::do_split → transferObjects</li>
+                        </ul>
+                      ),
+                      build: () => buildSplitTransferTx(xferObj, amt, xferTo),
+                    });
+                    return;
+                  }
+                  ask({
+                    title: '转账铭文对象',
+                    summary: (
+                      <ul className="summary">
+                        <li>对象：{xferObj}</li>
+                        <li>收款：{shortAddr(xferTo)}</li>
+                        <li>调用：transferObjects（整枚）</li>
+                      </ul>
+                    ),
+                    build: () => buildTransferTx(xferObj, xferTo),
+                  });
+                }}
+              >
+                转账
+              </button>
+            </div>
+
+            <div className="card form" style={{ marginTop: 16 }}>
+              <h3>部署新 Tick</h3>
+              <p className="hint">
+                使用 <code>epoch_bus_factory::deploy</code>：消耗一个 <strong>TICK</strong>{' '}
+                名称铭文对象创建新 tick。
+              </p>
               <label className="field">
                 TICK 名称铭文对象 ID
                 <select
@@ -572,13 +765,14 @@ export default function App() {
               </label>
               <button
                 className="btn primary"
-                disabled={!account || !dTickObj}
+                type="button"
+                disabled={!account || busy || !dTickObj}
                 onClick={() =>
                   ask({
                     title: '部署新铭文',
                     summary: (
                       <ul className="summary">
-                        <li>将销毁/消耗 TICK 名称对象：{dTickObj}</li>
+                        <li>TICK 名称对象：{dTickObj}</li>
                         <li>总量：{dSupply}</li>
                         <li>Epochs：{dEpochs}</li>
                         <li>初始锁定：{mistToSui(dInitSui || '0')} SUI</li>
@@ -597,14 +791,12 @@ export default function App() {
                   })
                 }
               >
-                创建铭文
+                部署
               </button>
-            </div>
-            <div className="card form" style={{ marginTop: 16 }}>
-              <h3>可选：先铸造 TICK 名称</h3>
+
+              <h3 style={{ marginTop: 20 }}>可选：先铸造 TICK 名称</h3>
               <p className="hint">
-                若还没有名称对象，可调用 <code>tick_factory::mint</code>（需锁定一枚 MOVE
-                铭文）。
+                <code>tick_factory::mint</code>（需锁定一枚 MOVE 铭文）。
               </p>
               <label className="field">
                 新 Tick 名称
@@ -624,14 +816,15 @@ export default function App() {
               </label>
               <button
                 className="btn"
-                disabled={!account || !dNewName || !dMoveObj}
+                type="button"
+                disabled={!account || busy || !dNewName || !dMoveObj}
                 onClick={() =>
                   ask({
                     title: `铸造 TICK 名称 ${dNewName}`,
                     summary: (
                       <ul className="summary">
                         <li>名称：{dNewName}</li>
-                        <li>锁定 MOVE 对象：{dMoveObj}</li>
+                        <li>锁定 MOVE：{dMoveObj}</li>
                         <li>调用：tick_factory::mint</li>
                       </ul>
                     ),
