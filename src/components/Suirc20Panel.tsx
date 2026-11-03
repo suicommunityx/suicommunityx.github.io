@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useInfiniteSlice } from '../hooks/useInfiniteSlice';
 import { useCurrentAccount, useSignAndExecuteTransaction } from '@mysten/dapp-kit';
 import { ConnectWalletButton } from './ConnectWalletButton';
+import { SearchClearInput } from './SearchClearInput';
 import type { Transaction } from '@mysten/sui/transactions';
 import { ConfirmModal } from './ConfirmModal';
 import { formatShortDate, isValidSuiAddress, shortAddr } from '../lib/format';
@@ -293,12 +294,7 @@ export function Suirc20Panel() {
           <div className="section-head">
             <h2>铭文列表</h2>
             <div className="suirc-search-row">
-              <input
-                className="search-input"
-                placeholder="搜索 tick"
-                value={q}
-                onChange={(e) => setQ(e.target.value)}
-              />
+              <SearchClearInput value={q} onChange={setQ} />
               <button
                 type="button"
                 className="btn ghost small suirc-refresh"

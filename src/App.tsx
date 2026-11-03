@@ -6,6 +6,7 @@ import { ConfirmModal } from './components/ConfirmModal';
 import { FormModal } from './components/FormModal';
 import { HoldersPanel } from './components/HoldersPanel';
 import { Suirc20Panel } from './components/Suirc20Panel';
+import { SearchClearInput } from './components/SearchClearInput';
 import type { TickInfo, MovescriptionHolding, MarketListing } from './lib/sui';
 import {
   loadAllTicks,
@@ -428,13 +429,7 @@ useEffect(() => {
             <div className="section-head">
               <h2>铭文列表</h2>
               <div className="row gap wrap" style={{ alignItems: 'center' }}>
-                <input
-                  className="search-input"
-                  style={{ maxWidth: 220 }}
-                  placeholder="搜索 tick"
-                  value={tickQuery}
-                  onChange={(e) => setTickQuery(e.target.value)}
-                />
+                <SearchClearInput value={tickQuery} onChange={setTickQuery} />
                 <button className="btn ghost small" onClick={() => refreshTicks(true)} disabled={loadingTicks} title="从链上刷新（可能较慢）">
                   刷新
                 </button>
