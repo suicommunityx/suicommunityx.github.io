@@ -17,10 +17,11 @@ import {
   buildSuirc20V2TransferTx,
   loadSuirc20Balances,
   loadSuirc20Holders,
-  loadSuirc20Ticks,
+  loadSuirc20TicksByVersion,
   type Suirc20Holder,
   type Suirc20Meta,
   type Suirc20Tick,
+  type Suirc20Version,
 } from '../lib/suirc20';
 
 type SubTab = 'list' | 'holders' | 'mine' | 'actions';
@@ -38,7 +39,8 @@ export function Suirc20Panel() {
   const { mutateAsync: signAndExecute } = useSignAndExecuteTransaction();
   const toastApi = useToast();
 
-
+  /** Default 旧版 — historical suis balances live there. */
+  const [version, setVersion] = useState<Suirc20Version>('v1');
   const [sub, setSub] = useState<SubTab>('list');
   const [meta, setMeta] = useState<Suirc20Meta | null>(null);
   const [ticks, setTicks] = useState<Suirc20Tick[]>([]);
@@ -66,14 +68,19 @@ export function Suirc20Panel() {
   const [dFee, setDFee] = useState('0');
   const [dFreq, setDFreq] = useState('1000');
 
+  const isV2 = version === 'v2';
+
   const refresh = useCallback(async () => {
     setLoading(true);
     try {
-      const data = await loadSuirc20Ticks();
+      const data = await loadSuirc20TicksByVersion(version);
       setMeta(data.meta);
       setTicks(data.ticks);
       setSelected((prev) => {
-        if (prev) return data.ticks.find((t) => t.tick === prev.tick) || prev;
+        if (prev) {
+          const same = data.ticks.find((t) => t.tick === prev.tick);
+          if (same) return same;
+        }
         return data.ticks.find((t) => t.tick === 'suis') || data.ticks[0] || null;
       });
     } catch (e: any) {
@@ -81,7 +88,7 @@ export function Suirc20Panel() {
     } finally {
       setLoading(false);
     }
-  }, [toastApi]);
+  }, [toastApi, version]);
 
   useEffect(() => {
     refresh();
@@ -101,29 +108,30 @@ export function Suirc20Panel() {
     total: listTotal,
   } = useInfiniteSlice(filtered, PAGE);
 
-  const loadHolders = useCallback(async (tick: string, preferV2 = false) => {
-    setLoadingHolders(true);
-    try {
-      const data = await loadSuirc20Holders(tick, preferV2);
-      setHolders(data.holders || []);
-      setHoldersTotal(data.totalHolders || data.holders?.length || 0);
-      setHolderPage(0);
-    } catch (e: any) {
-      setHolders([]);
-      setHoldersTotal(0);
-      toastApi.error(friendlyRpcError(e));
-    } finally {
-      setLoadingHolders(false);
-    }
-  }, [toastApi]);
+  const loadHolders = useCallback(
+    async (tick: string, ver: Suirc20Version) => {
+      setLoadingHolders(true);
+      try {
+        const data = await loadSuirc20Holders(tick, ver);
+        setHolders(data.holders || []);
+        setHoldersTotal(data.totalHolders || data.holders?.length || 0);
+        setHolderPage(0);
+      } catch (e: any) {
+        setHolders([]);
+        setHoldersTotal(0);
+        toastApi.error(friendlyRpcError(e));
+      } finally {
+        setLoadingHolders(false);
+      }
+    },
+    [toastApi],
+  );
 
   useEffect(() => {
     if (sub === 'holders' && selected) {
-      // v2 has no on-chain balances; prefer Operation holders for known migrated names
-      const preferV2 = false;
-      loadHolders(selected.tick, preferV2);
+      loadHolders(selected.tick, version);
     }
-  }, [sub, selected, loadHolders]);
+  }, [sub, selected, version, loadHolders]);
 
   const refreshMine = useCallback(async () => {
     if (!account) {
@@ -132,13 +140,13 @@ export function Suirc20Panel() {
     }
     setLoadingMine(true);
     try {
-      setMyBal(await loadSuirc20Balances(account.address));
+      setMyBal(await loadSuirc20Balances(account.address, version));
     } catch (e: any) {
       toastApi.error(friendlyRpcError(e));
     } finally {
       setLoadingMine(false);
     }
-  }, [account, toastApi]);
+  }, [account, toastApi, version]);
 
   useEffect(() => {
     if (sub === 'mine' || sub === 'actions') refreshMine();
@@ -192,27 +200,73 @@ export function Suirc20Panel() {
     return t ? BigInt(t.fee || '0') : 0n;
   };
 
+  function switchVersion(next: Suirc20Version) {
+    if (next === version) return;
+    setVersion(next);
+    setQ('');
+    setSelected(null);
+    setHolders([]);
+    setHoldersTotal(0);
+    setMyBal({});
+    // keep aTick default suis; path follows version via builders
+  }
+
   return (
     <>
       <section className="hero">
         <h1>SuiMint</h1>
-        <p className="subtitle">SUIRC-20 · Operation 见证 + 链上新版 · 无市场</p>
+        <p className="subtitle">SUIRC-20 · 旧版 Operation / 新版 cb5 · 无市场</p>
       </section>
+
+      <div className="version-switch-wrap" role="group" aria-label="SuiMint 版本">
+        <span className="version-switch-label">版本</span>
+        <div className="version-switch">
+          <button
+            type="button"
+            className={`version-btn ${version === 'v1' ? 'active' : ''}`}
+            onClick={() => switchVersion('v1')}
+          >
+            旧版
+          </button>
+          <button
+            type="button"
+            className={`version-btn ${version === 'v2' ? 'active' : ''}`}
+            onClick={() => switchVersion('v2')}
+          >
+            新版
+          </button>
+        </div>
+      </div>
 
       {meta && (
         <div className="banner ok progress-card" style={{ cursor: 'default' }}>
-          {meta.progressLabel}
-          {meta.tickCount != null ? ` · 合并 ${meta.tickCount} ticks` : ''}
-          {meta.v2?.tickCount != null ? ` · 新版注册表 ${meta.v2.tickCount}` : ''}
-          <div className="muted" style={{ marginTop: 6, fontSize: 13 }}>
-            余额数据源：<strong>Operation 见证索引</strong>（包 e09b…）。v2（cb5）仅有 tick 注册表、
-            <strong>链上无余额表</strong>；suis/dgen 的持有者与「我的铭文」以 Operation 快照为准（索引未完成时为部分数据）。
-            「新版」徽章表示该 tick 名已在 cb5 注册，不代表余额已迁到 v2。
-          </div>
+          {isV2 ? (
+            <>
+              当前：<strong>新版</strong>
+              {meta.tickCount != null ? ` · ${meta.tickCount} ticks` : ''}
+              {meta.updatedAtBeijing ? ` · ${meta.updatedAtBeijing}` : ''}
+              <div className="muted" style={{ marginTop: 6, fontSize: 13 }}>
+                数据源：<strong>cb5 链上注册表 / 事件索引</strong>
+                （包 cb5…）。进度与持有者来自 v2 快照（索引未完成时可能不完整）；铸造 / 转账 / 部署走{' '}
+                <code>suirc20::*</code>。
+              </div>
+            </>
+          ) : (
+            <>
+              当前：<strong>旧版</strong>
+              {meta.progressLabel ? ` · ${meta.progressLabel}` : ''}
+              {meta.tickCount != null ? ` · ${meta.tickCount} ticks` : ''}
+              <div className="muted" style={{ marginTop: 6, fontSize: 13 }}>
+                数据源：<strong>Operation 见证索引</strong>
+                （包 e09b…）。进度 / 持有者 / 我的铭文均来自旧版快照；铸造 / 转账 / 部署走{' '}
+                <code>Operation::*</code>。历史 suis 余额在此版本。
+              </div>
+            </>
+          )}
         </div>
       )}
 
-<nav className="tabbar tabbar-sub suirc-subnav" aria-label="SuiMint 子导航">
+      <nav className="tabbar tabbar-sub suirc-subnav" aria-label="SuiMint 子导航">
         <div className="tabbar-inner tabbar-sub-inner">
           {(
             [
@@ -276,47 +330,56 @@ export function Suirc20Panel() {
                       max > 0n
                         ? Math.min(100, Math.max(0, Number((minted * 10000n) / max) / 100))
                         : Number(t.progress || 0);
+                    const pinned =
+                      version === 'v1'
+                        ? t.tick === 'suis' || t.tick === 'dgen'
+                        : t.tick === 'suis';
                     return (
-                    <tr key={t.tick}>
-                      <td>
-                        <button
-                          type="button"
-                          className="tick-link"
-                          onClick={() => {
-                            setSelected(t);
-                            setSub('holders');
-                          }}
-                        >
-                          {t.tick}
-                        </button>
-                        {t.badge ? <span className="tag v2">{t.badge}</span> : null}
-                        {t.tick === 'suis' || t.tick === 'dgen' ? (
-                          <span className="tag" style={{ marginLeft: 6 }}>
-                            置顶
-                          </span>
-                        ) : null}
-                      </td>
-                      <td className="mint-progress-cell">
-                        <div className="mint-progress">
-                          <div className="mint-progress-bar" aria-hidden>
-                            <div className="mint-progress-fill" style={{ width: `${pct}%` }} />
-                          </div>
-                          <div className="mint-progress-meta">
-                            <span className="mint-progress-amt">
-                              <SmartAmountRange minted={t.minted} max={t.max} />
+                      <tr key={`${version}:${t.tick}`}>
+                        <td>
+                          <button
+                            type="button"
+                            className="tick-link"
+                            onClick={() => {
+                              setSelected(t);
+                              setSub('holders');
+                            }}
+                          >
+                            {t.tick}
+                          </button>
+                          {pinned ? (
+                            <span className="tag" style={{ marginLeft: 6 }}>
+                              置顶
                             </span>
-                            <span className="mint-progress-pct">{pct.toFixed(1)}%</span>
+                          ) : null}
+                        </td>
+                        <td className="mint-progress-cell">
+                          <div className="mint-progress">
+                            <div className="mint-progress-bar" aria-hidden>
+                              <div className="mint-progress-fill" style={{ width: `${pct}%` }} />
+                            </div>
+                            <div className="mint-progress-meta">
+                              <span className="mint-progress-amt">
+                                <SmartAmountRange minted={t.minted} max={t.max} />
+                              </span>
+                              <span className="mint-progress-pct">{pct.toFixed(1)}%</span>
+                            </div>
                           </div>
-                        </div>
-                      </td>
-                      <td className="num"><SmartAmount value={t.holderCount} /></td>
-                      <td>{formatShortDate(t.deployTimeUtc ?? t.deployTimeBeijing ?? t.createdTs)}</td>
-                    </tr>
+                        </td>
+                        <td className="num">
+                          <SmartAmount value={t.holderCount} />
+                        </td>
+                        <td>
+                          {formatShortDate(t.deployTimeUtc ?? t.deployTimeBeijing ?? t.createdTs)}
+                        </td>
+                      </tr>
                     );
                   })}
                 </tbody>
               </table>
-              {listHasMore ? <div ref={listSentinelRef} className="infinite-sentinel" aria-hidden /> : null}
+              {listHasMore ? (
+                <div ref={listSentinelRef} className="infinite-sentinel" aria-hidden />
+              ) : null}
               <div className="infinite-status">
                 {listHasMore
                   ? `已显示 ${listShown} / ${listTotal} · 上滑加载更多`
@@ -326,14 +389,18 @@ export function Suirc20Panel() {
               </div>
             </div>
           )}
-
         </section>
       )}
 
       {sub === 'holders' && (
         <section className="section">
           <div className="section-head">
-            <h2>持有者 · {selected?.tick || '—'}</h2>
+            <h2>
+              持有者 · {selected?.tick || '—'}
+              <span className="muted" style={{ fontSize: 14, fontWeight: 400, marginLeft: 8 }}>
+                （{isV2 ? '新版' : '旧版'}）
+              </span>
+            </h2>
             <label className="field" style={{ maxWidth: 200 }}>
               选择 tick
               <select
@@ -370,7 +437,9 @@ export function Suirc20Panel() {
                       <tr key={h.owner}>
                         <td>{holderPage * PAGE + i + 1}</td>
                         <td title={h.owner}>{shortAddr(h.owner)}</td>
-                        <td className="num"><SmartAmount value={h.balance} /></td>
+                        <td className="num">
+                          <SmartAmount value={h.balance} />
+                        </td>
                       </tr>
                     ))}
                     {!holderSlice.length && (
@@ -412,10 +481,20 @@ export function Suirc20Panel() {
       {sub === 'mine' && (
         <section className="section">
           <div className="section-head">
-            <h2>我的 SUIRC-20</h2>
+            <h2>
+              我的 SUIRC-20
+              <span className="muted" style={{ fontSize: 14, fontWeight: 400, marginLeft: 8 }}>
+                （{isV2 ? '新版' : '旧版'}）
+              </span>
+            </h2>
             {!account && <ConnectWalletButton connectText="连接钱包" />}
             {account && (
-              <button className="btn ghost small" type="button" onClick={refreshMine} disabled={loadingMine}>
+              <button
+                className="btn ghost small"
+                type="button"
+                onClick={refreshMine}
+                disabled={loadingMine}
+              >
                 刷新
               </button>
             )}
@@ -441,7 +520,9 @@ export function Suirc20Panel() {
                       <td>
                         <strong>{r.tick}</strong>
                       </td>
-                      <td className="num"><SmartAmount value={r.balance} /></td>
+                      <td className="num">
+                        <SmartAmount value={r.balance} />
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -453,10 +534,17 @@ export function Suirc20Panel() {
 
       {sub === 'actions' && (
         <section className="section narrow">
-          <h2>钱包操作</h2>
+          <h2>钱包操作 · {isV2 ? '新版' : '旧版'}</h2>
           <p className="muted">
-            默认按所选 tick 版本调用：旧版 <code>Operation::*</code>，新版{' '}
-            <code>suirc20::deploy/mint/transfer</code>（包 cb5…）。签名前 dry-run。
+            {isV2 ? (
+              <>
+                当前版本调用 <code>suirc20::deploy/mint/transfer</code>（包 cb5…）。签名前 dry-run。
+              </>
+            ) : (
+              <>
+                当前版本调用 <code>Operation::*</code>（包 e09b…）。签名前 dry-run。
+              </>
+            )}
           </p>
           {!account && (
             <div className="card muted" style={{ marginBottom: 16 }}>
@@ -466,16 +554,17 @@ export function Suirc20Panel() {
 
           <div className="card">
             <h3>铸造</h3>
-            <label className="field">Tick（区分大小写）
-              <input value={aTick} onChange={(e) => setATick(e.target.value)} /></label>
-            <label className="field">数量 amt
-              <input value={aAmt} onChange={(e) => setAAmt(e.target.value)} /></label>
+            <label className="field">
+              Tick（区分大小写）
+              <input value={aTick} onChange={(e) => setATick(e.target.value)} />
+            </label>
+            <label className="field">
+              数量 amt
+              <input value={aAmt} onChange={(e) => setAAmt(e.target.value)} />
+            </label>
             <p className="muted">
               Mint fee：{feeForTick(aTick).toString()} MIST
-              {(() => {
-                const t = ticks.find((x) => x.tick === aTick);
-                return t?.version === 'v2' ? ' · 新版 suirc20::mint' : ' · 旧版 Operation::mint';
-              })()}
+              {isV2 ? ' · 新版 suirc20::mint' : ' · 旧版 Operation::mint'}
             </p>
             <button
               className="btn"
@@ -503,8 +592,8 @@ export function Suirc20Panel() {
                   toastApi.error('铸造数量须为正整数');
                   return;
                 }
-                if (t?.version === 'v2') {
-                  if (!t.tickId) {
+                if (isV2) {
+                  if (!t?.tickId) {
                     toastApi.error('该新版 tick 缺少 tickId，无法铸造');
                     return;
                   }
@@ -521,10 +610,10 @@ export function Suirc20Panel() {
                   return;
                 }
                 ask({
-                  title: '确认铸造',
+                  title: '确认铸造（旧版）',
                   summary: (
                     <>
-                      mint <strong>{tick}</strong> amt={amt} fee={fee.toString()} MIST
+                      Operation::mint <strong>{tick}</strong> amt={amt} fee={fee.toString()} MIST
                     </>
                   ),
                   build: () => buildSuirc20MintTx(tick, amt, fee),
@@ -537,12 +626,18 @@ export function Suirc20Panel() {
 
           <div className="card">
             <h3>转账</h3>
-            <label className="field">Tick
-              <input value={aTick} onChange={(e) => setATick(e.target.value)} /></label>
-            <label className="field">数量
-              <input value={aAmt} onChange={(e) => setAAmt(e.target.value)} /></label>
-            <label className="field">收款地址 to
-              <input value={aTo} onChange={(e) => setATo(e.target.value)} placeholder="0x…" /></label>
+            <label className="field">
+              Tick
+              <input value={aTick} onChange={(e) => setATick(e.target.value)} />
+            </label>
+            <label className="field">
+              数量
+              <input value={aAmt} onChange={(e) => setAAmt(e.target.value)} />
+            </label>
+            <label className="field">
+              收款地址 to
+              <input value={aTo} onChange={(e) => setATo(e.target.value)} placeholder="0x…" />
+            </label>
             <button
               className="btn"
               type="button"
@@ -555,8 +650,7 @@ export function Suirc20Panel() {
                 const tick = aTick;
                 const amt = aAmt;
                 const to = aTo;
-                const t = ticks.find((x) => x.tick === tick);
-                if (t?.version === 'v2') {
+                if (isV2) {
                   ask({
                     title: '确认转账（新版）',
                     summary: (
@@ -569,10 +663,10 @@ export function Suirc20Panel() {
                   return;
                 }
                 ask({
-                  title: '确认转账',
+                  title: '确认转账（旧版）',
                   summary: (
                     <>
-                      transfer <strong>{tick}</strong> amt={amt} → {shortAddr(to)}
+                      Operation::transfer <strong>{tick}</strong> amt={amt} → {shortAddr(to)}
                     </>
                   ),
                   build: () => buildSuirc20TransferTx(tick, amt, to),
@@ -585,90 +679,101 @@ export function Suirc20Panel() {
 
           <div className="card">
             <h3>部署新 Tick</h3>
-            <label className="field">tick
-              <input value={dTick} onChange={(e) => setDTick(e.target.value)} /></label>
-            <label className="field">max
-              <input value={dMax} onChange={(e) => setDMax(e.target.value)} /></label>
-            <label className="field">lim
-              <input value={dLim} onChange={(e) => setDLim(e.target.value)} /></label>
-            <label className="field">fee (MIST)
-              <input value={dFee} onChange={(e) => setDFee(e.target.value)} /></label>
-            <label className="field">freq
-              <input value={dFreq} onChange={(e) => setDFreq(e.target.value)} /></label>
-            <button
-              className="btn"
-              type="button"
-              disabled={!account || busy}
-              onClick={() => {
-                const payload = {
-                  p: 'suirc-20',
-                  op: 'deploy',
-                  tick: dTick,
-                  max: dMax,
-                  lim: dLim,
-                  fee: dFee,
-                  freq: dFreq,
-                };
-                // Prefer Operation witness deploy for new names; offer v2 when tick already exists as v2 only via actions note.
-                ask({
-                  title: '确认部署（Operation）',
-                  summary: <code>{JSON.stringify(payload)}</code>,
-                  build: () => buildSuirc20DeployTx(payload),
-                });
-              }}
-            >
-              部署（旧版 Operation）
-            </button>
-            <button
-              className="btn ghost"
-              type="button"
-              style={{ marginTop: 10 }}
-              disabled={!account || busy}
-              onClick={() => {
-                const tickBytes = new TextEncoder().encode(dTick);
-                if (tickBytes.length !== 4) {
-                  toastApi.error('新版部署要求 tick 名称恰好 4 个字符（按字节，例如 suis）');
-                  return;
-                }
-                try {
-                  const maxN = BigInt(dMax || '0');
-                  const limN = BigInt(dLim || '0');
-                  if (limN > maxN) {
-                    toastApi.error('lim 不能大于 max');
+            <label className="field">
+              tick
+              <input value={dTick} onChange={(e) => setDTick(e.target.value)} />
+            </label>
+            <label className="field">
+              max
+              <input value={dMax} onChange={(e) => setDMax(e.target.value)} />
+            </label>
+            <label className="field">
+              lim
+              <input value={dLim} onChange={(e) => setDLim(e.target.value)} />
+            </label>
+            <label className="field">
+              fee (MIST)
+              <input value={dFee} onChange={(e) => setDFee(e.target.value)} />
+            </label>
+            <label className="field">
+              freq
+              <input value={dFreq} onChange={(e) => setDFreq(e.target.value)} />
+            </label>
+            {isV2 ? (
+              <button
+                className="btn"
+                type="button"
+                disabled={!account || busy}
+                onClick={() => {
+                  const tickBytes = new TextEncoder().encode(dTick);
+                  if (tickBytes.length !== 4) {
+                    toastApi.error('新版部署要求 tick 名称恰好 4 个字符（按字节，例如 suis）');
                     return;
                   }
-                } catch {
-                  toastApi.error('max/lim 须为非负整数');
-                  return;
-                }
-                ask({
-                  title: '确认部署（新版 suirc20）',
-                  summary: (
-                    <code>
-                      {JSON.stringify({
+                  try {
+                    const maxN = BigInt(dMax || '0');
+                    const limN = BigInt(dLim || '0');
+                    if (limN > maxN) {
+                      toastApi.error('lim 不能大于 max');
+                      return;
+                    }
+                  } catch {
+                    toastApi.error('max/lim 须为非负整数');
+                    return;
+                  }
+                  ask({
+                    title: '确认部署（新版 suirc20）',
+                    summary: (
+                      <code>
+                        {JSON.stringify({
+                          tick: dTick,
+                          max: dMax,
+                          lim: dLim,
+                          fee: dFee,
+                          freq: dFreq,
+                          dec: 0,
+                        })}
+                      </code>
+                    ),
+                    build: () =>
+                      buildSuirc20V2DeployTx({
                         tick: dTick,
                         max: dMax,
                         lim: dLim,
                         fee: dFee,
                         freq: dFreq,
                         dec: 0,
-                      })}
-                    </code>
-                  ),
-                  build: () =>
-                    buildSuirc20V2DeployTx({
-                      tick: dTick,
-                      max: dMax,
-                      lim: dLim,
-                      fee: dFee,
-                      freq: dFreq,
-                      dec: 0,
-                    }),
-                });
-              }}
-            >
-              部署（新版 cb5）
-            </button>
+                      }),
+                  });
+                }}
+              >
+                部署（新版 cb5）
+              </button>
+            ) : (
+              <button
+                className="btn"
+                type="button"
+                disabled={!account || busy}
+                onClick={() => {
+                  const payload = {
+                    p: 'suirc-20',
+                    op: 'deploy',
+                    tick: dTick,
+                    max: dMax,
+                    lim: dLim,
+                    fee: dFee,
+                    freq: dFreq,
+                  };
+                  ask({
+                    title: '确认部署（旧版 Operation）',
+                    summary: <code>{JSON.stringify(payload)}</code>,
+                    build: () => buildSuirc20DeployTx(payload),
+                  });
+                }}
+              >
+                部署（旧版 Operation）
+              </button>
+            )}
           </div>
         </section>
       )}

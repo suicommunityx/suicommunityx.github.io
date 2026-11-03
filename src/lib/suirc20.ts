@@ -108,6 +108,25 @@ export function pinSuirc20Ticks<
   });
 }
 
+/** 新版: pin suis first if present, then oldest create/deploy. */
+export function pinSuirc20TicksV2<
+  T extends {
+    tick: string;
+    deployTimeUtc?: string | null;
+    deployTimeBeijing?: string | null;
+    createdTs?: number | string | null;
+  },
+>(list: T[]): T[] {
+  return [...list].sort((a, b) => {
+    if (a.tick === 'suis' && b.tick !== 'suis') return -1;
+    if (b.tick === 'suis' && a.tick !== 'suis') return 1;
+    const ta = suirc20DeployMs(a);
+    const tb = suirc20DeployMs(b);
+    if (ta !== tb) return ta - tb;
+    return a.tick.localeCompare(b.tick);
+  });
+}
+
 function normV1(t: any): Suirc20Tick {
   return {
     tick: t.tick,
@@ -186,41 +205,56 @@ export function mergeSuirc20Ticks(v1: Suirc20Tick[], v2: Suirc20Tick[]): Suirc20
   return pinSuirc20Ticks([...map.values()]);
 }
 
-export async function loadSuirc20Ticks(): Promise<{ meta: Suirc20Meta; ticks: Suirc20Tick[] }> {
-  const base = import.meta.env.BASE_URL;
-  const [v1Res, v2Res] = await Promise.all([
-    fetch(`${base}suirc20/ticks.json`),
-    fetch(`${base}suirc20v2/ticks.json`).catch(() => null),
-  ]);
-  if (!v1Res.ok) throw new Error('无法加载 SuiMint 索引 ticks.json');
-  const v1Data = await v1Res.json();
-  const v1Ticks = (v1Data.ticks || []).map(normV1);
+export type Suirc20Version = 'v1' | 'v2';
 
-  let v2Ticks: Suirc20Tick[] = [];
-  let v2Meta: Suirc20Meta['v2'] | undefined;
-  if (v2Res && v2Res.ok) {
-    const v2Data = await v2Res.json();
-    v2Ticks = (v2Data.ticks || []).map(normV2);
-    const m = v2Data.meta || {};
-    v2Meta = {
-      tickCount: m.tickCount ?? v2Ticks.length,
+/** Load ticks for one version only — never merge same-name ticks across versions. */
+export async function loadSuirc20TicksByVersion(
+  version: Suirc20Version,
+): Promise<{ meta: Suirc20Meta; ticks: Suirc20Tick[] }> {
+  const base = import.meta.env.BASE_URL;
+  if (version === 'v1') {
+    const res = await fetch(`${base}suirc20/ticks.json`);
+    if (!res.ok) throw new Error('无法加载 SuiMint 旧版索引 ticks.json');
+    const data = await res.json();
+    const mappedV1: Suirc20Tick[] = (data.ticks || []).map(normV1);
+    const ticks = pinSuirc20Ticks(mappedV1);
+    const meta: Suirc20Meta = {
+      ...(data.meta || {}),
+      tickCount: ticks.length,
+      cb5Note: undefined,
+      v2: undefined,
+    };
+    return { meta, ticks };
+  }
+
+  const res = await fetch(`${base}suirc20v2/ticks.json`);
+  if (!res.ok) throw new Error('无法加载 SuiMint 新版索引 ticks.json');
+  const data = await res.json();
+  const mappedV2: Suirc20Tick[] = (data.ticks || []).map(normV2);
+  const ticks = pinSuirc20TicksV2(mappedV2);
+  const m = data.meta || {};
+  const meta: Suirc20Meta = {
+    progressPct: 0,
+    progressLabel: m.updatedAtBeijing
+      ? `新版索引更新于 ${m.updatedAtBeijing}`
+      : '新版（cb5）链上注册表',
+    tickCount: ticks.length,
+    complete: m.complete,
+    updatedAtBeijing: m.updatedAtBeijing,
+    stats: m.stats,
+    v2: {
+      tickCount: m.tickCount ?? ticks.length,
       complete: m.complete,
       updatedAtBeijing: m.updatedAtBeijing,
       dataSource: m.dataSource,
-    };
-  }
-
-  const ticks = mergeSuirc20Ticks(v1Ticks, v2Ticks);
-  const meta: Suirc20Meta = {
-    ...(v1Data.meta || {}),
-    tickCount: ticks.length,
-    cb5Note:
-      v2Meta != null
-        ? `已合并链上新版（cb5） ${v2Meta.tickCount} ticks；同名优先显示链上状态并标「新版」`
-        : undefined,
-    v2: v2Meta,
+    },
   };
   return { meta, ticks };
+}
+
+/** @deprecated Prefer loadSuirc20TicksByVersion — kept for scripts/tests. */
+export async function loadSuirc20Ticks(): Promise<{ meta: Suirc20Meta; ticks: Suirc20Tick[] }> {
+  return loadSuirc20TicksByVersion('v1');
 }
 
 async function fetchHolders(path: string, tick: string) {
@@ -232,29 +266,20 @@ async function fetchHolders(path: string, tick: string) {
 
 export async function loadSuirc20Holders(
   tick: string,
-  preferV2 = false,
+  version: Suirc20Version | boolean = 'v1',
 ): Promise<{
   tick: string;
   totalHolders: number;
   holders: Suirc20Holder[];
   source?: string;
 }> {
-  const order = preferV2
-    ? ['suirc20v2/holders', 'suirc20/holders']
-    : ['suirc20/holders', 'suirc20v2/holders'];
-  let best: any = null;
-  let bestPath = order[0];
-  for (const path of order) {
-    const data = await fetchHolders(path, tick);
-    if (!data) continue;
-    const score = Number(data.totalHolders || data.holders?.length || 0);
-    if (!best || score > Number(best.totalHolders || best.holders?.length || 0)) {
-      best = data;
-      bestPath = path;
-    }
-  }
-  if (best) return { ...best, source: bestPath };
-  throw new Error(`暂无 ${tick} 持有者快照`);
+  // backward compat: preferV2 boolean
+  const ver: Suirc20Version =
+    version === true ? 'v2' : version === false ? 'v1' : version;
+  const path = ver === 'v2' ? 'suirc20v2/holders' : 'suirc20/holders';
+  const data = await fetchHolders(path, tick);
+  if (data) return { ...data, source: path };
+  throw new Error(`暂无 ${tick} 持有者快照（${ver === 'v2' ? '新版' : '旧版'}）`);
 }
 
 function shardOf(addr: string): string {
@@ -263,25 +288,27 @@ function shardOf(addr: string): string {
 
 export async function loadSuirc20Balances(
   address: string,
+  version: Suirc20Version = 'v1',
 ): Promise<Record<string, string>> {
   const base = import.meta.env.BASE_URL;
   const shard = shardOf(address);
   const key = '0x' + address.toLowerCase().replace(/^0x/, '');
   const out: Record<string, string> = {};
-
-  for (const path of [`suirc20/balances/${shard}.json`, `suirc20v2/balances/${shard}.json`]) {
-    try {
-      const res = await fetch(`${base}${path}`);
-      if (!res.ok) continue;
+  const path =
+    version === 'v2'
+      ? `suirc20v2/balances/${shard}.json`
+      : `suirc20/balances/${shard}.json`;
+  try {
+    const res = await fetch(`${base}${path}`);
+    if (res.ok) {
       const data = await res.json();
       const row = data[key] || data[address] || data[address.toLowerCase()] || {};
       for (const [tick, bal] of Object.entries(row)) {
-        // prefer larger / later overwrite with v2 last
         out[tick] = String(bal);
       }
-    } catch {
-      /* ignore */
     }
+  } catch {
+    /* ignore */
   }
   return out;
 }
