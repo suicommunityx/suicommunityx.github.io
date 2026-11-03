@@ -192,6 +192,14 @@ h3 { font-size: 20px; font-weight: 600; }
   text-decoration: none;
   opacity: 1;
 }
+.table td.tick, .table td:has(.tick-link) {
+  max-width: 120px;
+}
+.table td:has(.tick-link) .tag { display: none; }
+@media (min-width: 721px) {
+  .table td:has(.tick-link) .tag { display: inline-block; }
+  .table td.tick, .table td:has(.tick-link) { max-width: none; }
+}
 .nowrap { white-space: nowrap; }
 .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; }
 

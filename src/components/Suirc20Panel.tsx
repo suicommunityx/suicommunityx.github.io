@@ -302,7 +302,7 @@ export function Suirc20Panel() {
                       <td className="num">{formatCompactAmount(t.max)}</td>
                       <td className="num">{formatCompactAmount(t.lim)}</td>
                       <td className="num hide-narrow">{t.holderCount}</td>
-                      <td className="muted">{formatShortDate(t.createdTs ?? t.deployTimeUtc ?? t.deployTimeBeijing)}</td>
+                      <td className="muted">{formatShortDate(t.deployTimeUtc ?? t.deployTimeBeijing ?? t.createdTs)}</td>
                     </tr>
                   ))}
                 </tbody>
