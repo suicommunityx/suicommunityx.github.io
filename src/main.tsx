@@ -8,6 +8,7 @@ import './index.css';
 import App from './App';
 import { NETWORK, SITE_NAME } from './lib/constants';
 import { client } from './lib/rpc';
+import { PREFERRED_WALLETS } from './lib/wallets';
 
 try {
   registerSlushWallet(SITE_NAME, {
@@ -23,7 +24,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <SuiClientProvider networks={{ [NETWORK]: client }} defaultNetwork={NETWORK}>
-        <WalletProvider autoConnect>
+        <WalletProvider autoConnect preferredWallets={[...PREFERRED_WALLETS]}>
           <App />
         </WalletProvider>
       </SuiClientProvider>

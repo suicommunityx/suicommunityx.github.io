@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ConnectButton, useCurrentAccount } from '@mysten/dapp-kit';
+import { useCurrentAccount } from '@mysten/dapp-kit';
+import { ConnectWalletButton } from './components/ConnectWalletButton';
 import { TickList } from './components/TickList';
 import { ConfirmModal } from './components/ConfirmModal';
 import { HoldersPanel } from './components/HoldersPanel';
@@ -317,7 +318,7 @@ export default function App() {
             <span className="tag">Mainnet</span>
           </div>
           <div className="header-actions">
-            <ConnectButton connectText="连接钱包" />
+            <ConnectWalletButton connectText="连接钱包" />
           </div>
         </header>
         <nav className="tabbar tabbar-top" aria-label="主导航">

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ConnectButton, useCurrentAccount, useSignAndExecuteTransaction } from '@mysten/dapp-kit';
+import { useCurrentAccount, useSignAndExecuteTransaction } from '@mysten/dapp-kit';
+import { ConnectWalletButton } from './ConnectWalletButton';
 import type { Transaction } from '@mysten/sui/transactions';
 import { ConfirmModal } from './ConfirmModal';
 import { formatAmount, formatShortDate, isValidSuiAddress, shortAddr } from '../lib/format';
@@ -476,7 +477,7 @@ export function Suirc20Panel() {
         <section className="section">
           <div className="section-head">
             <h2>我的 SUIRC-20</h2>
-            {!account && <ConnectButton connectText="连接钱包" />}
+            {!account && <ConnectWalletButton connectText="连接钱包" />}
             {account && (
               <button className="btn ghost small" type="button" onClick={refreshMine} disabled={loadingMine}>
                 刷新
@@ -523,7 +524,7 @@ export function Suirc20Panel() {
           </p>
           {!account && (
             <div className="card muted" style={{ marginBottom: 16 }}>
-              <ConnectButton connectText="连接钱包" />
+              <ConnectWalletButton connectText="连接钱包" />
             </div>
           )}
 

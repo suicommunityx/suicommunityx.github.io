@@ -444,3 +444,66 @@ td.num .smart-amount { text-align: right; margin-left: auto; }
   display: block;
   max-width: 100%;
 }
+
+
+/* Connect wallet — Apple-style sheet */
+.wallet-connect-btn {
+  border-radius: 980px;
+  padding: 8px 14px;
+  font-weight: 600;
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+.wallet-chip {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 980px;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+.wallet-chip-x { color: var(--muted); font-size: 16px; line-height: 1; }
+.wallet-modal {
+  width: min(400px, 100%);
+  padding: 18px 16px 12px;
+  border-radius: 20px;
+}
+.wallet-modal-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin-bottom: 4px;
+}
+.wallet-modal-head h3 { margin: 0; font-size: 18px; font-weight: 650; }
+.wallet-modal-close {
+  appearance: none; border: 0; background: #f2f2f7; width: 30px; height: 30px;
+  border-radius: 980px; font-size: 20px; line-height: 1; cursor: pointer; color: #3a3a3c;
+}
+.wallet-modal-hint { margin: 0 0 12px; font-size: 13px; line-height: 1.4; }
+.wallet-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; max-height: min(60vh, 420px); overflow: auto; }
+.wallet-list-item {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  padding: 12px 12px; border-radius: 14px; border: 1px solid var(--line);
+  background: #fafafa; color: inherit; text-decoration: none; font: inherit;
+  cursor: pointer; text-align: left;
+}
+.wallet-list-item:hover { background: #f2f2f7; }
+.wallet-list-item:disabled { opacity: 0.6; cursor: wait; }
+.wallet-list-icon {
+  width: 36px; height: 36px; border-radius: 10px; overflow: hidden;
+  display: grid; place-items: center; background: #fff; border: 1px solid var(--line); flex-shrink: 0;
+}
+.wallet-list-icon img { width: 32px; height: 32px; object-fit: contain; }
+.wallet-list-fallback {
+  font-weight: 700; font-size: 14px; color: #0071e3;
+}
+.wallet-list-name { flex: 1; font-weight: 600; font-size: 15px; }
+.wallet-list-meta { font-size: 12px; white-space: nowrap; }
+.wallet-list-empty { padding: 16px 8px; text-align: center; font-size: 13px; }
+.wallet-modal-err { color: #b00020; font-size: 13px; margin: 10px 0 0; }
