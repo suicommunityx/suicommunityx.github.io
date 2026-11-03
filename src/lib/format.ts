@@ -53,6 +53,13 @@ export function formatCompactAmount(n: string | number | bigint): string {
   const neg = v < 0n;
   if (neg) v = -v;
   const sign = neg ? '-' : '';
+  // Keep columns narrow for absurd max values
+  if (v >= 10n ** 16n) {
+    const s = v.toString();
+    const exp = s.length - 1;
+    const frac = s.slice(1, 3).replace(/0+$/, '');
+    return sign + s[0] + (frac ? '.' + frac : '') + 'e' + exp;
+  }
   const units: [bigint, string][] = [
     [10n ** 12n, 'T'],
     [10n ** 9n, 'B'],

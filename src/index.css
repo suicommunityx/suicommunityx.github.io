@@ -379,3 +379,26 @@ code { font-size: 12px; background: #eee; padding: 1px 6px; border-radius: 6px; 
   display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 0;
 }
 .section-nav .tab-btn { border: 1px solid var(--line); }
+
+
+/* Mint progress column (Apple-style) */
+.mint-progress-cell { min-width: 148px; max-width: 220px; white-space: normal; }
+.mint-progress { display: flex; flex-direction: column; gap: 4px; min-width: 140px; }
+.mint-progress-bar {
+  height: 4px; border-radius: 99px; background: #e8e8ed; overflow: hidden; width: 100%;
+}
+.mint-progress-fill {
+  height: 100%; border-radius: 99px; background: #0071e3; min-width: 0;
+}
+.mint-progress-meta {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 8px;
+  font-size: 11px; line-height: 1.2; white-space: nowrap;
+}
+.mint-progress-amt { color: var(--fg); font-variant-numeric: tabular-nums; }
+.mint-progress-pct { color: var(--muted); font-variant-numeric: tabular-nums; }
+@media (max-width: 720px) {
+  .mint-progress-cell { min-width: 118px; max-width: 160px; padding-right: 6px; }
+  .mint-progress { min-width: 110px; gap: 3px; }
+  .mint-progress-meta { font-size: 10px; gap: 4px; }
+  .table .tick .tag, .table td .tag { display: none; }
+}

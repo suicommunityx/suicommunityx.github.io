@@ -262,16 +262,21 @@ export function Suirc20Panel() {
                 <thead>
                   <tr>
                     <th className="tick-col">Tick</th>
-                    <th className="num">进度</th>
-                    <th className="num">已铸</th>
+                    <th>铸造进度</th>
                     <th className="num">持有</th>
-                    <th className="num hide-narrow">上限</th>
                     <th className="num hide-narrow">限额</th>
                     <th className="hide-narrow">部署</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {filtered.map((t) => (
+                  {filtered.map((t) => {
+                    const max = BigInt(t.max || '0');
+                    const minted = BigInt(t.minted || '0');
+                    const pct =
+                      max > 0n
+                        ? Math.min(100, Math.max(0, Number((minted * 10000n) / max) / 100))
+                        : Number(t.progress || 0);
+                    return (
                     <tr
                       key={t.tick}
                       className={selected?.tick === t.tick ? 'selected' : ''}
@@ -297,14 +302,25 @@ export function Suirc20Panel() {
                           </span>
                         ) : null}
                       </td>
-                      <td className="num">{t.progress.toFixed(1)}%</td>
-                      <td className="num">{formatCompactAmount(t.minted)}</td>
+                      <td className="mint-progress-cell">
+                        <div className="mint-progress">
+                          <div className="mint-progress-bar" aria-hidden>
+                            <div className="mint-progress-fill" style={{ width: `${pct}%` }} />
+                          </div>
+                          <div className="mint-progress-meta">
+                            <span className="mint-progress-amt">
+                              {formatCompactAmount(t.minted)} / {formatCompactAmount(t.max)}
+                            </span>
+                            <span className="mint-progress-pct">{pct.toFixed(1)}%</span>
+                          </div>
+                        </div>
+                      </td>
                       <td className="num">{t.holderCount}</td>
-                      <td className="num hide-narrow">{formatCompactAmount(t.max)}</td>
                       <td className="num hide-narrow">{formatCompactAmount(t.lim)}</td>
                       <td className="muted hide-narrow">{formatShortDate(t.deployTimeUtc ?? t.deployTimeBeijing ?? t.createdTs)}</td>
                     </tr>
-                  ))}
+                    );
+                  })}
                 </tbody>
               </table>
             </div>

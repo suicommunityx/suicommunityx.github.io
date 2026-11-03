@@ -18,12 +18,9 @@ export function TickList({ ticks, loading, onSelect, onView, selected }: Props) 
         <thead>
           <tr>
             <th className="tick-col">名称</th>
-            <th className="num">进度</th>
-            <th className="num">已铸</th>
-            <th className="num hide-narrow">剩余</th>
-            <th className="num hide-narrow">总量</th>
-            <th className="hide-narrow">创建</th>
+            <th>铸造进度</th>
             <th className="num hide-narrow">费</th>
+            <th>创建</th>
           </tr>
         </thead>
         <tbody>
@@ -48,17 +45,25 @@ export function TickList({ ticks, loading, onSelect, onView, selected }: Props) 
                     {t.tick}
                   </button>
                 </td>
-                <td className="num">
-                  <span className="bar-label">{pct.toFixed(1)}%</span>
-                  {closed ? <span className="pill danger">罄</span> : null}
+                <td className="mint-progress-cell">
+                  <div className="mint-progress">
+                    <div className="mint-progress-bar" aria-hidden>
+                      <div className="mint-progress-fill" style={{ width: `${pct}%` }} />
+                    </div>
+                    <div className="mint-progress-meta">
+                      <span className="mint-progress-amt">
+                        {formatCompactAmount(t.currentSupply)} / {formatCompactAmount(t.totalSupply)}
+                      </span>
+                      <span className="mint-progress-pct">
+                        {pct.toFixed(1)}%{closed ? ' · 罄' : ''}
+                      </span>
+                    </div>
+                  </div>
                 </td>
-                <td className="num">{formatCompactAmount(t.currentSupply)}</td>
-                <td className="num hide-narrow">{formatCompactAmount(t.remain)}</td>
-                <td className="num hide-narrow">{formatCompactAmount(t.totalSupply)}</td>
-                <td className="hide-narrow">{formatShortDate(t.startTimeMs)}</td>
                 <td className="num hide-narrow">
                   {t.mintFee == null ? '—' : t.mintFee === 0n ? '0' : mistToSui(t.mintFee)}
                 </td>
+                <td>{formatShortDate(t.startTimeMs)}</td>
               </tr>
             );
           })}
