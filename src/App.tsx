@@ -322,7 +322,7 @@ useEffect(() => {
       <div className="app-chrome">
         <header className="header">
           <div className="brand">
-            {section === 'suimint' ? <span className="logo">{SITE_NAME}</span> : null}
+            <span className="logo">{SITE_NAME}</span>
             <span className="tag">Mainnet</span>
           </div>
           <div className="header-actions">

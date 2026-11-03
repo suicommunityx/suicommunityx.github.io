@@ -51,7 +51,13 @@ body { background: var(--bg); }
   box-sizing: border-box;
 }
 .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
-.logo { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; white-space: nowrap; }
+.logo {
+  font-size: 18px; font-weight: 650; letter-spacing: -0.03em; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis; min-width: 0;
+}
+.header { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.header-actions { flex-shrink: 0; }
+.brand { flex: 1; min-width: 0; }
 .tag {
   font-size: 11px; color: var(--muted); border: 1px solid var(--line);
   border-radius: 999px; padding: 2px 8px; white-space: nowrap;
@@ -326,6 +332,9 @@ code { font-size: 12px; background: #eee; padding: 1px 6px; border-radius: 6px; 
 
 @media (max-width: 720px) {
   .header { padding: 10px 14px; min-height: 48px; }
+  .logo { font-size: 15px; letter-spacing: -0.04em; }
+  .brand { gap: 6px; }
+  .tag { font-size: 10px; padding: 2px 6px; }
   .tabbar { top: auto; }
   .tabbar-inner { padding: 8px 12px; }
   .tabbar-top .tabbar-inner { padding: 10px 12px; overflow-x: visible; min-height: 44px; }

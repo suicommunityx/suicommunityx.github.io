@@ -49,7 +49,7 @@ export const KNOWN_MARKETS: Record<string, string> = {
   SUIZ: '0x43e31eb68fd130f673773b68407ad16ca5251d5e20dec4f354b70d33e66e716e',
 };
 
-export const SITE_NAME = 'SUIRC20';
+export const SITE_NAME = 'Sui Inscription';
 
 /** sessionStorage TTL for RPC responses (ms). */
 export const CACHE_TTL_MS = 60_000;
