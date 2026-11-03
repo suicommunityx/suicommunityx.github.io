@@ -215,14 +215,14 @@ export function Suirc20Panel() {
         </div>
       )}
 
-      <div className="suirc-subnav">
+      <nav className="tabbar tabbar-sub suirc-subnav" aria-label="SuiMint 子导航">
         <div className="tabbar-inner tabbar-sub-inner">
           {(
             [
               ['list', '铭文列表'],
               ['holders', '持有者'],
               ['mine', '我的铭文'],
-              ['actions', '部署 / 铸造 / 转账'],
+              ['actions', '部署·铸造·转账'],
             ] as [SubTab, string][]
           ).map(([k, label]) => (
             <button
@@ -235,6 +235,8 @@ export function Suirc20Panel() {
             </button>
           ))}
         </div>
+      </nav>
+      <div className="suirc-refresh-row">
         <button type="button" className="btn ghost small suirc-refresh" onClick={() => refresh()} disabled={loading}>
           刷新索引
         </button>
