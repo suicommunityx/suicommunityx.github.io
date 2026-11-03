@@ -279,7 +279,17 @@ export function Suirc20Panel() {
                       style={{ cursor: 'pointer' }}
                     >
                       <td>
-                        <strong>{t.tick}</strong>
+                        <button
+                          type="button"
+                          className="tick-link"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelected(t);
+                            setSub('holders');
+                          }}
+                        >
+                          {t.tick}
+                        </button>
                         {t.badge ? <span className="tag v2">{t.badge}</span> : null}
                         {t.tick === 'suis' || t.tick === 'dgen' ? (
                           <span className="tag" style={{ marginLeft: 6 }}>

@@ -36,12 +36,13 @@ function parseRoute(): { section: Section; tab: Tab; holdersTick: string | null 
   if (!raw || raw === 'suimint' || raw.startsWith('suimint/')) {
     return { section: 'suimint', tab: 'suimint', holdersTick: null };
   }
-  const holdersMatch = raw.match(/^holders(?:\/([A-Za-z0-9_]+))?$/i);
+  const holdersMatch = raw.match(/^holders(?:\/([^/?#]+))?$/i);
   if (holdersMatch) {
     return {
       section: 'moves',
       tab: 'holders',
-      holdersTick: holdersMatch[1] ? holdersMatch[1].toUpperCase() : null,
+      // Keep exact tick casing (suis vs SUIS)
+      holdersTick: holdersMatch[1] ? decodeURIComponent(holdersMatch[1]) : null,
     };
   }
   const tab = raw.split('/')[0].toLowerCase() as Tab;
@@ -55,7 +56,7 @@ function writeRoute(tab: Tab, holdersTick?: string | null) {
   if (tab === 'suimint') {
     next = '#/suimint';
   } else if (tab === 'holders') {
-    next = holdersTick ? `#/holders/${holdersTick}` : '#/holders';
+    next = holdersTick ? `#/holders/${encodeURIComponent(holdersTick)}` : '#/holders';
   } else if (tab !== 'ticks') {
     next = `#/${tab}`;
   } else {

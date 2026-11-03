@@ -169,6 +169,14 @@ h3 { font-size: 20px; font-weight: 600; }
 .table tr:hover { background: #fafafa; cursor: pointer; }
 .table tr.selected { background: #eef5ff; }
 .tick { font-weight: 600; letter-spacing: 0.02em; }
+.tick-link {
+  appearance: none; border: 0; background: transparent; padding: 0;
+  font: inherit; font-weight: 600; letter-spacing: 0.02em;
+  color: var(--primary, #0071e3); cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.tick-link:hover { opacity: 0.85; }
 .nowrap { white-space: nowrap; }
 .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; }
 

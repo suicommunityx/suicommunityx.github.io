@@ -5,7 +5,7 @@ type Props = {
   ticks: TickInfo[];
   loading: boolean;
   onSelect: (t: TickInfo) => void;
-  /** Navigate to holders/detail for this tick (查看 button). */
+  /** Open holders for this tick (exact case). */
   onView?: (t: TickInfo) => void;
   selected?: string;
 };
@@ -23,7 +23,6 @@ export function TickList({ ticks, loading, onSelect, onView, selected }: Props) 
             <th>进度</th>
             <th>创建时间</th>
             <th>铸造费</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -36,7 +35,18 @@ export function TickList({ ticks, loading, onSelect, onView, selected }: Props) 
                 className={selected === t.tick ? 'selected' : ''}
                 onClick={() => onSelect(t)}
               >
-                <td className="tick">{t.tick}</td>
+                <td className="tick">
+                  <button
+                    type="button"
+                    className="tick-link"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      (onView || onSelect)(t);
+                    }}
+                  >
+                    {t.tick}
+                  </button>
+                </td>
                 <td>{formatAmount(t.totalSupply)}</td>
                 <td>
                   {formatAmount(t.currentSupply)} / {formatAmount(t.remain)}
@@ -51,17 +61,6 @@ export function TickList({ ticks, loading, onSelect, onView, selected }: Props) 
                 <td className="nowrap">{formatShanghai(t.startTimeMs ?? undefined)}</td>
                 <td>
                   {t.mintFee == null ? '—' : t.mintFee === 0n ? '0' : `${mistToSui(t.mintFee)} SUI`}
-                </td>
-                <td>
-                  <button
-                    className="btn small"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      (onView || onSelect)(t);
-                    }}
-                  >
-                    查看
-                  </button>
                 </td>
               </tr>
             );
