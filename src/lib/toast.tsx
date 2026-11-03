@@ -33,6 +33,16 @@ function newId() {
   return `t-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
+/** Split friendly title vs raw detail (first line / rest). */
+export function splitToastMessage(message: string): { title: string; detail: string | null } {
+  const raw = String(message || '').trim();
+  if (!raw) return { title: '', detail: null };
+  const normalized = raw.replace(/\s*——\s*/g, '\n');
+  const parts = normalized.split(/\n+/).map((s) => s.trim()).filter(Boolean);
+  if (parts.length <= 1) return { title: parts[0] || raw, detail: null };
+  return { title: parts[0], detail: parts.slice(1).join('\n') };
+}
+
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<ToastItem[]>([]);
 
@@ -58,6 +68,16 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     [push, dismiss],
   );
 
+  // Allow Playwright / console: window.dispatchEvent(new CustomEvent('suimint:toast', { detail: { message, kind } }))
+  useEffect(() => {
+    const onToast = (ev: Event) => {
+      const detail = (ev as CustomEvent<{ message?: string; kind?: ToastKind }>).detail;
+      if (detail?.message) push(detail.message, detail.kind || 'error');
+    };
+    window.addEventListener('suimint:toast', onToast as EventListener);
+    return () => window.removeEventListener('suimint:toast', onToast as EventListener);
+  }, [push]);
+
   return (
     <ToastContext.Provider value={api}>
       {children}
@@ -74,7 +94,6 @@ export function useToast(): ToastApi {
   return ctx;
 }
 
-/** Safe optional toast (for modules that may render outside provider in tests). */
 export function useToastOptional(): ToastApi | null {
   return useContext(ToastContext);
 }
@@ -107,6 +126,7 @@ function ToastCard({
   const remainingRef = useRef(DURATION_MS);
   const lastTsRef = useRef<number | null>(null);
   const rafRef = useRef<number | null>(null);
+  const { title, detail } = splitToastMessage(item.message);
 
   useEffect(() => {
     const tick = (ts: number) => {
@@ -146,7 +166,10 @@ function ToastCard({
       onTouchCancel={resume}
     >
       <div className="toast-body">
-        <div className="toast-text">{item.message}</div>
+        <div className="toast-content">
+          <div className="toast-title">{title}</div>
+          {detail ? <div className="toast-detail">{detail}</div> : null}
+        </div>
         <button
           type="button"
           className="toast-close"

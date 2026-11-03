@@ -39,8 +39,9 @@ function explainMoveAbort(msg: string): string | null {
 
   const detail = msg.replace(/^Transaction resolution failed:\s*/i, '').trim();
   const truncated = detail.length > 180 ? `${detail.slice(0, 180)}…` : detail;
+  // Title = Chinese explanation; detail = raw MoveAbort (toast renders as separate lines)
   if (meaning) {
-    return `${head}——${meaning}\n${truncated}`;
+    return `${head}：${meaning}\n${truncated}`;
   }
   return `${head}\n${truncated}`;
 }
