@@ -33,7 +33,7 @@ body { background: var(--bg); }
   position: sticky;
   top: 0;
   z-index: 30;
-  background: rgba(255,255,255,0.92);
+  background: #fff;
   backdrop-filter: saturate(180%) blur(16px);
   -webkit-backdrop-filter: saturate(180%) blur(16px);
   border-bottom: 1px solid rgba(0,0,0,0.06);
@@ -65,7 +65,7 @@ body { background: var(--bg); }
   border-bottom: 0;
 }
 .tabbar-top {
-  border-top: 1px solid rgba(0,0,0,0.04);
+  border-top: 1px solid rgba(0,0,0,0.06);
 }
 .tabbar-top .tabbar-inner {
   overflow-x: visible;

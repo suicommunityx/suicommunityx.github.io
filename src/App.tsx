@@ -324,7 +324,7 @@ export default function App() {
         ) : (
           <>
         <section className="hero">
-          <h1>{SITE_NAME}</h1>
+          <h1>Movescriptions</h1>
           <p className="subtitle">Movescriptions 铭文浏览器与交易面板</p>
         </section>
 
