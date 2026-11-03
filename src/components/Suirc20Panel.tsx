@@ -4,7 +4,7 @@ import { useCurrentAccount, useSignAndExecuteTransaction } from '@mysten/dapp-ki
 import { ConnectWalletButton } from './ConnectWalletButton';
 import type { Transaction } from '@mysten/sui/transactions';
 import { ConfirmModal } from './ConfirmModal';
-import { formatAmount, formatShortDate, isValidSuiAddress, shortAddr } from '../lib/format';
+import { formatShortDate, isValidSuiAddress, shortAddr } from '../lib/format';
 import { SmartAmount, SmartAmountRange } from './SmartAmount';
 import { dryRun, friendlyRpcError } from '../lib/sui';
 import { useToast } from '../lib/toast';
@@ -277,18 +277,12 @@ export function Suirc20Panel() {
                         ? Math.min(100, Math.max(0, Number((minted * 10000n) / max) / 100))
                         : Number(t.progress || 0);
                     return (
-                    <tr
-                      key={t.tick}
-                      className={selected?.tick === t.tick ? 'selected' : ''}
-                      onClick={() => setSelected(t)}
-                      style={{ cursor: 'pointer' }}
-                    >
+                    <tr key={t.tick}>
                       <td>
                         <button
                           type="button"
                           className="tick-link"
-                          onClick={(e) => {
-                            e.stopPropagation();
+                          onClick={() => {
                             setSelected(t);
                             setSub('holders');
                           }}
@@ -333,71 +327,6 @@ export function Suirc20Panel() {
             </div>
           )}
 
-          {selected && (
-            <div className="card detail">
-              <h3>
-                {selected.tick}
-                {selected.badge ? <span className="tag v2">{selected.badge}</span> : null}
-              </h3>
-              <dl className="grid-dl">
-                <div>
-                  <dt>Max</dt>
-                  <dd>{formatAmount(BigInt(selected.max))}</dd>
-                </div>
-                <div>
-                  <dt>Lim</dt>
-                  <dd>{formatAmount(BigInt(selected.lim))}</dd>
-                </div>
-                <div>
-                  <dt>Fee (MIST)</dt>
-                  <dd>{selected.fee}</dd>
-                </div>
-                <div>
-                  <dt>Decimals</dt>
-                  <dd>{selected.dec}</dd>
-                </div>
-                <div>
-                  <dt>已铸造</dt>
-                  <dd>
-                    {formatAmount(BigInt(selected.minted))}（{selected.mintCount} 次）
-                  </dd>
-                </div>
-                <div>
-                  <dt>持有者</dt>
-                  <dd>{selected.holderCount}</dd>
-                </div>
-                <div>
-                  <dt>部署者</dt>
-                  <dd title={selected.deployer}>{shortAddr(selected.deployer)}</dd>
-                </div>
-                <div>
-                  <dt>部署时间</dt>
-                  <dd>{selected.deployTimeBeijing}</dd>
-                </div>
-              </dl>
-              <div className="row-actions" style={{ marginTop: 12 }}>
-                <button
-                  className="btn"
-                  type="button"
-                  onClick={() => {
-                    setATick(selected.tick);
-                    setSub('actions');
-                  }}
-                >
-                  去铸造 / 转账
-                </button>
-                <button
-                  className="btn ghost"
-                  type="button"
-                  onClick={() => {
-                    setSub('holders');
-                  }}
-                >
-                  查看持有者
-                </button>
-              </div>
-            </div>
-          )}
         </section>
       )}
 

@@ -7,10 +7,10 @@ import { SmartAmount, SmartAmountRange } from './SmartAmount';
 type Props = {
   ticks: TickInfo[];
   loading: boolean;
-  onSelect: (t: TickInfo) => void;
+  /** Optional legacy select callback; row click no longer selects for a detail panel. */
+  onSelect?: (t: TickInfo) => void;
   /** Open holders for this tick (exact case). */
   onView?: (t: TickInfo) => void;
-  selected?: string;
   /** Snapshot holder counts keyed by tick (exact or upper). Missing → '—'. */
   holderCounts?: Record<string, number>;
 };
@@ -26,7 +26,7 @@ function lookupHolders(tick: string, map?: Record<string, number>): number | nul
 
 const BATCH = 50;
 
-export function TickList({ ticks, loading, onSelect, onView, selected, holderCounts }: Props) {
+export function TickList({ ticks, loading, onSelect, onView, holderCounts }: Props) {
   const { visible, hasMore, sentinelRef, shown, total } = useInfiniteSlice(ticks, BATCH);
 
   const rows = useMemo(
@@ -53,18 +53,13 @@ export function TickList({ ticks, loading, onSelect, onView, selected, holderCou
         </thead>
         <tbody>
           {rows.map(({ t, pct, holders }) => (
-            <tr
-              key={t.tick}
-              className={selected === t.tick ? 'selected' : ''}
-              onClick={() => onSelect(t)}
-            >
+            <tr key={t.tick}>
               <td className="tick">
                 <button
                   type="button"
                   className="tick-link"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    (onView || onSelect)(t);
+                  onClick={() => {
+                    (onView || onSelect)?.(t);
                   }}
                 >
                   {t.tick}

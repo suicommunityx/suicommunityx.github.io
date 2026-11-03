@@ -443,11 +443,7 @@ useEffect(() => {
             <TickList
               ticks={filteredMovesTicks}
               loading={loadingTicks}
-              selected={selected?.tick}
               holderCounts={holderCounts}
-              onSelect={(t) => {
-                setSelected(t);
-              }}
               onView={(t) => {
                 setSelected(t);
                 setHoldersTick(t.tick);
@@ -455,84 +451,6 @@ useEffect(() => {
                 writeRoute('holders', t.tick);
               }}
             />
-            {selected && (
-              <div className="card detail">
-                <h3>{selected.tick}</h3>
-                <dl className="grid-dl">
-                  <div>
-                    <dt>总量</dt>
-                    <dd>{formatAmount(selected.totalSupply)}</dd>
-                  </div>
-                  <div>
-                    <dt>已铸造</dt>
-                    <dd>{formatAmount(selected.currentSupply)}</dd>
-                  </div>
-                  <div>
-                    <dt>剩余</dt>
-                    <dd>{formatAmount(selected.remain)}</dd>
-                  </div>
-                  <div>
-                    <dt>创建时间</dt>
-                    <dd>{formatShanghai(selected.startTimeMs ?? undefined)}</dd>
-                  </div>
-                  <div>
-                    <dt>铸造费</dt>
-                    <dd>
-                      {selected.mintFee == null
-                        ? '—'
-                        : selected.mintFee === 0n
-                          ? '0 SUI'
-                          : `${mistToSui(selected.mintFee)} SUI`}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt>记录对象</dt>
-                    <dd className="mono">{shortAddr(selected.recordId, 10)}</dd>
-                  </div>
-                </dl>
-                <div className="row gap wrap">
-                  {selected.remain === 0n ? (
-                    <button className="btn" disabled>
-                      已售罄，无法铸造
-                    </button>
-                  ) : (
-                    <>
-                      <label className="field inline">
-                        锁定 SUI (MIST)
-                        <input value={mintMist} onChange={(e) => setMintMist(e.target.value)} />
-                      </label>
-                      <button
-                        className="btn primary"
-                        disabled={!account}
-                        onClick={() =>
-                          ask({
-                            title: `铸造 ${selected.tick}`,
-                            summary: (
-                              <ul className="summary">
-                                <li>Tick：{selected.tick}</li>
-                                <li>锁定 SUI：{mistToSui(mintMist)} SUI</li>
-                                <li>剩余可铸：{formatAmount(selected.remain)}</li>
-                                <li>调用：{selected.isV2 ? 'epoch_bus_factory::mint' : 'movescription::mint'}</li>
-                              </ul>
-                            ),
-                            build: () =>
-                              buildMintTx({
-                                recordId: selected.recordId,
-                                isV2: selected.isV2,
-                                mintFactory: selected.mintFactory,
-                                lockedSuiMist: BigInt(mintMist || '0'),
-                              }),
-                          })
-                        }
-                      >
-                        铸造
-                      </button>
-                    </>
-                  )}
-                  {!account && <span className="hint">连接钱包后可铸造</span>}
-                </div>
-              </div>
-            )}
           </section>
         )}
 
