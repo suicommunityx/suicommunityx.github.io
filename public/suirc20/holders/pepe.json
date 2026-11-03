@@ -1,0 +1,11 @@
+{
+  "tick": "pepe",
+  "updatedAtBeijing": "2026-11-03 11:15:31 Asia/Shanghai",
+  "totalHolders": 1,
+  "holders": [
+    {
+      "owner": "0x86b88117e18a2184395fc8eb667e959598a124533e55e1120dd0f189459b6349",
+      "balance": "11000"
+    }
+  ]
+}

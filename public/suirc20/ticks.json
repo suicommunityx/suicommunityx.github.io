@@ -18,21 +18,21 @@
       "suis",
       "dgen"
     ],
-    "progressPct": 9.9,
-    "progressLabel": "索引进度 9.9%（扫描到 2023-12-16 01:52:50 Asia/Shanghai）",
+    "progressPct": 11,
+    "progressLabel": "索引进度 11%（扫描到 2023-12-16 02:00:08 Asia/Shanghai）",
     "stats": {
-      "mintTx": 99400,
+      "mintTx": 110400,
       "transferTx": 0,
       "deployTx": 1430,
-      "mintAccepted": 98864,
-      "mintIgnored": 536,
+      "mintAccepted": 109863,
+      "mintIgnored": 537,
       "transferAccepted": 0,
       "transferIgnored": 0,
-      "lastTs": "2023-12-15T17:52:50.509Z",
+      "lastTs": "2023-12-15T18:00:08.330Z",
       "startedAt": "2026-11-03T02:22:48.240Z"
     },
     "tickCount": 1430,
-    "updatedAtBeijing": "2026-11-03 11:12:19 Asia/Shanghai",
+    "updatedAtBeijing": "2026-11-03 11:15:31 Asia/Shanghai",
     "complete": false
   },
   "ticks": [
@@ -47,10 +47,10 @@
       "deployTimeBeijing": "2023-12-15 23:34:13 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T15:34:13.517Z",
       "digest": "2VyEi7pLvrieZgg3TisppDMtPm8B2unvWHLunhshofhZ",
-      "minted": "850254116",
-      "mintCount": 86919,
-      "holderCount": 1097,
-      "progress": 8.5
+      "minted": "933409120",
+      "mintCount": 95384,
+      "holderCount": 1103,
+      "progress": 9.33
     },
     {
       "tick": "dgen",
@@ -9439,10 +9439,10 @@
       "deployTimeBeijing": "2023-12-15 23:40:52 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T15:40:52.464Z",
       "digest": "2Wj2mK4WP6CG4JiYjKFWdHV8rCGCBcL4AvJaFyYjJHeQ",
-      "minted": "11680886",
-      "mintCount": 11809,
-      "holderCount": 408,
-      "progress": 55.62
+      "minted": "14201885",
+      "mintCount": 14333,
+      "holderCount": 418,
+      "progress": 67.62
     },
     {
       "tick": "H3CN",
@@ -12975,9 +12975,9 @@
       "deployTimeBeijing": "2023-12-16 01:52:57 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T17:52:57.527Z",
       "digest": "HVnPXiPJGJikMEKWu2pDkbzYri1oijgxsVQeKJuLEQ7c",
-      "minted": "0",
-      "mintCount": 0,
-      "holderCount": 0,
+      "minted": "1000",
+      "mintCount": 1,
+      "holderCount": 1,
       "progress": 0
     },
     {
@@ -17903,8 +17903,8 @@
       "deployTimeBeijing": "2023-12-16 00:16:43 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T16:16:43.242Z",
       "digest": "CKhvmME3zmvbjiiE7HTmPGoFXHq3qZULh1h3HKzT5bgc",
-      "minted": "3900",
-      "mintCount": 48,
+      "minted": "4800",
+      "mintCount": 57,
       "holderCount": 2,
       "progress": 0
     },
