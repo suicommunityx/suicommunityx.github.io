@@ -14,10 +14,10 @@
     "seededFrom": "/workspace/suimint/suirc20/deploys_raw.json"
   },
   "0xe09b37505173ae119a0ae3b1fdf9050a6b029391f9d9f10a3fff27e3f3115727:mint": {
-    "after": "KAE6Cwilp4AKEMy7+coD",
+    "after": "KAE6CwjOq4AKEI67/coD",
     "done": false,
-    "pages": 24978,
-    "processed": 1248900
+    "pages": 26060,
+    "processed": 1303000
   },
   "0xe09b37505173ae119a0ae3b1fdf9050a6b029391f9d9f10a3fff27e3f3115727:transfer": {
     "after": "KAE6CwjaoowKEKDrzNID",
