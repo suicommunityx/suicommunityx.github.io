@@ -1,8 +1,6 @@
 name: Refresh SUIRC-20 index
 
 on:
-  schedule:
-    - cron: '23 */6 * * *'
   workflow_dispatch:
 
 permissions:
