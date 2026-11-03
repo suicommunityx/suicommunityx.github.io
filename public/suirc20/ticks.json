@@ -19,20 +19,20 @@
       "dgen"
     ],
     "progressPct": 99.9,
-    "progressLabel": "索引进度 99.9%（扫描到 2023-12-16 05:26:53 Asia/Shanghai）",
+    "progressLabel": "索引进度 99.9%（扫描到 2023-12-16 05:35:33 Asia/Shanghai）",
     "stats": {
-      "mintTx": 1111400,
+      "mintTx": 1173400,
       "transferTx": 0,
       "deployTx": 1430,
-      "mintAccepted": 941223,
-      "mintIgnored": 170177,
+      "mintAccepted": 987891,
+      "mintIgnored": 185509,
       "transferAccepted": 0,
       "transferIgnored": 0,
-      "lastTs": "2023-12-15T21:26:53.661Z",
+      "lastTs": "2023-12-15T21:35:33.142Z",
       "startedAt": "2026-11-03T02:22:48.240Z"
     },
     "tickCount": 1430,
-    "updatedAtBeijing": "2026-11-03 21:29:16 Asia/Shanghai",
+    "updatedAtBeijing": "2026-11-03 21:50:32 Asia/Shanghai",
     "complete": false
   },
   "ticks": [
@@ -47,10 +47,10 @@
       "deployTimeBeijing": "2023-12-15 23:34:13 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T15:34:13.517Z",
       "digest": "2VyEi7pLvrieZgg3TisppDMtPm8B2unvWHLunhshofhZ",
-      "minted": "9139257913",
-      "mintCount": 919647,
-      "holderCount": 1928,
-      "progress": 91.39
+      "minted": "9604675757",
+      "mintCount": 966304,
+      "holderCount": 1943,
+      "progress": 96.04
     },
     {
       "tick": "dgen",
@@ -19327,9 +19327,9 @@
       "deployTimeBeijing": "2023-12-16 01:02:01 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T17:02:01.955Z",
       "digest": "8g3hRdQWsqn4Lsje9oocFLN26tjsef8RKEypW4GwLLen",
-      "minted": "0",
-      "mintCount": 0,
-      "holderCount": 0,
+      "minted": "1",
+      "mintCount": 1,
+      "holderCount": 1,
       "progress": 0
     },
     {
@@ -19519,10 +19519,10 @@
       "deployTimeBeijing": "2023-12-16 00:29:15 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T16:29:15Z",
       "digest": "59vfLFF7khaAbRs2KgvbAai42rVEgc7pHpZWQt8iwVmL",
-      "minted": "168",
-      "mintCount": 168,
+      "minted": "178",
+      "mintCount": 178,
       "holderCount": 7,
-      "progress": 1.68
+      "progress": 1.78
     },
     {
       "tick": "suit",
