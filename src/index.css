@@ -172,11 +172,18 @@ h3 { font-size: 20px; font-weight: 600; }
 .tick-link {
   appearance: none; border: 0; background: transparent; padding: 0;
   font: inherit; font-weight: 600; letter-spacing: 0.02em;
-  color: var(--primary, #0071e3); cursor: pointer;
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  color: var(--fg);
+  cursor: pointer;
+  text-decoration: none;
 }
-.tick-link:hover { opacity: 0.85; }
+.tick-link:hover,
+.tick-link:visited,
+.tick-link:active,
+.tick-link:focus {
+  color: var(--fg);
+  text-decoration: none;
+  opacity: 1;
+}
 .nowrap { white-space: nowrap; }
 .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; }
 
