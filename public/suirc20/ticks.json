@@ -19,20 +19,20 @@
       "dgen"
     ],
     "progressPct": 99.9,
-    "progressLabel": "索引进度 99.9%（扫描到 2023-12-16 09:16:42 Asia/Shanghai）",
+    "progressLabel": "索引进度 99.9%（扫描到 2023-12-16 09:23:58 Asia/Shanghai）",
     "stats": {
-      "mintTx": 2427400,
+      "mintTx": 2479400,
       "transferTx": 0,
       "deployTx": 1430,
       "mintAccepted": 1027758,
-      "mintIgnored": 1399642,
+      "mintIgnored": 1451642,
       "transferAccepted": 0,
       "transferIgnored": 0,
-      "lastTs": "2023-12-16T01:16:42.673Z",
+      "lastTs": "2023-12-16T01:23:58.760Z",
       "startedAt": "2026-11-03T02:22:48.240Z"
     },
     "tickCount": 1430,
-    "updatedAtBeijing": "2026-11-04 05:53:41 Asia/Shanghai",
+    "updatedAtBeijing": "2026-11-04 06:19:47 Asia/Shanghai",
     "complete": false
   },
   "ticks": [
