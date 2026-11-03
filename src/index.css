@@ -29,15 +29,26 @@ html, body, #root { margin: 0; min-height: 100%; }
 body { background: var(--bg); }
 
 .page { min-height: 100vh; display: flex; flex-direction: column; }
-.header {
-  position: sticky; top: 0; z-index: 30;
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  flex-wrap: nowrap;
-  padding: 12px 28px;
-  background: rgba(255,255,255,0.72);
+.app-chrome {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: rgba(255,255,255,0.92);
   backdrop-filter: saturate(180%) blur(16px);
   -webkit-backdrop-filter: saturate(180%) blur(16px);
   border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.header {
+  position: relative; top: auto; z-index: auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  flex-wrap: nowrap;
+  padding: 12px 28px;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: 0;
+  min-height: 52px;
+  box-sizing: border-box;
 }
 .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .logo { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; white-space: nowrap; }
@@ -47,19 +58,22 @@ body { background: var(--bg); }
 }
 .header-actions { display: flex; align-items: center; flex-shrink: 0; }
 .tabbar {
-  position: sticky; top: 56px; z-index: 25;
-  background: rgba(255,255,255,0.88);
-  backdrop-filter: saturate(180%) blur(16px);
-  -webkit-backdrop-filter: saturate(180%) blur(16px);
-  border-bottom: 1px solid rgba(0,0,0,0.06);
+  position: relative; top: auto; z-index: auto;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: 0;
+}
+.tabbar-top {
+  border-top: 1px solid rgba(0,0,0,0.04);
 }
 .tabbar-top .tabbar-inner {
   overflow-x: visible;
   justify-content: flex-start;
   flex-wrap: nowrap;
   gap: 8px;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   align-items: center;
   min-height: 44px;
   box-sizing: border-box;
@@ -255,10 +269,10 @@ code { font-size: 12px; background: #eee; padding: 1px 6px; border-radius: 6px; 
 .market-card-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 
 @media (max-width: 720px) {
-  .header { padding: 10px 14px; }
-  .tabbar { top: 52px; }
+  .header { padding: 10px 14px; min-height: 48px; }
+  .tabbar { top: auto; }
   .tabbar-inner { padding: 8px 12px; }
-  .tabbar-top .tabbar-inner { padding: 8px 12px; overflow-x: visible; min-height: 44px; }
+  .tabbar-top .tabbar-inner { padding: 10px 12px; overflow-x: visible; min-height: 44px; }
   .tabbar-top-inner .tab-btn { padding: 8px 12px; font-size: 14px; }
   .suirc-refresh { font-size: 12px; padding: 6px 10px; }
   .main { padding: 16px 14px 48px; }

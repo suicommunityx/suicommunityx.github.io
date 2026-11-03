@@ -273,48 +273,50 @@ export default function App() {
 
   return (
     <div className="page">
-      <header className="header">
-        <div className="brand">
-          {section === 'suimint' ? <span className="logo">{SITE_NAME}</span> : null}
-          <span className="tag">Mainnet</span>
-        </div>
-        <div className="header-actions">
-          <ConnectButton connectText="连接钱包" />
-        </div>
-      </header>
-      <nav className="tabbar tabbar-top" aria-label="主导航">
-        <div className="tabbar-inner tabbar-top-inner">
-          <button
-            type="button"
-            className={`tab-btn ${section === 'suimint' ? 'active' : ''}`}
-            onClick={() => {
-              setSection('suimint');
-              setTab('suimint');
-              writeRoute('suimint');
-            }}
-          >
-            SuiMint
-          </button>
-          <button
-            type="button"
-            className={`tab-btn ${section === 'moves' ? 'active' : ''}`}
-            onClick={() => {
-              const next: Tab = section === 'suimint' || tab === 'suimint' ? 'ticks' : tab;
-              setSection('moves');
-              setTab(next);
-              if (next === 'holders') {
-                const t = holdersTick || selected?.tick || 'SUIS';
-                setHoldersTick(t);
-                writeRoute('holders', t);
-              } else {
-                writeRoute(next);
-              }
-            }}
-          >
-            Movescriptions
-          </button>
-        </div>
-      </nav>
+      <div className="app-chrome">
+        <header className="header">
+          <div className="brand">
+            {section === 'suimint' ? <span className="logo">{SITE_NAME}</span> : null}
+            <span className="tag">Mainnet</span>
+          </div>
+          <div className="header-actions">
+            <ConnectButton connectText="连接钱包" />
+          </div>
+        </header>
+        <nav className="tabbar tabbar-top" aria-label="主导航">
+          <div className="tabbar-inner tabbar-top-inner">
+            <button
+              type="button"
+              className={`tab-btn ${section === 'suimint' ? 'active' : ''}`}
+              onClick={() => {
+                setSection('suimint');
+                setTab('suimint');
+                writeRoute('suimint');
+              }}
+            >
+              SuiMint
+            </button>
+            <button
+              type="button"
+              className={`tab-btn ${section === 'moves' ? 'active' : ''}`}
+              onClick={() => {
+                const next: Tab = section === 'suimint' || tab === 'suimint' ? 'ticks' : tab;
+                setSection('moves');
+                setTab(next);
+                if (next === 'holders') {
+                  const t = holdersTick || selected?.tick || 'SUIS';
+                  setHoldersTick(t);
+                  writeRoute('holders', t);
+                } else {
+                  writeRoute(next);
+                }
+              }}
+            >
+              Movescriptions
+            </button>
+          </div>
+        </nav>
+      </div>
 
       <main className="main">
         {section === 'suimint' ? (
