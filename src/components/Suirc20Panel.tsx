@@ -90,7 +90,7 @@ export function Suirc20Panel() {
   const filtered = useMemo(() => {
     const s = q.trim();
     if (!s) return ticks;
-    return ticks.filter((t) => t.tick.toLowerCase().includes(s.toLowerCase()));
+    return ticks.filter((t) => t.tick.includes(s));
   }, [ticks, q]);
 
   const {
