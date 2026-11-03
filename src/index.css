@@ -98,12 +98,28 @@ body { background: var(--bg); }
   padding-right: 0;
   width: 100%;
 }
-.suirc-refresh-row {
+.suirc-search-row {
   display: flex;
-  justify-content: flex-end;
-  margin: 0 0 10px;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 220px;
+  min-width: 0;
+  flex-wrap: nowrap;
 }
-.suirc-refresh { white-space: nowrap; }
+.suirc-search-row .search-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: none;
+  width: 100%;
+  box-sizing: border-box;
+  height: 34px;
+}
+.suirc-refresh {
+  white-space: nowrap;
+  flex-shrink: 0;
+  height: 34px;
+  box-sizing: border-box;
+}
 .tabbar-sub {
   position: static;
   background: transparent;
@@ -339,7 +355,9 @@ code { font-size: 12px; background: #eee; padding: 1px 6px; border-radius: 6px; 
   .tabbar-inner { padding: 8px 12px; }
   .tabbar-top .tabbar-inner { padding: 10px 12px; overflow-x: visible; min-height: 44px; }
   .tabbar-top-inner .tab-btn { padding: 8px 12px; font-size: 14px; }
-  .suirc-refresh { font-size: 12px; padding: 6px 10px; }
+  .suirc-refresh { font-size: 12px; padding: 6px 10px; height: 32px; }
+  .suirc-search-row { flex: 1 1 100%; width: 100%; }
+  .suirc-search-row .search-input { height: 32px; }
   .main { padding: 16px 14px 48px; }
   .hero { padding: 20px 0 8px; }
   .section-head { flex-wrap: wrap; align-items: flex-start; }

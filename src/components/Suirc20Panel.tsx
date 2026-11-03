@@ -247,23 +247,27 @@ export function Suirc20Panel() {
           ))}
         </div>
       </nav>
-      <div className="suirc-refresh-row">
-        <button type="button" className="btn ghost small suirc-refresh" onClick={() => refresh()} disabled={loading}>
-          刷新索引
-        </button>
-      </div>
 
       {sub === 'list' && (
         <section className="section">
           <div className="section-head">
             <h2>铭文列表</h2>
-            <input
-              
-              className="search-input" style={{ maxWidth: 220 }}
-              placeholder="搜索 tick"
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-            />
+            <div className="suirc-search-row">
+              <input
+                className="search-input"
+                placeholder="搜索 tick"
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+              />
+              <button
+                type="button"
+                className="btn ghost small suirc-refresh"
+                onClick={() => refresh()}
+                disabled={loading}
+              >
+                刷新索引
+              </button>
+            </div>
           </div>
           {loading ? (
             <div className="card muted">加载中…</div>
