@@ -275,7 +275,7 @@ export default function App() {
     <div className="page">
       <header className="header">
         <div className="brand">
-          <span className="logo">{SITE_NAME}</span>
+          {section === 'suimint' ? <span className="logo">{SITE_NAME}</span> : null}
           <span className="tag">Mainnet</span>
         </div>
         <div className="header-actions">

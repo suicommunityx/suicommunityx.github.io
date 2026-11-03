@@ -58,11 +58,33 @@ body { background: var(--bg); }
   justify-content: flex-start;
   flex-wrap: nowrap;
   gap: 8px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .tabbar-top-inner .tab-btn {
   flex: 0 0 auto;
   padding: 8px 16px;
   font-size: 15px;
+  line-height: 1.2;
+}
+.suirc-subnav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  min-width: 0;
+}
+.suirc-subnav .tabbar-sub-inner {
+  flex: 1;
+  min-width: 0;
+  padding-left: 0;
+  padding-right: 0;
+  margin: 0;
+  width: auto;
+}
+.suirc-refresh {
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 .tabbar-sub {
   position: static;
@@ -238,8 +260,10 @@ code { font-size: 12px; background: #eee; padding: 1px 6px; border-radius: 6px; 
   .header { padding: 10px 14px; }
   .tabbar { top: 52px; }
   .tabbar-inner { padding: 8px 12px; }
-  .tabbar-top .tabbar-inner { padding: 6px 12px; overflow-x: visible; }
-  .tabbar-top-inner .tab-btn { padding: 7px 12px; font-size: 14px; }
+  .tabbar-top .tabbar-inner { padding: 10px 12px; overflow-x: visible; }
+  .tabbar-top-inner .tab-btn { padding: 8px 12px; font-size: 14px; }
+  .suirc-subnav { flex-wrap: nowrap; }
+  .suirc-refresh { font-size: 12px; padding: 6px 10px; }
   .main { padding: 16px 14px 48px; }
   .hero { padding: 20px 0 8px; }
   .section-head { flex-wrap: wrap; align-items: flex-start; }

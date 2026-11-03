@@ -1,0 +1,94 @@
+{
+  "tick": "suis",
+  "source": "suirc20-operation",
+  "package": "0xe09b37505173ae119a0ae3b1fdf9050a6b029391f9d9f10a3fff27e3f3115727",
+  "note": "Balances from Operation JSON witness replay (partial index). v2 cb5 SUIRC20Tick has NO on-chain balance table; add_v1_tick migrated registry only.",
+  "progressLabel": "索引进度 9.7%（扫描到 2023-12-16 01:52:15 Asia/Shanghai）",
+  "minted": "832554116",
+  "mintCount": 85149,
+  "holderCount": 1097,
+  "totalHolders": 1097,
+  "updatedAtBeijing": "2026-11-03 11:11:44 Asia/Shanghai",
+  "holdersTop": [
+    {
+      "owner": "0xd3c8ad0b04ef36c817a75d2c44e8ffa13ebfbf59a606ade4445f9f1a01418b71",
+      "balance": "17860000"
+    },
+    {
+      "owner": "0x234ac43eb8f528947a7f0fb01629d18c4afdd6ea09c163b8829f0b1ec6d2313d",
+      "balance": "14270000"
+    },
+    {
+      "owner": "0x82c009c3a3b09cba355513ec31ccf3484a6fe7cb5438d707fb58b1e5c6ee25db",
+      "balance": "13452000"
+    },
+    {
+      "owner": "0xf497c154a24c56f145f0b5f11df9d71073a1108762e6d9a6bbff6be9478f08cc",
+      "balance": "13213000"
+    },
+    {
+      "owner": "0x6fd3c7d34e6d43bf29c097f01cd48f0572ce736aea50ffadc5cfcdb73f06a6bb",
+      "balance": "13194000"
+    },
+    {
+      "owner": "0xdcf5a37c9d5e6c5407a602ccf8cc9a6de5ece50854924febf16a8a1b1abd5df8",
+      "balance": "12902000"
+    },
+    {
+      "owner": "0xbb53580efcce7fbaabd60defb5541ecec4831245fb3f046ed9fb633e4783da93",
+      "balance": "12677000"
+    },
+    {
+      "owner": "0xb62ac52f7a9f7b53be6dfeb2b1914da52ef90c4b4c61fc847db941049ec548ad",
+      "balance": "12583000"
+    },
+    {
+      "owner": "0x6cf462e6e35c1550d9fc68e3f8797d3d59687c2337cd2cba13f27e94ca4d180f",
+      "balance": "12555000"
+    },
+    {
+      "owner": "0xad09e784daf2ff2a1191997831021a19b2dc4b973717f0979a516fd62416113f",
+      "balance": "12500000"
+    },
+    {
+      "owner": "0xe54fb98246728c2d21490a64e11dbcfbe5c8c6c056a2d91b97fba789343f6b64",
+      "balance": "12485000"
+    },
+    {
+      "owner": "0x290efa91eadc68e17c9cb375d67f4d132a1622f1ce1c431ae4bd3be59715db43",
+      "balance": "12429000"
+    },
+    {
+      "owner": "0x9f668c01238b319416a83d45a013aa802c8b10aae8c1503cf923984aa8b36d4c",
+      "balance": "12428000"
+    },
+    {
+      "owner": "0x9d22423412d0248ca8bdbd70c46eab70d9e9de739558294a873a8052fe3f068f",
+      "balance": "12217000"
+    },
+    {
+      "owner": "0x5b5ab5b056367c1c78ae61eead6ce00c2529acd0dd4f1883b3b2277fbf578df0",
+      "balance": "12144000"
+    },
+    {
+      "owner": "0x9ad9a7e3a815b749be150e852ee60b88eb08843c36a1c3d65467e271a87cec64",
+      "balance": "11970000"
+    },
+    {
+      "owner": "0x21c566af6d98436694e40defffa72b0fa26b570ff82fa69ecf8748ff92a0fdf7",
+      "balance": "11960000"
+    },
+    {
+      "owner": "0xad36bbb9371faa2023583f8e6319ce312eaf286a4a416bb2703c9cfcec880c90",
+      "balance": "11928000"
+    },
+    {
+      "owner": "0x9a149ecffd2ed62b6f1817313410f24d7f86780d7d925a940d13d9af8ff1e60e",
+      "balance": "11778000"
+    },
+    {
+      "owner": "0xd8f00d5840ca61c82317377202d389ebc59a2801f933e15bbc1878485861d01f",
+      "balance": "11092000"
+    }
+  ]
+}

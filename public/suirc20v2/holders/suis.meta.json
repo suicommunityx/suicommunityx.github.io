@@ -1,0 +1,9 @@
+{
+  "tick": "suis",
+  "source": "suirc20v2",
+  "exactBalances": false,
+  "reason": "SUIRC20Tick has zero dynamic fields / no balance table; MintEvent for suis not observed in early stream; TransferEvent index incomplete (waiting on Mint cursor). Not authoritative yet.",
+  "minted": "0",
+  "holderCount": 0,
+  "updatedAtBeijing": "2026-11-03 11:11:50 Asia/Shanghai"
+}

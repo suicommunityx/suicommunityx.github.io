@@ -108,7 +108,11 @@ export function Suirc20Panel() {
   }, []);
 
   useEffect(() => {
-    if (sub === 'holders' && selected) loadHolders(selected.tick, selected.version === 'v2');
+    if (sub === 'holders' && selected) {
+      // v2 has no on-chain balances; prefer Operation holders for known migrated names
+      const preferV2 = false;
+      loadHolders(selected.tick, preferV2);
+    }
   }, [sub, selected, loadHolders]);
 
   const refreshMine = useCallback(async () => {
@@ -191,10 +195,11 @@ export function Suirc20Panel() {
         <div className="banner ok" style={{ cursor: 'default' }}>
           {meta.progressLabel}
           {meta.tickCount != null ? ` · 合并 ${meta.tickCount} ticks` : ''}
-          {meta.v2?.tickCount != null ? ` · 新版链上 ${meta.v2.tickCount}` : ''}
+          {meta.v2?.tickCount != null ? ` · 新版注册表 ${meta.v2.tickCount}` : ''}
           <div className="muted" style={{ marginTop: 6, fontSize: 13 }}>
-            {meta.cb5Note ||
-              '余额来自本站索引；同名 tick 优先显示链上新版并标「新版」。不包含信任最小化市场。'}
+            余额数据源：<strong>Operation 见证索引</strong>（包 e09b…）。v2（cb5）仅有 tick 注册表、
+            <strong>链上无余额表</strong>；suis/dgen 的持有者与「我的铭文」以 Operation 快照为准（索引未完成时为部分数据）。
+            「新版」徽章表示该 tick 名已在 cb5 注册，不代表余额已迁到 v2。
           </div>
         </div>
       )}
@@ -210,25 +215,27 @@ export function Suirc20Panel() {
         </div>
       )}
 
-      <div className="tabbar-inner" style={{ paddingLeft: 0, marginBottom: 8 }}>
-        {(
-          [
-            ['list', '铭文列表'],
-            ['holders', '持有者'],
-            ['mine', '我的铭文'],
-            ['actions', '部署 / 铸造 / 转账'],
-          ] as [SubTab, string][]
-        ).map(([k, label]) => (
-          <button
-            key={k}
-            type="button"
-            className={`tab-btn ${sub === k ? 'active' : ''}`}
-            onClick={() => setSub(k)}
-          >
-            {label}
-          </button>
-        ))}
-        <button type="button" className="btn ghost small" onClick={() => refresh()} disabled={loading}>
+      <div className="suirc-subnav">
+        <div className="tabbar-inner tabbar-sub-inner">
+          {(
+            [
+              ['list', '铭文列表'],
+              ['holders', '持有者'],
+              ['mine', '我的铭文'],
+              ['actions', '部署 / 铸造 / 转账'],
+            ] as [SubTab, string][]
+          ).map(([k, label]) => (
+            <button
+              key={k}
+              type="button"
+              className={`tab-btn ${sub === k ? 'active' : ''}`}
+              onClick={() => setSub(k)}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+        <button type="button" className="btn ghost small suirc-refresh" onClick={() => refresh()} disabled={loading}>
           刷新索引
         </button>
       </div>
