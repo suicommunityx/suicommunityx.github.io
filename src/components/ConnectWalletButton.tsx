@@ -8,9 +8,12 @@ import {
 import type { WalletWithRequiredFeatures } from '@mysten/wallet-standard';
 import { shortAddr } from '../lib/format';
 import {
+  CURATED_WALLETS,
   MOBILE_DEEP_LINK_WALLETS,
+  findCuratedForDetected,
   isMobileUa,
   walletNameMatches,
+  type CuratedWallet,
 } from '../lib/wallets';
 
 type Props = {
@@ -22,6 +25,38 @@ function walletIcon(wallet: WalletWithRequiredFeatures): string | null {
   if (!icon) return null;
   if (typeof icon === 'string') return icon;
   return null;
+}
+
+type ListRow =
+  | {
+      kind: 'installed';
+      key: string;
+      name: string;
+      icon: string | null;
+      fallbackLetter: string;
+      wallet: WalletWithRequiredFeatures;
+    }
+  | {
+      kind: 'install';
+      key: string;
+      name: string;
+      iconSrc: string;
+      fallbackLetter: string;
+      href: string;
+      meta: string;
+    }
+  | {
+      kind: 'deeplink';
+      key: string;
+      name: string;
+      iconSrc?: string;
+      fallbackLetter: string;
+      href: string;
+      meta: string;
+    };
+
+function curatedFallback(c: CuratedWallet): string {
+  return c.name.slice(0, 1);
 }
 
 export function ConnectWalletButton({ connectText = '连接钱包' }: Props) {
@@ -39,15 +74,104 @@ export function ConnectWalletButton({ connectText = '连接钱包' }: Props) {
 
   const detectedNames = useMemo(() => wallets.map((w) => w.name), [wallets]);
 
-  const deepLinkRows = useMemo(() => {
-    if (!mobile) return [];
-    const href = typeof window !== 'undefined' ? window.location.href : '';
-    return MOBILE_DEEP_LINK_WALLETS.filter((w) => {
-      if (w.inApp()) return false;
-      const already = detectedNames.some((n) => walletNameMatches(n, w.matchNames));
-      return !already;
-    }).map((w) => ({ ...w, url: w.buildUrl(href) }));
-  }, [mobile, detectedNames]);
+  const rows = useMemo((): ListRow[] => {
+    const out: ListRow[] = [];
+    const usedDetected = new Set<string>();
+
+    // 1) Curated wallets in preferred order — installed or install/download link
+    for (const curated of CURATED_WALLETS) {
+      const detected = wallets.find((w) => walletNameMatches(w.name, curated.matchNames));
+      if (detected) {
+        usedDetected.add(detected.name);
+        out.push({
+          kind: 'installed',
+          key: `installed-${detected.name}`,
+          name: detected.name,
+          icon: walletIcon(detected),
+          fallbackLetter: curatedFallback(curated),
+          wallet: detected,
+        });
+        continue;
+      }
+
+      if (mobile) {
+        const deep = MOBILE_DEEP_LINK_WALLETS.find((d) => d.id === curated.id);
+        if (deep && !deep.inApp()) {
+          const href = typeof window !== 'undefined' ? deep.buildUrl(window.location.href) : '#';
+          out.push({
+            kind: 'deeplink',
+            key: `deeplink-${deep.id}`,
+            name: deep.name,
+            iconSrc: curated.iconSrc,
+            fallbackLetter: curatedFallback(curated),
+            href,
+            meta: '在 App 中打开',
+          });
+          continue;
+        }
+        // Mobile, not deep-linkable: still offer official download
+        out.push({
+          kind: 'install',
+          key: `install-${curated.id}`,
+          name: curated.name,
+          iconSrc: curated.iconSrc,
+          fallbackLetter: curatedFallback(curated),
+          href: curated.downloadUrl,
+          meta: '未安装',
+        });
+        continue;
+      }
+
+      // Desktop: always show install row for undetected curated wallets
+      out.push({
+        kind: 'install',
+        key: `install-${curated.id}`,
+        name: curated.name,
+        iconSrc: curated.iconSrc,
+        fallbackLetter: curatedFallback(curated),
+        href: curated.downloadUrl,
+        meta: '未安装',
+      });
+    }
+
+    // 2) Any other detected Wallet Standard wallets not in curated list
+    for (const w of wallets) {
+      if (usedDetected.has(w.name)) continue;
+      if (findCuratedForDetected(w.name)) continue;
+      usedDetected.add(w.name);
+      out.push({
+        kind: 'installed',
+        key: `other-${w.name}`,
+        name: w.name,
+        icon: walletIcon(w),
+        fallbackLetter: w.name.slice(0, 1),
+        wallet: w,
+      });
+    }
+
+    // 3) Mobile deep-link wallets not already covered via curated (safety)
+    if (mobile) {
+      const href = typeof window !== 'undefined' ? window.location.href : '';
+      for (const deep of MOBILE_DEEP_LINK_WALLETS) {
+        if (deep.inApp()) continue;
+        if (out.some((r) => r.key === `deeplink-${deep.id}` || r.name === deep.name)) continue;
+        const already = detectedNames.some((n) => walletNameMatches(n, deep.matchNames));
+        if (already) continue;
+        const curated = CURATED_WALLETS.find((c) => c.id === deep.id);
+        out.push({
+          kind: 'deeplink',
+          key: `deeplink-${deep.id}`,
+          name: deep.name,
+          iconSrc: curated?.iconSrc,
+          fallbackLetter: deep.name.slice(0, 1),
+          href: deep.buildUrl(href),
+          meta: '在 App 中打开',
+        });
+      }
+    }
+
+    return out;
+  }, [wallets, mobile, detectedNames]);
 
   const close = useCallback(() => {
     setOpen(false);
@@ -101,49 +225,58 @@ export function ConnectWalletButton({ connectText = '连接钱包' }: Props) {
               </button>
             </div>
             <p className="wallet-modal-hint muted">
-              检测到的 Sui 钱包会自动列出；未安装扩展时可在手机上用 App 打开本站。
+              {mobile
+                ? '已安装的钱包可直接连接；未安装时可在 App 中打开本站，或前往官方下载页。'
+                : '已安装的钱包可直接连接；未安装的会打开官方扩展 / 下载页。'}
             </p>
             <ul className="wallet-list">
-              {wallets.map((w) => {
-                const icon = walletIcon(w);
+              {rows.map((row) => {
+                if (row.kind === 'installed') {
+                  return (
+                    <li key={row.key}>
+                      <button
+                        type="button"
+                        className="wallet-list-item"
+                        disabled={isPending}
+                        onClick={() => onPick(row.wallet)}
+                      >
+                        <span className="wallet-list-icon" aria-hidden>
+                          {row.icon ? (
+                            <img src={row.icon} alt="" width={32} height={32} />
+                          ) : (
+                            <span className="wallet-list-fallback">{row.fallbackLetter}</span>
+                          )}
+                        </span>
+                        <span className="wallet-list-name">{row.name}</span>
+                        <span className="wallet-list-meta muted">已安装</span>
+                      </button>
+                    </li>
+                  );
+                }
+
                 return (
-                  <li key={w.name}>
-                    <button
-                      type="button"
+                  <li key={row.key}>
+                    <a
                       className="wallet-list-item"
-                      disabled={isPending}
-                      onClick={() => onPick(w)}
+                      href={row.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={close}
                     >
                       <span className="wallet-list-icon" aria-hidden>
-                        {icon ? (
-                          <img src={icon} alt="" width={32} height={32} />
+                        {row.iconSrc ? (
+                          <img src={row.iconSrc} alt="" width={32} height={32} />
                         ) : (
-                          <span className="wallet-list-fallback">{w.name.slice(0, 1)}</span>
+                          <span className="wallet-list-fallback">{row.fallbackLetter}</span>
                         )}
                       </span>
-                      <span className="wallet-list-name">{w.name}</span>
-                      <span className="wallet-list-meta muted">已安装</span>
-                    </button>
+                      <span className="wallet-list-name">{row.name}</span>
+                      <span className="wallet-list-meta muted">{row.meta}</span>
+                    </a>
                   </li>
                 );
               })}
-              {deepLinkRows.map((w) => (
-                <li key={`deeplink-${w.id}`}>
-                  <a
-                    className="wallet-list-item"
-                    href={w.url}
-                    rel="noopener noreferrer"
-                    onClick={close}
-                  >
-                    <span className="wallet-list-icon" aria-hidden>
-                      <span className="wallet-list-fallback">{w.name.slice(0, 1)}</span>
-                    </span>
-                    <span className="wallet-list-name">{w.name}</span>
-                    <span className="wallet-list-meta muted">在 App 中打开</span>
-                  </a>
-                </li>
-              ))}
-              {wallets.length === 0 && deepLinkRows.length === 0 ? (
+              {rows.length === 0 ? (
                 <li className="wallet-list-empty muted">
                   未检测到 Sui 钱包。请安装 Slush / OKX / Bitget / Suiet 等扩展，或在手机钱包 App 内打开本站。
                 </li>
