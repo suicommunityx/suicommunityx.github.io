@@ -334,10 +334,10 @@ export default function App() {
             {(
               [
                 ['ticks', '铭文列表'],
+                ['holders', '持有者'],
                 ['deploy', '创建铭文'],
                 ['mine', '我的铭文'],
                 ['market', '市场'],
-                ['holders', '持有者'],
               ] as [Tab, string][]
             ).map(([k, label]) => (
               <button
