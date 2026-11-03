@@ -423,3 +423,24 @@ code { font-size: 12px; background: #eee; padding: 1px 6px; border-radius: 6px; 
   .mint-progress-meta { font-size: 10px; gap: 4px; overflow: hidden; }
   .table .tick .tag, .table td .tag { display: none; }
 }
+
+
+/* Exact-by-default amounts; compact only when this box overflows */
+.smart-amount {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  text-align: inherit;
+}
+td.num .smart-amount { text-align: right; margin-left: auto; }
+.mint-progress-amt {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+.mint-progress-amt .smart-amount-range {
+  display: block;
+  max-width: 100%;
+}

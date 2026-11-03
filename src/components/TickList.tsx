@@ -1,5 +1,6 @@
 import type { TickInfo } from '../lib/sui';
-import { formatCompactAmount, formatShortDate, progressPct } from '../lib/format';
+import { formatShortDate, progressPct } from '../lib/format';
+import { SmartAmount, SmartAmountRange } from './SmartAmount';
 
 type Props = {
   ticks: TickInfo[];
@@ -63,13 +64,15 @@ export function TickList({ ticks, loading, onSelect, onView, selected, holderCou
                     </div>
                     <div className="mint-progress-meta">
                       <span className="mint-progress-amt">
-                        {formatCompactAmount(t.currentSupply)} / {formatCompactAmount(t.totalSupply)}
+                        <SmartAmountRange minted={t.currentSupply} max={t.totalSupply} />
                       </span>
                       <span className="mint-progress-pct">{pct.toFixed(1)}%</span>
                     </div>
                   </div>
                 </td>
-                <td className="num">{holders == null ? '—' : holders}</td>
+                <td className="num">
+                  {holders == null ? '—' : <SmartAmount value={holders} />}
+                </td>
                 <td>{formatShortDate(t.startTimeMs)}</td>
               </tr>
             );

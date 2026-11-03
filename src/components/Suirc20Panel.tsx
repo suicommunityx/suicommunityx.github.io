@@ -2,7 +2,8 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ConnectButton, useCurrentAccount, useSignAndExecuteTransaction } from '@mysten/dapp-kit';
 import type { Transaction } from '@mysten/sui/transactions';
 import { ConfirmModal } from './ConfirmModal';
-import { formatAmount, formatCompactAmount, formatShortDate, isValidSuiAddress, shortAddr } from '../lib/format';
+import { formatAmount, formatShortDate, isValidSuiAddress, shortAddr } from '../lib/format';
+import { SmartAmount, SmartAmountRange } from './SmartAmount';
 import { dryRun, friendlyRpcError } from '../lib/sui';
 import {
   buildSuirc20DeployTx,
@@ -308,13 +309,13 @@ export function Suirc20Panel() {
                           </div>
                           <div className="mint-progress-meta">
                             <span className="mint-progress-amt">
-                              {formatCompactAmount(t.minted)} / {formatCompactAmount(t.max)}
+                              <SmartAmountRange minted={t.minted} max={t.max} />
                             </span>
                             <span className="mint-progress-pct">{pct.toFixed(1)}%</span>
                           </div>
                         </div>
                       </td>
-                      <td className="num">{t.holderCount}</td>
+                      <td className="num"><SmartAmount value={t.holderCount} /></td>
                       <td>{formatShortDate(t.deployTimeUtc ?? t.deployTimeBeijing ?? t.createdTs)}</td>
                     </tr>
                     );
@@ -432,7 +433,7 @@ export function Suirc20Panel() {
                       <tr key={h.owner}>
                         <td>{holderPage * PAGE + i + 1}</td>
                         <td title={h.owner}>{shortAddr(h.owner)}</td>
-                        <td>{formatAmount(BigInt(h.balance))}</td>
+                        <td className="num"><SmartAmount value={h.balance} /></td>
                       </tr>
                     ))}
                     {!holderSlice.length && (
@@ -503,7 +504,7 @@ export function Suirc20Panel() {
                       <td>
                         <strong>{r.tick}</strong>
                       </td>
-                      <td>{formatAmount(BigInt(r.balance))}</td>
+                      <td className="num"><SmartAmount value={r.balance} /></td>
                     </tr>
                   ))}
                 </tbody>

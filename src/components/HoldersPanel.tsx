@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { formatAmount, formatShanghai, mistToSui, progressPct, shortAddr } from '../lib/format';
+import { SmartAmount } from './SmartAmount';
 import type { TickInfo } from '../lib/sui';
 
 export type HolderRow = {
@@ -191,7 +192,7 @@ export function HoldersPanel({ tick, tickInfo, tickOptions, onTickChange }: Prop
           </div>
           <div>
             <dt>持有地址数</dt>
-            <dd>{holderCount != null ? holderCount.toLocaleString('zh-CN') : '—'}</dd>
+            <dd>{holderCount != null ? <SmartAmount value={holderCount} /> : '—'}</dd>
           </div>
           <div>
             <dt>铸造费</dt>
@@ -299,7 +300,7 @@ export function HoldersPanel({ tick, tickInfo, tickOptions, onTickChange }: Prop
                           复制
                         </button>
                       </td>
-                      <td>{formatAmount(BigInt(h.amount))}</td>
+                      <td className="num"><SmartAmount value={h.amount} /></td>
                       <td>{h.pct.toFixed(2)}%</td>
                       <td>{h.objects}</td>
                     </tr>
@@ -335,7 +336,7 @@ export function HoldersPanel({ tick, tickInfo, tickOptions, onTickChange }: Prop
                   <div className="market-card-grid">
                     <div>
                       <div className="muted">持有量</div>
-                      <div>{formatAmount(BigInt(h.amount))}</div>
+                      <div className="num"><SmartAmount value={h.amount} /></div>
                     </div>
                     <div>
                       <div className="muted">占比</div>

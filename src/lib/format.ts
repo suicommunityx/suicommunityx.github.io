@@ -1,8 +1,30 @@
 const SHANGHAI = 'Asia/Shanghai';
 
+/** Full integer with thousands separators; BigInt-safe, never scientific. */
+export function formatExactAmount(n: string | number | bigint): string {
+  let v: bigint;
+  try {
+    const raw = typeof n === 'bigint' ? n.toString() : String(n).replace(/,/g, '').trim();
+    // Reject decimals / scientific input by taking integer part only if plain int
+    if (/[eE.]/.test(raw) && !/^-?\d+$/.test(raw)) {
+      // If caller passed a float string accidentally, still try BigInt of integer piece
+      const m = raw.match(/^-?\d+/);
+      v = BigInt(m ? m[0] : '0');
+    } else {
+      v = BigInt(raw || '0');
+    }
+  } catch {
+    return String(n);
+  }
+  const neg = v < 0n;
+  if (neg) v = -v;
+  const withSep = v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return neg ? `-${withSep}` : withSep;
+}
+
+/** Alias — always exact full units. */
 export function formatAmount(n: string | number | bigint): string {
-  const v = BigInt(n);
-  return v.toLocaleString('zh-CN');
+  return formatExactAmount(n);
 }
 
 export function mistToSui(mist: string | number | bigint, digits = 4): string {
@@ -42,25 +64,20 @@ export function progressPct(minted: bigint, supply: bigint): number {
 }
 
 
-/** Compact amounts for narrow tables: 10B / 21M / 1.2K (bigint-safe). */
+/** Compact amounts: K/M/B/T/Qa/Qi (bigint-safe, never scientific). */
 export function formatCompactAmount(n: string | number | bigint): string {
   let v: bigint;
   try {
-    v = typeof n === 'bigint' ? n : BigInt(String(n).replace(/,/g, ''));
+    v = typeof n === 'bigint' ? n : BigInt(String(n).replace(/,/g, '').trim() || '0');
   } catch {
     return String(n);
   }
   const neg = v < 0n;
   if (neg) v = -v;
   const sign = neg ? '-' : '';
-  // Keep columns narrow for absurd max values
-  if (v >= 10n ** 16n) {
-    const s = v.toString();
-    const exp = s.length - 1;
-    const frac = s.slice(1, 3).replace(/0+$/, '');
-    return sign + s[0] + (frac ? '.' + frac : '') + 'e' + exp;
-  }
   const units: [bigint, string][] = [
+    [10n ** 18n, 'Qi'],
+    [10n ** 15n, 'Qa'],
     [10n ** 12n, 'T'],
     [10n ** 9n, 'B'],
     [10n ** 6n, 'M'],
