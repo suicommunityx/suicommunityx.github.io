@@ -42,7 +42,7 @@ export function progressPct(minted: bigint, supply: bigint): number {
 }
 
 
-/** Compact amounts for narrow tables: 10B / 21M / 1.2K */
+/** Compact amounts for narrow tables: 10B / 21M / 1.2K (bigint-safe). */
 export function formatCompactAmount(n: string | number | bigint): string {
   let v: bigint;
   try {
@@ -53,27 +53,22 @@ export function formatCompactAmount(n: string | number | bigint): string {
   const neg = v < 0n;
   if (neg) v = -v;
   const sign = neg ? '-' : '';
-  if (v >= 1_000_000_000_000n) {
-    const x = Number(v / 10_000_000_000n) / 100;
-    return sign + trimNum(x) + 'T';
-  }
-  if (v >= 1_000_000_000n) {
-    const x = Number(v / 10_000_000n) / 100;
-    return sign + trimNum(x) + 'B';
-  }
-  if (v >= 1_000_000n) {
-    const x = Number(v / 10_000n) / 100;
-    return sign + trimNum(x) + 'M';
-  }
-  if (v >= 10_000n) {
-    const x = Number(v / 10n) / 100;
-    return sign + trimNum(x) + 'K';
+  const units: [bigint, string][] = [
+    [10n ** 12n, 'T'],
+    [10n ** 9n, 'B'],
+    [10n ** 6n, 'M'],
+    [10n ** 3n, 'K'],
+  ];
+  for (const [div, suffix] of units) {
+    if (v >= div) {
+      const whole = v / div;
+      const frac = ((v % div) * 100n) / div; // 2 decimals
+      if (frac === 0n) return sign + whole.toString() + suffix;
+      const f = frac.toString().padStart(2, '0').replace(/0+$/, '');
+      return sign + whole.toString() + (f ? '.' + f : '') + suffix;
+    }
   }
   return sign + v.toString();
-}
-
-function trimNum(x: number): string {
-  return String(x).replace(/\.0+$/, '').replace(/(\.[1-9]*)0+$/, '$1');
 }
 
 /** YYYY-MM-DD from ms or Beijing/ISO string; no timezone suffix. */
