@@ -1,10 +1,14 @@
 {
   "tick": "MOON",
-  "updatedAtBeijing": "2026-11-03 14:02:36 Asia/Shanghai",
-  "totalHolders": 1,
+  "updatedAtBeijing": "2026-11-03 15:40:53 Asia/Shanghai",
+  "totalHolders": 2,
   "holders": [
     {
       "owner": "0xd6c15d52ea5951617cb9a7fe3f783637f9f2a6758f5983142ee5d5ff10c0e134",
+      "balance": "1000"
+    },
+    {
+      "owner": "0xf8bcd746293c8130dfc5ff4424d14fe0edec6e9611483cc830647d2e3b0e6b1a",
       "balance": "1000"
     }
   ]
