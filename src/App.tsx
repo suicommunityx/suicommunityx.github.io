@@ -88,6 +88,8 @@ export default function App() {
   const [holdersTick, setHoldersTick] = useState<string>(
     initialRoute.holdersTick || 'SUIS',
   );
+  /** Snapshot holder counts (public/holders/counts.json); no per-tick RPC. */
+  const [holderCounts, setHolderCounts] = useState<Record<string, number>>({});
   const [holdings, setHoldings] = useState<MovescriptionHolding[]>([]);
   const [loadingMine, setLoadingMine] = useState(false);
   const [listings, setListings] = useState<MarketListing[]>([]);
@@ -250,6 +252,26 @@ export default function App() {
     return [...m.entries()].sort((a, b) => a[0].localeCompare(b[0]));
   }, [holdings]);
 
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const data = await fetch(`${import.meta.env.BASE_URL}holders/counts.json`).then((r) => {
+          if (!r.ok) throw new Error(String(r.status));
+          return r.json();
+        });
+        if (!cancelled && data?.counts && typeof data.counts === 'object') {
+          setHolderCounts(data.counts as Record<string, number>);
+        }
+      } catch {
+        /* optional — missing ticks show — */
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const filteredMovesTicks = useMemo(() => {
     const s = tickQuery.trim();
     if (!s) return ticks;
@@ -408,6 +430,7 @@ export default function App() {
               ticks={filteredMovesTicks}
               loading={loadingTicks}
               selected={selected?.tick}
+              holderCounts={holderCounts}
               onSelect={(t) => {
                 setSelected(t);
               }}

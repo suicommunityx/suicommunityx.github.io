@@ -1,0 +1,44 @@
+{
+  "updatedAt": "2026-11-03T03:57:05.308Z",
+  "source": "public/holders/*.json top-level holderCount (no live RPC)",
+  "counts": {
+    "DGEN": 5,
+    "GAME": 27,
+    "IKUN": 640,
+    "MOVE": 9816,
+    "SUIS": 1881,
+    "SUIZ": 146
+  },
+  "meta": {
+    "DGEN": {
+      "holderCount": 5,
+      "updatedAt": "2026-11-03T01:38:29.885Z",
+      "complete": false
+    },
+    "GAME": {
+      "holderCount": 27,
+      "updatedAt": "2026-11-02T21:38:00.471Z",
+      "complete": false
+    },
+    "IKUN": {
+      "holderCount": 640,
+      "updatedAt": "2026-11-02T21:38:00.471Z",
+      "complete": false
+    },
+    "MOVE": {
+      "holderCount": 9816,
+      "updatedAt": "2026-11-02T21:38:00.471Z",
+      "complete": false
+    },
+    "SUIS": {
+      "holderCount": 1881,
+      "updatedAt": "2026-11-02T21:38:00.471Z",
+      "complete": false
+    },
+    "SUIZ": {
+      "holderCount": 146,
+      "updatedAt": "2026-11-02T21:38:00.471Z",
+      "complete": false
+    }
+  }
+}

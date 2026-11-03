@@ -8,9 +8,20 @@ type Props = {
   /** Open holders for this tick (exact case). */
   onView?: (t: TickInfo) => void;
   selected?: string;
+  /** Snapshot holder counts keyed by tick (exact or upper). Missing → '—'. */
+  holderCounts?: Record<string, number>;
 };
 
-export function TickList({ ticks, loading, onSelect, onView, selected }: Props) {
+function lookupHolders(tick: string, map?: Record<string, number>): number | null {
+  if (!map) return null;
+  if (tick in map) return map[tick];
+  const up = tick.toUpperCase();
+  if (up in map) return map[up];
+  const hit = Object.entries(map).find(([k]) => k.toUpperCase() === up);
+  return hit ? hit[1] : null;
+}
+
+export function TickList({ ticks, loading, onSelect, onView, selected, holderCounts }: Props) {
   if (loading) return <div className="card muted">加载铭文列表…</div>;
   return (
     <div className="table-wrap">
@@ -19,14 +30,15 @@ export function TickList({ ticks, loading, onSelect, onView, selected }: Props) 
           <tr>
             <th className="tick-col">名称</th>
             <th>铸造进度</th>
+            <th className="num">持有</th>
             <th className="num hide-narrow">费</th>
-            <th>创建</th>
+            <th className="hide-narrow">创建</th>
           </tr>
         </thead>
         <tbody>
           {ticks.map((t) => {
             const pct = progressPct(t.currentSupply, t.totalSupply);
-            const closed = t.remain === 0n;
+            const holders = lookupHolders(t.tick, holderCounts);
             return (
               <tr
                 key={t.tick}
@@ -54,16 +66,15 @@ export function TickList({ ticks, loading, onSelect, onView, selected }: Props) 
                       <span className="mint-progress-amt">
                         {formatCompactAmount(t.currentSupply)} / {formatCompactAmount(t.totalSupply)}
                       </span>
-                      <span className="mint-progress-pct">
-                        {pct.toFixed(1)}%{closed ? ' · 罄' : ''}
-                      </span>
+                      <span className="mint-progress-pct">{pct.toFixed(1)}%</span>
                     </div>
                   </div>
                 </td>
+                <td className="num">{holders == null ? '—' : holders}</td>
                 <td className="num hide-narrow">
                   {t.mintFee == null ? '—' : t.mintFee === 0n ? '0' : mistToSui(t.mintFee)}
                 </td>
-                <td>{formatShortDate(t.startTimeMs)}</td>
+                <td className="hide-narrow">{formatShortDate(t.startTimeMs)}</td>
               </tr>
             );
           })}

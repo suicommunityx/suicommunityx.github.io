@@ -164,10 +164,9 @@ h3 { font-size: 20px; font-weight: 600; }
 
 .table-wrap { overflow: auto; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; -webkit-overflow-scrolling: touch; }
 .table {
-  /* Content-sized: do NOT stretch to 100% (avoids one column eating leftover space) */
-  width: max-content;
+  /* Fill card; 铸造进度 column absorbs leftover width */
+  width: 100%;
   min-width: 0;
-  max-width: none;
   border-collapse: collapse;
   table-layout: auto;
   font-size: 13px;
@@ -186,8 +185,14 @@ h3 { font-size: 20px; font-weight: 600; }
   font-variant-numeric: tabular-nums;
   padding-left: 12px;
   padding-right: 10px;
+  width: 1%;
+  white-space: nowrap;
 }
-.table td.tick, .table th.tick-col { text-align: left; }
+.table td.tick, .table th.tick-col {
+  text-align: left;
+  width: 1%;
+  white-space: nowrap;
+}
 .table tr:hover { background: #fafafa; cursor: pointer; }
 .table tr.selected { background: #eef5ff; }
 .tick { font-weight: 600; letter-spacing: 0.02em; }
@@ -335,7 +340,7 @@ code { font-size: 12px; background: #eee; padding: 1px 6px; border-radius: 6px; 
     color: var(--muted);
     padding: 8px 12px 0;
   }
-  .table { min-width: 0; width: max-content; font-size: 12px; }
+  .table { min-width: 0; width: 100%; font-size: 12px; }
   .table th, .table td { padding: 6px 8px; white-space: nowrap; }
   .table-wrap:not(.market-table-wrap)::before { display: none; }
   .table .hide-narrow { display: none; }
@@ -381,9 +386,16 @@ code { font-size: 12px; background: #eee; padding: 1px 6px; border-radius: 6px; 
 .section-nav .tab-btn { border: 1px solid var(--line); }
 
 
-/* Mint progress column (Apple-style) */
-.mint-progress-cell { min-width: 148px; max-width: 220px; white-space: normal; }
-.mint-progress { display: flex; flex-direction: column; gap: 4px; min-width: 140px; }
+/* Mint progress column (Apple-style) — flexible, fills leftover table width */
+.mint-progress-cell {
+  width: auto;
+  min-width: 140px;
+  white-space: normal;
+}
+.mint-progress {
+  display: flex; flex-direction: column; gap: 4px;
+  width: 100%; min-width: 0;
+}
 .mint-progress-bar {
   height: 4px; border-radius: 99px; background: #e8e8ed; overflow: hidden; width: 100%;
 }
@@ -397,8 +409,8 @@ code { font-size: 12px; background: #eee; padding: 1px 6px; border-radius: 6px; 
 .mint-progress-amt { color: var(--fg); font-variant-numeric: tabular-nums; }
 .mint-progress-pct { color: var(--muted); font-variant-numeric: tabular-nums; }
 @media (max-width: 720px) {
-  .mint-progress-cell { min-width: 118px; max-width: 160px; padding-right: 6px; }
-  .mint-progress { min-width: 110px; gap: 3px; }
+  .mint-progress-cell { min-width: 100px; padding-right: 6px; }
+  .mint-progress { gap: 3px; }
   .mint-progress-meta { font-size: 10px; gap: 4px; }
   .table .tick .tag, .table td .tag { display: none; }
 }
