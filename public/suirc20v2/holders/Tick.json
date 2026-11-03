@@ -1,0 +1,12 @@
+{
+  "tick": "Tick",
+  "version": "v2",
+  "totalHolders": 1,
+  "holders": [
+    {
+      "owner": "0xa3ef9ca6455d0c82a5816ab2753f64009230cb32e6e74838b14739d21cd7fcbc",
+      "balance": "10"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 10:55:48 Asia/Shanghai"
+}

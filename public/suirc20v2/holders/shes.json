@@ -1,0 +1,16 @@
+{
+  "tick": "shes",
+  "version": "v2",
+  "totalHolders": 2,
+  "holders": [
+    {
+      "owner": "0x81f4d3194a26292388821bef67d5fc6a80e8c1d30fba4503bf1d0041008337c8",
+      "balance": "1"
+    },
+    {
+      "owner": "0x650ecddd6b6edb4ddfbc375145b391d020706b052cd8834d886872ea658fd057",
+      "balance": "1"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 11:00:15 Asia/Shanghai"
+}

@@ -282,8 +282,8 @@ export default function App() {
           <ConnectButton connectText="连接钱包" />
         </div>
       </header>
-      <nav className="tabbar" aria-label="主导航">
-        <div className="tabbar-inner">
+      <nav className="tabbar tabbar-top" aria-label="主导航">
+        <div className="tabbar-inner tabbar-top-inner">
           <button
             type="button"
             className={`tab-btn ${section === 'suimint' ? 'active' : ''}`}
@@ -293,36 +293,26 @@ export default function App() {
               writeRoute('suimint');
             }}
           >
-            SuiMint 铭文
+            SuiMint
           </button>
-          {(
-            [
-              ['ticks', 'Movescriptions'],
-              ['deploy', '创建铭文'],
-              ['mine', '我的铭文'],
-              ['market', '市场'],
-              ['holders', '持有者'],
-            ] as [Tab, string][]
-          ).map(([k, label]) => (
-            <button
-              key={k}
-              type="button"
-              className={`tab-btn ${section === 'moves' && tab === k ? 'active' : ''}`}
-              onClick={() => {
-                setSection('moves');
-                setTab(k);
-                if (k === 'holders') {
-                  const t = holdersTick || selected?.tick || 'SUIS';
-                  setHoldersTick(t);
-                  writeRoute('holders', t);
-                } else {
-                  writeRoute(k);
-                }
-              }}
-            >
-              {label}
-            </button>
-          ))}
+          <button
+            type="button"
+            className={`tab-btn ${section === 'moves' ? 'active' : ''}`}
+            onClick={() => {
+              const next: Tab = section === 'suimint' || tab === 'suimint' ? 'ticks' : tab;
+              setSection('moves');
+              setTab(next);
+              if (next === 'holders') {
+                const t = holdersTick || selected?.tick || 'SUIS';
+                setHoldersTick(t);
+                writeRoute('holders', t);
+              } else {
+                writeRoute(next);
+              }
+            }}
+          >
+            Movescriptions
+          </button>
         </div>
       </nav>
 
@@ -335,6 +325,39 @@ export default function App() {
           <h1>{SITE_NAME}</h1>
           <p className="subtitle">Movescriptions 铭文浏览器与交易面板</p>
         </section>
+
+        <nav className="tabbar tabbar-sub" aria-label="Movescriptions 子导航">
+          <div className="tabbar-inner">
+            {(
+              [
+                ['ticks', '铭文列表'],
+                ['deploy', '创建铭文'],
+                ['mine', '我的铭文'],
+                ['market', '市场'],
+                ['holders', '持有者'],
+              ] as [Tab, string][]
+            ).map(([k, label]) => (
+              <button
+                key={k}
+                type="button"
+                className={`tab-btn ${tab === k ? 'active' : ''}`}
+                onClick={() => {
+                  setSection('moves');
+                  setTab(k);
+                  if (k === 'holders') {
+                    const t = holdersTick || selected?.tick || 'SUIS';
+                    setHoldersTick(t);
+                    writeRoute('holders', t);
+                  } else {
+                    writeRoute(k);
+                  }
+                }}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </nav>
 
         {err && (
           <div className="banner error" onClick={() => setErr(null)}>

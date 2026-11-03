@@ -1,0 +1,12 @@
+{
+  "tick": "dege",
+  "version": "v2",
+  "totalHolders": 1,
+  "holders": [
+    {
+      "owner": "0x79de99201c41ec5fd9e4d1e4164949a383016bfa193e6d1bcb630119a6ef046b",
+      "balance": "600"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 11:00:15 Asia/Shanghai"
+}

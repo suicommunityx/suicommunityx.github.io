@@ -1,0 +1,12 @@
+{
+  "tick": "zeus",
+  "version": "v2",
+  "totalHolders": 1,
+  "holders": [
+    {
+      "owner": "0xc5a4effe7b5458347b0ad5758985ca639b4892b84494eea21a371afd72681ab0",
+      "balance": "10"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 10:55:28 Asia/Shanghai"
+}

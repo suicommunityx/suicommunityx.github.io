@@ -1,0 +1,16 @@
+{
+  "tick": "H202",
+  "version": "v2",
+  "totalHolders": 2,
+  "holders": [
+    {
+      "owner": "0x55e1322557a8bdc4e5a309ac26d23a3eeedcb2f6936c3e3ab05ec843c38c34ad",
+      "balance": "2000"
+    },
+    {
+      "owner": "0xfe5146635919f9563eb5b6ad43deefe33b0febe529ba1f2a8a582e4195582716",
+      "balance": "1000"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 11:00:15 Asia/Shanghai"
+}

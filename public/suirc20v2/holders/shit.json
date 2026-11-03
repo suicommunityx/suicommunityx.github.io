@@ -1,0 +1,12 @@
+{
+  "tick": "shit",
+  "version": "v2",
+  "totalHolders": 1,
+  "holders": [
+    {
+      "owner": "0x650ecddd6b6edb4ddfbc375145b391d020706b052cd8834d886872ea658fd057",
+      "balance": "50"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 10:58:59 Asia/Shanghai"
+}

@@ -1,0 +1,12 @@
+{
+  "tick": "shib",
+  "version": "v2",
+  "totalHolders": 1,
+  "holders": [
+    {
+      "owner": "0x0c7c46a88ee5ddbe03f1914a52b44486638e0f784e926404954e054d13630c48",
+      "balance": "4000"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 10:59:24 Asia/Shanghai"
+}

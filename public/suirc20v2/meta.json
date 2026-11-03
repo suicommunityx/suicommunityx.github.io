@@ -1,0 +1,26 @@
+{
+  "protocol": "suirc-20",
+  "version": "v2",
+  "package": "0xcb5bd7a29f458a1b1e0221516fbfaeb182be027033eb8dcb4f33dd540d20bb87",
+  "globalConfig": "0xc584d0d14cb3a020f8b1411275abc39d1a3d954a4c922d3efa9d03cba9e86ef9",
+  "dataSource": {
+    "ticks": "on-chain SUIRC20Tick shared objects (exact)",
+    "balances": "re-index from MintEvent/TransferEvent/TransferFromEvent (no on-chain balance table)"
+  },
+  "marketplaceNote": "Historical SuiMint marketplace was a separate package (validator-mediated); not built in this UI.",
+  "tickCount": 2475,
+  "stats": {
+    "deployEvents": 0,
+    "mintEvents": 10250,
+    "transferEvents": 4000,
+    "transferFromEvents": 1795,
+    "mintAccepted": 10223,
+    "transferAccepted": 214,
+    "transferIgnored": 5581,
+    "lastTs": "2024-01-02T16:19:27.230Z",
+    "startedAt": "2026-11-03T02:53:39.045Z",
+    "finishedAt": "2026-11-03T02:57:40.066Z"
+  },
+  "updatedAtBeijing": "2026-11-03 11:00:15 Asia/Shanghai",
+  "complete": false
+}

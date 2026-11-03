@@ -1,0 +1,12 @@
+{
+  "tick": "sBNB",
+  "version": "v2",
+  "totalHolders": 1,
+  "holders": [
+    {
+      "owner": "0x99234cd3ca93711c243e73ded12e6637332f48731afb02d9a48c01aa0b5ba326",
+      "balance": "1000"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 11:00:15 Asia/Shanghai"
+}

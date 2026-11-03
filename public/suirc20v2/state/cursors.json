@@ -1,0 +1,23 @@
+{
+  "ticks": {
+    "after": "Uy9UFAAAAABqy1vXop9FihseAiFRb7+usYK+AnAz643LTzPdVA0gu4cAAAAAAAAAB3N1aXJjMjAAAAAAAAAAC1NVSVJDMjBUaWNrAAAAAAAAAAD/+8jYrq116/A4hsaF28j1blDwu/nKxMD8QyMSAqNMKg==",
+    "done": true,
+    "pages": 50
+  },
+  "_balancesInited": true,
+  "MintEvent": {
+    "after": "KAFCDQiOzt0KEJXkmOgDGAA=",
+    "done": false,
+    "pages": 205
+  },
+  "TransferEvent": {
+    "after": "KAFCDQjJ0Y0LELiL0/QDGAE=",
+    "done": false,
+    "pages": 80
+  },
+  "TransferFromEvent": {
+    "after": "KAJCDgir5tCiARCa6+X+FxgA",
+    "done": true,
+    "pages": 36
+  }
+}

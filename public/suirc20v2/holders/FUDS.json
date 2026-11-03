@@ -1,0 +1,96 @@
+{
+  "tick": "FUDS",
+  "version": "v2",
+  "totalHolders": 22,
+  "holders": [
+    {
+      "owner": "0xee3707b3e684edfb3c8f2fbbec7b9882508904af0ee6fe7c59396c34f6aa71f3",
+      "balance": "10200"
+    },
+    {
+      "owner": "0x9f082a7f978e695983b4aa9d93e6b650115e854bfd0c152071d955ad99821e43",
+      "balance": "6300"
+    },
+    {
+      "owner": "0x5a53098536597b73127c6aae2653d514bd1a08b0ae7d3d8f52bbac1bd6313179",
+      "balance": "1600"
+    },
+    {
+      "owner": "0x99cf7adab4d637d16a03fecf5e175f0584246196947c5fd55610123553b32fa6",
+      "balance": "1400"
+    },
+    {
+      "owner": "0x83f7f875d0f3232b60f955e84d14f1d465d2e199d4500ed8568b0d6a7283bfcd",
+      "balance": "1300"
+    },
+    {
+      "owner": "0x621d0fdcadf046c84f48f6a88511e59ca634c34b5fd49a61c980c47079cb44d0",
+      "balance": "1198"
+    },
+    {
+      "owner": "0xfd5e60f32e387863950aaf63a341911d157aec056796bd761ed900325491a439",
+      "balance": "1000"
+    },
+    {
+      "owner": "0x7ca8df33fa4f06603ed515387dc5c84e97e84800a7fa594ac21defb0361a0d79",
+      "balance": "1000"
+    },
+    {
+      "owner": "0xb776a1de519d30933fe3421d431112b6d12adf90d3695005334ff23e1d7da945",
+      "balance": "500"
+    },
+    {
+      "owner": "0x7ac7110a8404a3a37ead581d38a88235bbb3ba74490833a49366798226222704",
+      "balance": "500"
+    },
+    {
+      "owner": "0x9850c7d1de2ada6068c26aa5710f0e2376c82e86a230d92dfcba39c061173613",
+      "balance": "500"
+    },
+    {
+      "owner": "0x34674cfaadbe3703895465f17eead86090e93ab7f60a5e6dd0f6719bdf47665e",
+      "balance": "500"
+    },
+    {
+      "owner": "0x6ad7b6d5d85128641b0f1e1e38b771a6fc4bbb5df46b7b09e39fec28366d35e9",
+      "balance": "450"
+    },
+    {
+      "owner": "0xf0861bc4418ecf9a1e7897d9091d4e236e4e626953631c7947763f558b457745",
+      "balance": "100"
+    },
+    {
+      "owner": "0x05cf57101c9d43b86844f0e0c86a07fe876ee9251dfb313604222b621eb3ecfa",
+      "balance": "100"
+    },
+    {
+      "owner": "0xaba274c9d38dc13e829826a7b8a28b7cfa9e548675e1c8aadf17249d6f7c52d7",
+      "balance": "100"
+    },
+    {
+      "owner": "0x58da25dc949d335960c356d74647feae57d3a3073be045f02d92e64dc360f1b3",
+      "balance": "100"
+    },
+    {
+      "owner": "0x79de99201c41ec5fd9e4d1e4164949a383016bfa193e6d1bcb630119a6ef046b",
+      "balance": "97"
+    },
+    {
+      "owner": "0xb07d360c64ca4d8c50c8815ddfdccaff84e1e55f6cdc4c027235a916fab69234",
+      "balance": "25"
+    },
+    {
+      "owner": "0x0005e9b405ab0424b6494b64d3d5b79b6715d06d284585faffe1ee1a873ba8a3",
+      "balance": "1"
+    },
+    {
+      "owner": "0x4b253f028ed137c76c66ce3e4d1d19c25227ba9f4c60674099bb19ee52f0bd39",
+      "balance": "1"
+    },
+    {
+      "owner": "0xdb246fcf61ba900df41aa6f24a6cd1a9807b6da1b4d485e1c7cb235ccb65ac72",
+      "balance": "1"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 11:00:15 Asia/Shanghai"
+}

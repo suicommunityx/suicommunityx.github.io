@@ -1,0 +1,24 @@
+{
+  "tick": "💧",
+  "version": "v2",
+  "totalHolders": 4,
+  "holders": [
+    {
+      "owner": "0x176fc6816074d30d848596bbfc2eadf5088d433b4316a7f595094960247349de",
+      "balance": "10000"
+    },
+    {
+      "owner": "0x55e1322557a8bdc4e5a309ac26d23a3eeedcb2f6936c3e3ab05ec843c38c34ad",
+      "balance": "9000"
+    },
+    {
+      "owner": "0xe40a1e90926684852e9bd4b549b52aadd1e3e9c0fc4232a715fe77bda51988b3",
+      "balance": "100"
+    },
+    {
+      "owner": "0x055e89ba65e7b2a1bbf6d0cd99ce0e34c0ba71f0507277368bab4c05170cd326",
+      "balance": "1"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 11:00:15 Asia/Shanghai"
+}

@@ -1,0 +1,16 @@
+{
+  "tick": "GOOD",
+  "version": "v2",
+  "totalHolders": 2,
+  "holders": [
+    {
+      "owner": "0x5a53098536597b73127c6aae2653d514bd1a08b0ae7d3d8f52bbac1bd6313179",
+      "balance": "1170000"
+    },
+    {
+      "owner": "0x58da25dc949d335960c356d74647feae57d3a3073be045f02d92e64dc360f1b3",
+      "balance": "120000"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 11:00:15 Asia/Shanghai"
+}

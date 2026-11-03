@@ -1,0 +1,12 @@
+{
+  "tick": "suiX",
+  "version": "v2",
+  "totalHolders": 1,
+  "holders": [
+    {
+      "owner": "0x679ab74d1e4c684f81d1e863983e0065ff3377d9165ad6fca56f4b778badd8c1",
+      "balance": "10"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 10:55:48 Asia/Shanghai"
+}

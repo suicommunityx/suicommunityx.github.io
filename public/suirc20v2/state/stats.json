@@ -1,0 +1,12 @@
+{
+  "deployEvents": 0,
+  "mintEvents": 10250,
+  "transferEvents": 4000,
+  "transferFromEvents": 1795,
+  "mintAccepted": 10223,
+  "transferAccepted": 214,
+  "transferIgnored": 5581,
+  "lastTs": "2024-01-02T16:19:27.230Z",
+  "startedAt": "2026-11-03T02:53:39.045Z",
+  "finishedAt": "2026-11-03T02:57:40.066Z"
+}

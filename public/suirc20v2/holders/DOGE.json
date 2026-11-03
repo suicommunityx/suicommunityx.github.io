@@ -1,0 +1,136 @@
+{
+  "tick": "DOGE",
+  "version": "v2",
+  "totalHolders": 32,
+  "holders": [
+    {
+      "owner": "0x1d30e55c730f92a02a33dbdf6b052cd178e5d924aa58c5e2350a24852250ae58",
+      "balance": "2506700"
+    },
+    {
+      "owner": "0x5a53098536597b73127c6aae2653d514bd1a08b0ae7d3d8f52bbac1bd6313179",
+      "balance": "615000"
+    },
+    {
+      "owner": "0x75d1685146dabbdbdc11ea546a59b635fc598b0d426beaa28864feb331024869",
+      "balance": "220000"
+    },
+    {
+      "owner": "0x79de99201c41ec5fd9e4d1e4164949a383016bfa193e6d1bcb630119a6ef046b",
+      "balance": "115500"
+    },
+    {
+      "owner": "0x13d5b339a273ed540c4d85a619264cb073503be83aebf531ec298b12058f07d0",
+      "balance": "111000"
+    },
+    {
+      "owner": "0x7ca8df33fa4f06603ed515387dc5c84e97e84800a7fa594ac21defb0361a0d79",
+      "balance": "90000"
+    },
+    {
+      "owner": "0x68a695d9d2ab299122effed0fffc946facf167435d790bb83770dfeb76b1e7c3",
+      "balance": "45000"
+    },
+    {
+      "owner": "0x32561cf5de6678b0195a7d4761d311be00abe092983db32050991cd12d1e7ca0",
+      "balance": "40000"
+    },
+    {
+      "owner": "0x83f7f875d0f3232b60f955e84d14f1d465d2e199d4500ed8568b0d6a7283bfcd",
+      "balance": "40000"
+    },
+    {
+      "owner": "0x09346386a3eed274d378e5f3aec7afb793da1d90a0c203fef7bcfe2922902885",
+      "balance": "27400"
+    },
+    {
+      "owner": "0x6bc3ff52da36084da3b448e6923e6c578c624c4caeb8c885181e1d4c60737449",
+      "balance": "25000"
+    },
+    {
+      "owner": "0x585638c73d55160fa2c7e4389ab1fdad73b859bd4f671da0fc5f3239fb869c53",
+      "balance": "25000"
+    },
+    {
+      "owner": "0x19691fc4c853c525263596d633b0a429ef3188549de8df467555f6be2566167b",
+      "balance": "25000"
+    },
+    {
+      "owner": "0xee3707b3e684edfb3c8f2fbbec7b9882508904af0ee6fe7c59396c34f6aa71f3",
+      "balance": "25000"
+    },
+    {
+      "owner": "0x79d5ac0e28cf0f4d5891249fbf4fab72654c9640f925e2489f838165c363de62",
+      "balance": "24999"
+    },
+    {
+      "owner": "0xbf571e81ad31d0fd9053cf16d21bc6118fba83fc5b44aff0d2443dd6b676ad44",
+      "balance": "10000"
+    },
+    {
+      "owner": "0xc274b8393c3d05bc3eb6a0e5af743cf42183d65601c8bd0118720c0067217f81",
+      "balance": "10000"
+    },
+    {
+      "owner": "0xb21e3c3cecb46e0225aa22d4d6bf063f4f95111b76096b22fb9425ae294a0b31",
+      "balance": "10000"
+    },
+    {
+      "owner": "0xd8c5887d0f3eff75649d56532ff59b937f7b612d8f183086e6f17f3c9dbcefab",
+      "balance": "10000"
+    },
+    {
+      "owner": "0x2708c15cedc8b63e32cb0fdbfde2b1fb215f2a1c1055c453eeb93d808fec6a8a",
+      "balance": "10000"
+    },
+    {
+      "owner": "0x128304027041b9683fe249838975cf3e050d9f6e60f629a3f89e9257588248b6",
+      "balance": "10000"
+    },
+    {
+      "owner": "0x479af548b5ccf187b5923729038ecd83d348d057c0fbc30325649f329ce46948",
+      "balance": "10000"
+    },
+    {
+      "owner": "0x66fb9f23e7a608317d91a036cb16b44363459fbfa2ab1595d4202ac4d95bb589",
+      "balance": "5001"
+    },
+    {
+      "owner": "0xafe3bc8816825d06a0fe66020d52befb419f84a7c203eeb300ddc09241ccaa58",
+      "balance": "5000"
+    },
+    {
+      "owner": "0x3d469f664abc7d4fa193643975549e84a009c9af75f7eacc1458bbd4ccef96dd",
+      "balance": "5000"
+    },
+    {
+      "owner": "0x176fc6816074d30d848596bbfc2eadf5088d433b4316a7f595094960247349de",
+      "balance": "5000"
+    },
+    {
+      "owner": "0xbbac3e153b75721858db3e1a0288aa470576f5115f5a7a0dd0b1578ac3300930",
+      "balance": "5000"
+    },
+    {
+      "owner": "0x10056847822a200c7b27a97a9eae6b21c6ba860d0aa2c5a9ffbb044e253e4b73",
+      "balance": "5000"
+    },
+    {
+      "owner": "0x4a790ae02420c8f29266b480e96f54d8448829d1c0f5e0564eb426c54e83fde0",
+      "balance": "5000"
+    },
+    {
+      "owner": "0xfe6f5ebad24073088aef78bf112eeac1e750db7221f3b0c62a3b87d561c527c8",
+      "balance": "400"
+    },
+    {
+      "owner": "0xb07d360c64ca4d8c50c8815ddfdccaff84e1e55f6cdc4c027235a916fab69234",
+      "balance": "25"
+    },
+    {
+      "owner": "0xf5db5b067dee902e88b0a0eb04219f8d065bf80010a73e001f253d58e05d93bf",
+      "balance": "1"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 11:00:15 Asia/Shanghai"
+}

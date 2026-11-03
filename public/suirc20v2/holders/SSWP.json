@@ -1,0 +1,16 @@
+{
+  "tick": "SSWP",
+  "version": "v2",
+  "totalHolders": 2,
+  "holders": [
+    {
+      "owner": "0x3336afff8b6bf3e707c87cdd5e29430146f98a20fcea268f4f6565504a1f092c",
+      "balance": "1101"
+    },
+    {
+      "owner": "0x79de99201c41ec5fd9e4d1e4164949a383016bfa193e6d1bcb630119a6ef046b",
+      "balance": "1000"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 11:00:15 Asia/Shanghai"
+}

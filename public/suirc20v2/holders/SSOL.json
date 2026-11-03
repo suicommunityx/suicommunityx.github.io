@@ -1,0 +1,60 @@
+{
+  "tick": "SSOL",
+  "version": "v2",
+  "totalHolders": 13,
+  "holders": [
+    {
+      "owner": "0xd43da1f58c916dcbabe001416276c1732e3333a9670504e7bc241b6889e53f70",
+      "balance": "8060000"
+    },
+    {
+      "owner": "0x5a53098536597b73127c6aae2653d514bd1a08b0ae7d3d8f52bbac1bd6313179",
+      "balance": "1560000"
+    },
+    {
+      "owner": "0x0d6694b2dcfcbd258ea8ba8f93d14e30c3f8daecb14220d167366b609a593059",
+      "balance": "505750"
+    },
+    {
+      "owner": "0xfe6f5ebad24073088aef78bf112eeac1e750db7221f3b0c62a3b87d561c527c8",
+      "balance": "330000"
+    },
+    {
+      "owner": "0x5a393f0458dfb8d713132b94d4c8146dc89538bc0cfd86b17bf57a06731d7894",
+      "balance": "250000"
+    },
+    {
+      "owner": "0xb41fea77edf28c774ccb6d88debda861740cc204841f37073a7ac34914bf8b8a",
+      "balance": "70000"
+    },
+    {
+      "owner": "0x6ad7b6d5d85128641b0f1e1e38b771a6fc4bbb5df46b7b09e39fec28366d35e9",
+      "balance": "50000"
+    },
+    {
+      "owner": "0x8dc54c9a0199d6b27119914fc01689d63cbb29dabff0515b0b7ba4d73c9fe96e",
+      "balance": "30000"
+    },
+    {
+      "owner": "0x20d171760c892537ad3d489f1e259e9f90beaf92eb4ba4930d98963a08304ac8",
+      "balance": "20000"
+    },
+    {
+      "owner": "0x05cf57101c9d43b86844f0e0c86a07fe876ee9251dfb313604222b621eb3ecfa",
+      "balance": "10000"
+    },
+    {
+      "owner": "0xb07d360c64ca4d8c50c8815ddfdccaff84e1e55f6cdc4c027235a916fab69234",
+      "balance": "100"
+    },
+    {
+      "owner": "0xe40a1e90926684852e9bd4b549b52aadd1e3e9c0fc4232a715fe77bda51988b3",
+      "balance": "50"
+    },
+    {
+      "owner": "0xdf7ccefce20b9b954eaeae99b1d455f8a1d7fdfc3782b9931b99c749480f20d7",
+      "balance": "10"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 11:00:15 Asia/Shanghai"
+}

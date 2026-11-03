@@ -1,0 +1,12 @@
+{
+  "tick": "NAVI",
+  "version": "v2",
+  "totalHolders": 1,
+  "holders": [
+    {
+      "owner": "0x866d41f89f13f1d6d66e69040603b71b0a5a01aa52937323c05d53f209e7e97b",
+      "balance": "90"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 11:00:15 Asia/Shanghai"
+}

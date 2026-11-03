@@ -1,0 +1,12 @@
+{
+  "tick": "esip",
+  "version": "v2",
+  "totalHolders": 1,
+  "holders": [
+    {
+      "owner": "0x1add26a04ae84823ef9a8c7fe7076cc04449f8bb30d5402f2d0d3c502c6a5cf0",
+      "balance": "100000"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 11:00:15 Asia/Shanghai"
+}

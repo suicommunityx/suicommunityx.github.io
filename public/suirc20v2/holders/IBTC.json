@@ -1,0 +1,12 @@
+{
+  "tick": "IBTC",
+  "version": "v2",
+  "totalHolders": 1,
+  "holders": [
+    {
+      "owner": "0x5a53098536597b73127c6aae2653d514bd1a08b0ae7d3d8f52bbac1bd6313179",
+      "balance": "1419000"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 11:00:15 Asia/Shanghai"
+}

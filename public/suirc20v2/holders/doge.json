@@ -1,0 +1,20 @@
+{
+  "tick": "doge",
+  "version": "v2",
+  "totalHolders": 3,
+  "holders": [
+    {
+      "owner": "0x5a53098536597b73127c6aae2653d514bd1a08b0ae7d3d8f52bbac1bd6313179",
+      "balance": "230000"
+    },
+    {
+      "owner": "0x9850c7d1de2ada6068c26aa5710f0e2376c82e86a230d92dfcba39c061173613",
+      "balance": "80000"
+    },
+    {
+      "owner": "0x79de99201c41ec5fd9e4d1e4164949a383016bfa193e6d1bcb630119a6ef046b",
+      "balance": "20000"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 11:00:15 Asia/Shanghai"
+}

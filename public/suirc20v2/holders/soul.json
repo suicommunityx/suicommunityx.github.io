@@ -1,0 +1,12 @@
+{
+  "tick": "soul",
+  "version": "v2",
+  "totalHolders": 1,
+  "holders": [
+    {
+      "owner": "0x27b42b563db320fb91f51b02e749b4583b1ca60a9be7a7e6064bd2302200d743",
+      "balance": "220"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 10:58:59 Asia/Shanghai"
+}

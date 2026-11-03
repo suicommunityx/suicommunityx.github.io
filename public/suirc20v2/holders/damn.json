@@ -1,0 +1,44 @@
+{
+  "tick": "damn",
+  "version": "v2",
+  "totalHolders": 9,
+  "holders": [
+    {
+      "owner": "0x5a53098536597b73127c6aae2653d514bd1a08b0ae7d3d8f52bbac1bd6313179",
+      "balance": "200000"
+    },
+    {
+      "owner": "0x68a695d9d2ab299122effed0fffc946facf167435d790bb83770dfeb76b1e7c3",
+      "balance": "100000"
+    },
+    {
+      "owner": "0x937d31a083faf1dfdfce2b92d81066adb9f8399653c18c49eb4e298c618b55bb",
+      "balance": "20000"
+    },
+    {
+      "owner": "0x8dc54c9a0199d6b27119914fc01689d63cbb29dabff0515b0b7ba4d73c9fe96e",
+      "balance": "10000"
+    },
+    {
+      "owner": "0x20d171760c892537ad3d489f1e259e9f90beaf92eb4ba4930d98963a08304ac8",
+      "balance": "2000"
+    },
+    {
+      "owner": "0xabe12e3ea286a221a12adae310bc186e329c947083ea30897c05304ce52a57d0",
+      "balance": "1000"
+    },
+    {
+      "owner": "0x79de99201c41ec5fd9e4d1e4164949a383016bfa193e6d1bcb630119a6ef046b",
+      "balance": "832"
+    },
+    {
+      "owner": "0x2deaf5e0ff6a9804faee9e59688f61300610aa9542f53610db39bd5c684a0550",
+      "balance": "170"
+    },
+    {
+      "owner": "0x866d41f89f13f1d6d66e69040603b71b0a5a01aa52937323c05d53f209e7e97b",
+      "balance": "25"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 11:00:15 Asia/Shanghai"
+}

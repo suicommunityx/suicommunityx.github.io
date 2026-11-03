@@ -1,0 +1,32 @@
+{
+  "tick": "Coqs",
+  "version": "v2",
+  "totalHolders": 6,
+  "holders": [
+    {
+      "owner": "0xfd5e60f32e387863950aaf63a341911d157aec056796bd761ed900325491a439",
+      "balance": "50"
+    },
+    {
+      "owner": "0xb6a2033ab2df7aea83baa359b6138d2d3da503c3f3f14413202a430f3bed92d7",
+      "balance": "50"
+    },
+    {
+      "owner": "0xe40a1e90926684852e9bd4b549b52aadd1e3e9c0fc4232a715fe77bda51988b3",
+      "balance": "50"
+    },
+    {
+      "owner": "0xbca647e0eefc92f10bd3039a46793d7ceca3b8934d8a71f44f700464af46e4c9",
+      "balance": "50"
+    },
+    {
+      "owner": "0x9850c7d1de2ada6068c26aa5710f0e2376c82e86a230d92dfcba39c061173613",
+      "balance": "38"
+    },
+    {
+      "owner": "0x79de99201c41ec5fd9e4d1e4164949a383016bfa193e6d1bcb630119a6ef046b",
+      "balance": "12"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 11:00:15 Asia/Shanghai"
+}

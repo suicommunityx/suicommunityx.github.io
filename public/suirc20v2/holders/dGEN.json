@@ -1,0 +1,12 @@
+{
+  "tick": "dGEN",
+  "version": "v2",
+  "totalHolders": 1,
+  "holders": [
+    {
+      "owner": "0x5b9420023db24abe98c52d3ce71583fcd8ccdc34b432267b73cc60622f38ceb9",
+      "balance": "690"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 11:00:15 Asia/Shanghai"
+}

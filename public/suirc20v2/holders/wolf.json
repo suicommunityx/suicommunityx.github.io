@@ -1,0 +1,16 @@
+{
+  "tick": "wolf",
+  "version": "v2",
+  "totalHolders": 2,
+  "holders": [
+    {
+      "owner": "0x4ca731ca9d710f29eb9156d79b0f5d97b73c81e314915f34b47c55d86ba8ce6f",
+      "balance": "75"
+    },
+    {
+      "owner": "0x79de99201c41ec5fd9e4d1e4164949a383016bfa193e6d1bcb630119a6ef046b",
+      "balance": "25"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 10:57:05 Asia/Shanghai"
+}

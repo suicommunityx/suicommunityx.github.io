@@ -1,0 +1,24 @@
+{
+  "tick": "MYST",
+  "version": "v2",
+  "totalHolders": 4,
+  "holders": [
+    {
+      "owner": "0x80bd7fa8df3159e7883785d795e05929d755259699fd36e784e10585c3a10425",
+      "balance": "72100"
+    },
+    {
+      "owner": "0x8cf92c0b69fc4bf559808447c0baf700a8be5b3c5678c6630a5d5237ced26797",
+      "balance": "21000"
+    },
+    {
+      "owner": "0x79de99201c41ec5fd9e4d1e4164949a383016bfa193e6d1bcb630119a6ef046b",
+      "balance": "1111"
+    },
+    {
+      "owner": "0x000000000000000000000000000000000000000000000000000000000000dead",
+      "balance": "289"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 11:00:15 Asia/Shanghai"
+}

@@ -1,0 +1,20 @@
+{
+  "tick": "SUIs",
+  "version": "v2",
+  "totalHolders": 3,
+  "holders": [
+    {
+      "owner": "0xee3707b3e684edfb3c8f2fbbec7b9882508904af0ee6fe7c59396c34f6aa71f3",
+      "balance": "4000"
+    },
+    {
+      "owner": "0x0c7c46a88ee5ddbe03f1914a52b44486638e0f784e926404954e054d13630c48",
+      "balance": "500"
+    },
+    {
+      "owner": "0x7243fd0e2282205f6dfbdbeeceff4c7be5ce621e280312d259ceb6fd2a32b3cc",
+      "balance": "100"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 11:00:15 Asia/Shanghai"
+}

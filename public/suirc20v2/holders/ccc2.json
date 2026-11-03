@@ -1,0 +1,20 @@
+{
+  "tick": "ccc2",
+  "version": "v2",
+  "totalHolders": 3,
+  "holders": [
+    {
+      "owner": "0x1d30e55c730f92a02a33dbdf6b052cd178e5d924aa58c5e2350a24852250ae58",
+      "balance": "4500"
+    },
+    {
+      "owner": "0x09346386a3eed274d378e5f3aec7afb793da1d90a0c203fef7bcfe2922902885",
+      "balance": "4000"
+    },
+    {
+      "owner": "0x79de99201c41ec5fd9e4d1e4164949a383016bfa193e6d1bcb630119a6ef046b",
+      "balance": "1500"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 11:00:15 Asia/Shanghai"
+}

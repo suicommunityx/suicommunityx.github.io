@@ -1,0 +1,24 @@
+{
+  "tick": "opbn",
+  "version": "v2",
+  "totalHolders": 4,
+  "holders": [
+    {
+      "owner": "0xa3ce6a679bc3db6eca187c60c797b62209dfb7fee48181445331f8a692a9f566",
+      "balance": "19600"
+    },
+    {
+      "owner": "0x79de99201c41ec5fd9e4d1e4164949a383016bfa193e6d1bcb630119a6ef046b",
+      "balance": "10200"
+    },
+    {
+      "owner": "0xd0d1d40e905fe4d2bad19cfae3011f81c13d2396c1f34a55690199b1bc7a3754",
+      "balance": "9990"
+    },
+    {
+      "owner": "0x479af548b5ccf187b5923729038ecd83d348d057c0fbc30325649f329ce46948",
+      "balance": "210"
+    }
+  ],
+  "updatedAtBeijing": "2026-11-03 11:00:15 Asia/Shanghai"
+}
