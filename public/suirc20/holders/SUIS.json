@@ -1,7 +1,7 @@
 {
   "tick": "SUIS",
-  "updatedAtBeijing": "2026-11-04 18:48:24 Asia/Shanghai",
-  "totalHolders": 44,
+  "updatedAtBeijing": "2026-11-04 19:09:54 Asia/Shanghai",
+  "totalHolders": 50,
   "holders": [
     {
       "owner": "0xa979c47a282f116d2e03b1fd0ab5b8d47a9afc1f1def8fc7b643b84ef5ef8491",
@@ -36,6 +36,14 @@
       "balance": "25"
     },
     {
+      "owner": "0xecd87dd16466ab5316b9f631df7f10e974b3bcb0298dbfc8e77157bd80449217",
+      "balance": "22"
+    },
+    {
+      "owner": "0xa4bd3aa24158047f28216e3082b010bec04541bcbdcdcda52a02ab7755b06eaa",
+      "balance": "20"
+    },
+    {
       "owner": "0x0feeae3a567cff6df2b6f1c58529ce5093d2c135c6209d10dca1675373a4fee3",
       "balance": "15"
     },
@@ -56,12 +64,20 @@
       "balance": "10"
     },
     {
-      "owner": "0xa4bd3aa24158047f28216e3082b010bec04541bcbdcdcda52a02ab7755b06eaa",
-      "balance": "10"
+      "owner": "0x0f881c2b4d6f7ed90406f15c05a236b6255506847ac3f35f884479b53fca0838",
+      "balance": "9"
+    },
+    {
+      "owner": "0xd9b84b74000c785dca2fac6b587fcfbc900dd8419eb996c218e7798870e2779e",
+      "balance": "8"
     },
     {
       "owner": "0x198731d3e1c4c13c4300620e775316516d183aa351471da151ec34222b4abc5a",
       "balance": "7"
+    },
+    {
+      "owner": "0xc1ce573a896bc873d8c5161c9707a54ccfa4d978ab390fed9c589dfb2577486e",
+      "balance": "6"
     },
     {
       "owner": "0x53c30f72d86a46d9cd8f6a856b0b8f74414f72d23043e370d712187816445ed7",
@@ -84,8 +100,16 @@
       "balance": "5"
     },
     {
+      "owner": "0xfe3ff1f804183cb4529f6ab6ce44f22fc52a5b4d741c8236ea99718780996f5c",
+      "balance": "5"
+    },
+    {
       "owner": "0xa376e409e28dfc84e54ea4a7cb83b372b8c258fe2520c661e3588bf99e4aa0c0",
       "balance": "4"
+    },
+    {
+      "owner": "0xa703e8299cb9863d308af985c3f125c63b9bd8e4ccf113c543cb7f0b25f317b7",
+      "balance": "3"
     },
     {
       "owner": "0x144dcdce794c0a43317be66ab3f526e4faf5ff2da33500c8792a6d3c991a4855",
@@ -117,10 +141,6 @@
     },
     {
       "owner": "0xa2edb8d06284a696e5aeedb054255256592eb394f0479324eb9199b1e632a93d",
-      "balance": "2"
-    },
-    {
-      "owner": "0xecd87dd16466ab5316b9f631df7f10e974b3bcb0298dbfc8e77157bd80449217",
       "balance": "2"
     },
     {
@@ -177,6 +197,10 @@
     },
     {
       "owner": "0xe69e0d7284e94878626e5d2cb48d71b669713127f02424b6ea6047e5ff113e62",
+      "balance": "1"
+    },
+    {
+      "owner": "0xede12f8324047174448947c7bf37bfc6771ab864054e19d5e749a53bf083ed85",
       "balance": "1"
     }
   ]

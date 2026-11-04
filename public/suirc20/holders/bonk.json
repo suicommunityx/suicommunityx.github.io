@@ -1,7 +1,7 @@
 {
   "tick": "bonk",
-  "updatedAtBeijing": "2026-11-04 18:48:24 Asia/Shanghai",
-  "totalHolders": 5,
+  "updatedAtBeijing": "2026-11-04 19:09:54 Asia/Shanghai",
+  "totalHolders": 8,
   "holders": [
     {
       "owner": "0x1970e556fe5b5f7e87eb953705137fbbb270ba2bc40083cccc7ea5552507f823",
@@ -12,12 +12,24 @@
       "balance": "100000"
     },
     {
+      "owner": "0xc1ce573a896bc873d8c5161c9707a54ccfa4d978ab390fed9c589dfb2577486e",
+      "balance": "100000"
+    },
+    {
       "owner": "0x2f4d5bce99adf77d4f6e3ef4087617eb27907f903beaaa7c6fbcfca758c910d4",
       "balance": "50000"
     },
     {
+      "owner": "0xede12f8324047174448947c7bf37bfc6771ab864054e19d5e749a53bf083ed85",
+      "balance": "30000"
+    },
+    {
       "owner": "0x855a973f193b1d2853a1eeba2f8303258561055d865a12e856468ae73d900f4c",
       "balance": "10000"
+    },
+    {
+      "owner": "0x1d0a053ee4a9362c9e1455c5b618a072306f3c37cc91fb0015f53f4e419414ca",
+      "balance": "5000"
     },
     {
       "owner": "0x726780cb60d5c85e9d243b96516186b3d3d8cf194c2c34a8f16e1e909dc2cf3b",

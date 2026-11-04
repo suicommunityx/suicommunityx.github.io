@@ -1,7 +1,7 @@
 {
   "tick": "mist",
-  "updatedAtBeijing": "2026-11-04 18:48:24 Asia/Shanghai",
-  "totalHolders": 9,
+  "updatedAtBeijing": "2026-11-04 19:09:54 Asia/Shanghai",
+  "totalHolders": 11,
   "holders": [
     {
       "owner": "0xcfede55c4d36ff331251c8882ce4fed61b199c28844d84888679051072b4b9ed",
@@ -28,8 +28,16 @@
       "balance": "1000000"
     },
     {
+      "owner": "0x27b584b88559b00623d0014948ebc86a0a7eb1f66551cf7963566a27aaabbf23",
+      "balance": "180000"
+    },
+    {
       "owner": "0xd66e9a8a932f5a0db8cb6e0afe3a2a993ac46ef8ffdf6987306099001aac57a8",
       "balance": "106666"
+    },
+    {
+      "owner": "0x4a747235f2f2cacbeb91c0685e36ff16c3c48449d32cd87b4e3ecbde69dbcfa3",
+      "balance": "100000"
     },
     {
       "owner": "0xdaa5b86afce1a5f1a1cbb7b909a384e2a60c6e0b932488008dda7304b5725b64",
