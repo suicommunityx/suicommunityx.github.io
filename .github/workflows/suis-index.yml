@@ -1,0 +1,50 @@
+name: Refresh suis index
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: suis-index
+  cancel-in-progress: false
+
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Replay InscriptionEvent only
+        run: |
+          set -euo pipefail
+          read_pkg() {
+            node --input-type=module -e 'import { readFileSync } from "node:fs"; const j = JSON.parse(readFileSync("scripts/suis-package.json", "utf8")); process.stdout.write(`${j.packageId || ""}\n${j.rpc || ""}`);'
+          }
+          mapfile -t cfg < <(read_pkg)
+          PKG="${cfg[0]}"
+          RPC="${cfg[1]:-https://mainnet.suiet.app}"
+          if [ -z "$PKG" ]; then
+            echo "scripts/suis-package.json packageId is empty."
+            echo "Leave public/suis as the empty snapshot. Do not scan Operation or OrderDeal."
+            exit 0
+          fi
+          node --experimental-strip-types scripts/suis-indexer/src/cli.ts scan \
+            --rpc "$RPC" \
+            --package "$PKG" \
+            --out public/suis
+      - name: Commit if changed
+        run: |
+          git config user.name 'suicommunity'
+          git config user.email 'suicommunity@users.noreply.github.com'
+          git add public/suis
+          if git diff --staged --quiet; then
+            echo 'No suis index changes'
+          else
+            git commit -m "chore: refresh suis-20 inscription index"
+            git push
+          fi

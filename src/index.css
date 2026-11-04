@@ -76,7 +76,7 @@ body { background: var(--bg); }
 .tabbar-top .tabbar-inner {
   overflow-x: visible;
   justify-content: flex-start;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: 8px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -875,3 +875,25 @@ td.num .smart-amount { text-align: right; margin-left: auto; }
 
 /* Index status banner is not a click target. */
 .banner.progress-card { cursor: default; }
+
+.suis-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.suis-tick {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+.suis-empty {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}
+.suis-empty p { margin: 0; }

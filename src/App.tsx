@@ -6,6 +6,7 @@ import { ConfirmModal } from './components/ConfirmModal';
 import { FormModal } from './components/FormModal';
 import { HoldersPanel } from './components/HoldersPanel';
 import { Suirc20Panel } from './components/Suirc20Panel';
+import { SuisPanel } from './components/SuisPanel';
 import { SearchClearInput } from './components/SearchClearInput';
 import type { TickInfo, MovescriptionHolding, MarketListing } from './lib/sui';
 import {
@@ -33,13 +34,24 @@ import { useSignAndExecuteTransaction } from '@mysten/dapp-kit';
 import type { Transaction } from '@mysten/sui/transactions';
 
 
-type Section = 'suimint' | 'moves';
+type Section = 'suimint' | 'moves' | 'suis';
 type Tab = 'suimint' | 'ticks' | 'deploy' | 'mine' | 'market' | 'holders';
 
 const TAB_SET = new Set<Tab>(['suimint', 'ticks', 'deploy', 'mine', 'market', 'holders']);
 
 function parseRoute(): { section: Section; tab: Tab; holdersTick: string | null } {
   const raw = (window.location.hash || '').replace(/^#\/?/, '');
+  if (
+    raw === 'ticks' ||
+    raw.startsWith('ticks/') ||
+    raw === 'suis' ||
+    raw.startsWith('suis/')
+  ) {
+    return { section: 'suis', tab: 'ticks', holdersTick: null };
+  }
+  if (raw === 'moves' || raw.startsWith('moves/')) {
+    return { section: 'moves', tab: 'ticks', holdersTick: null };
+  }
   if (!raw || raw === 'suimint' || raw.startsWith('suimint/')) {
     return { section: 'suimint', tab: 'suimint', holdersTick: null };
   }
@@ -67,7 +79,7 @@ function writeRoute(tab: Tab, holdersTick?: string | null) {
   } else if (tab !== 'ticks') {
     next = `#/${tab}`;
   } else {
-    next = '#/ticks';
+    next = '#/moves';
   }
   if (window.location.hash !== next) {
     window.location.hash = next;
@@ -364,6 +376,16 @@ useEffect(() => {
             </button>
             <button
               type="button"
+              className={`tab-btn ${section === 'suis' ? 'active' : ''}`}
+              onClick={() => {
+                setSection('suis');
+                if (window.location.hash !== '#/ticks') window.location.hash = '#/ticks';
+              }}
+            >
+              suis
+            </button>
+            <button
+              type="button"
               className={`tab-btn ${section === 'moves' ? 'active' : ''}`}
               onClick={() => {
                 const next: Tab = section === 'suimint' || tab === 'suimint' ? 'ticks' : tab;
@@ -387,6 +409,8 @@ useEffect(() => {
       <main className="main">
         {section === 'suimint' ? (
           <Suirc20Panel />
+        ) : section === 'suis' ? (
+          <SuisPanel />
         ) : (
           <>
         <section className="hero">
@@ -1085,7 +1109,9 @@ useEffect(() => {
         <p>
           <strong>{SITE_NAME}</strong> 是独立的社区前端：首页为 SuiMint SUIRC-20
           索引浏览器；Movescriptions 标签页与链上 Movescriptions / market
-          合约交互。与 SuiMint、Movescriptions 官方无隶属或合作关系。
+          合约交互，列表在 <code>#/moves</code>。suis 在 <code>#/ticks</code>
+          ，只重放 <code>p=&quot;suis-20&quot;</code> 的 deploy / mint / transfer，不计入
+          Operation、OrderDeal 或空投。与 SuiMint、Movescriptions 官方无隶属或合作关系。
         </p>
         <p className="muted">交易由你的钱包签名发送 · Mainnet · 不托管私钥 · 无 SuiMint 市场</p>
       </footer>

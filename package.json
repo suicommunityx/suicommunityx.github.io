@@ -9,6 +9,7 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "index:suirc20": "node scripts/suirc20-index.mjs",
+    "index:suis": "node --experimental-strip-types scripts/suis-indexer/src/cli.ts",
     "dryrun:suirc20": "node scripts/suirc20-dryrun.mjs"
   },
   "dependencies": {
