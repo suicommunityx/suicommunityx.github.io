@@ -104,8 +104,8 @@
     "mintCount": 21258
   },
   "EVAN": {
-    "minted": "200",
-    "mintCount": 20
+    "minted": "210",
+    "mintCount": 21
   },
   "MIST": {
     "minted": "11000000",
@@ -124,12 +124,12 @@
     "mintCount": 15
   },
   "SUIS": {
-    "minted": "571",
-    "mintCount": 571
+    "minted": "630",
+    "mintCount": 630
   },
   "pepe": {
-    "minted": "32000",
-    "mintCount": 32
+    "minted": "48000",
+    "mintCount": 48
   },
   "suin": {
     "minted": "41001",
@@ -216,8 +216,8 @@
     "mintCount": 90
   },
   "bonk": {
-    "minted": "120000",
-    "mintCount": 12
+    "minted": "210000",
+    "mintCount": 21
   },
   "suix": {
     "minted": "0",
