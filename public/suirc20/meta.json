@@ -18,23 +18,24 @@
     "dgen"
   ],
   "progressPct": 100,
-  "progressLabel": "索引进度 100%（扫描完成 2025-05-04 03:18:52 Asia/Shanghai）",
+  "progressLabel": "1430 ticks · 扫描到 2026-11-05 00:58:53 Asia/Shanghai · CP 341624014",
+  "scannedTo": "2026-11-04T16:58:53.161Z",
   "stats": {
     "mintTx": 28609260,
-    "transferTx": 16425,
+    "transferTx": 16437,
     "deployTx": 1430,
     "mintAccepted": 15885811,
     "mintIgnored": 12723449,
     "transferAccepted": 10935,
-    "transferIgnored": 5490,
-    "lastTs": "2025-05-03T19:18:52.118Z",
-    "lastCheckpoint": 140975026,
-    "startedAt": "2026-11-04T15:50:42.197Z",
-    "finishedAt": "2026-11-04T16:03:58.888Z",
+    "transferIgnored": 5502,
+    "lastTs": "2026-11-04T16:58:53.161Z",
+    "lastCheckpoint": 341624014,
+    "startedAt": "2026-11-04T16:58:54.745Z",
+    "finishedAt": "2026-11-04T17:07:39.748Z",
     "dupesSkipped": 0
   },
   "tickCount": 1430,
-  "updatedAtBeijing": "2026-11-05 00:03:58 Asia/Shanghai",
+  "updatedAtBeijing": "2026-11-05 01:07:39 Asia/Shanghai",
   "complete": true,
   "pipeline": "fetch-parallel+apply-ordered"
 }
