@@ -21,11 +21,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Build holders snapshots (GraphQL bidirectional)
+      - name: Build holders snapshots (full object-id partition)
         env:
-          HOLDERS_TICKS: SUIS,DGEN,MOVE,IKUN,GAME,SUIZ
           HOLDERS_PAGE_SIZE: '50'
-          HOLDERS_CHECKPOINT_EVERY: '80'
+          HOLDERS_PARTS: '256'
+          HOLDERS_CONCURRENCY: '8'
         run: node scripts/build-holders.mjs
       - name: Commit if changed
         run: |
