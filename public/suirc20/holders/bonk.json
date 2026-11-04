@@ -1,6 +1,6 @@
 {
   "tick": "bonk",
-  "updatedAtBeijing": "2026-11-04 17:11:34 Asia/Shanghai",
+  "updatedAtBeijing": "2026-11-04 17:36:55 Asia/Shanghai",
   "totalHolders": 3,
   "holders": [
     {
@@ -9,7 +9,7 @@
     },
     {
       "owner": "0x10c860b35457a23465e559960bc899cadcc1a27a247e24457144a02de3ded818",
-      "balance": "90000"
+      "balance": "100000"
     },
     {
       "owner": "0x855a973f193b1d2853a1eeba2f8303258561055d865a12e856468ae73d900f4c",
