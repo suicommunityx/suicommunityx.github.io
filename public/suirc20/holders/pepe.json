@@ -1,7 +1,7 @@
 {
   "tick": "pepe",
-  "updatedAtBeijing": "2026-11-04 19:59:57 Asia/Shanghai",
-  "totalHolders": 20,
+  "updatedAtBeijing": "2026-11-04 20:26:38 Asia/Shanghai",
+  "totalHolders": 22,
   "holders": [
     {
       "owner": "0xb4449d513ccd3c7d3f54c1326b98f8e9d93c381aff7e3dd17c1158bb1f25519b",
@@ -28,6 +28,10 @@
       "balance": "20000"
     },
     {
+      "owner": "0xbdf4a95f7bf5199ce17b69534471712816306a8cebf7ead784b55351ad4e30dd",
+      "balance": "20000"
+    },
+    {
       "owner": "0x1d0a053ee4a9362c9e1455c5b618a072306f3c37cc91fb0015f53f4e419414ca",
       "balance": "15000"
     },
@@ -49,6 +53,10 @@
     },
     {
       "owner": "0x78e47f8ebab902d38e566c6c6c38d4dc4132ffd838c3dbb5789d10debeadc966",
+      "balance": "4000"
+    },
+    {
+      "owner": "0x99e975a5619f8059c70bbabeffc9605925847c4757e5263f087b99d093c4d8e3",
       "balance": "4000"
     },
     {

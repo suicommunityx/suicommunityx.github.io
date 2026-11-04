@@ -1,11 +1,11 @@
 {
-  "mintTx": 4638400,
+  "mintTx": 4698400,
   "transferTx": 0,
   "deployTx": 1430,
-  "mintAccepted": 1028999,
-  "mintIgnored": 3609401,
+  "mintAccepted": 1029051,
+  "mintIgnored": 3669349,
   "transferAccepted": 0,
   "transferIgnored": 0,
-  "lastTs": "2023-12-16T08:44:48.485Z",
+  "lastTs": "2023-12-16T08:52:09.826Z",
   "startedAt": "2026-11-03T02:22:48.240Z"
 }
