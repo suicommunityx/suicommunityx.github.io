@@ -1,11 +1,23 @@
 {
   "tick": "mist",
-  "updatedAtBeijing": "2026-11-04 12:43:14 Asia/Shanghai",
-  "totalHolders": 7,
+  "updatedAtBeijing": "2026-11-04 13:04:19 Asia/Shanghai",
+  "totalHolders": 8,
   "holders": [
+    {
+      "owner": "0x61c7c85e94c518827e06039a2a38451b8329ddf18b2aaf15a02e8abb912f9c96",
+      "balance": "8000000"
+    },
     {
       "owner": "0xcfc7bb22b9590642070744ea664f7b36897d57cd45f305468ad0b2ee8180f758",
       "balance": "5000000"
+    },
+    {
+      "owner": "0xe006c0d862f30aaec066ad793ae6a0ed788a00b9e176d5f1447c6949a098cb10",
+      "balance": "2020000"
+    },
+    {
+      "owner": "0xaf61eb7ce951bba3dd96b9e5a969bbca0ea066398304260d823a2bcffe0911d6",
+      "balance": "1002000"
     },
     {
       "owner": "0x03340cc8a50c9916ebf43a3ff675017ee9893485c758da9064248addb41f545a",
@@ -20,15 +32,7 @@
       "balance": "60000"
     },
     {
-      "owner": "0xe006c0d862f30aaec066ad793ae6a0ed788a00b9e176d5f1447c6949a098cb10",
-      "balance": "20000"
-    },
-    {
       "owner": "0x314b37ec19f7f6b26d986c05de4c029ede1664a7d83c0003518085bd0c959d94",
-      "balance": "1000"
-    },
-    {
-      "owner": "0xaf61eb7ce951bba3dd96b9e5a969bbca0ea066398304260d823a2bcffe0911d6",
       "balance": "1000"
     }
   ]
