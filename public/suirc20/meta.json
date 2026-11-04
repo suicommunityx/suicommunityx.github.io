@@ -4,7 +4,7 @@
     "0xe09b37505173ae119a0ae3b1fdf9050a6b029391f9d9f10a3fff27e3f3115727",
     "0x2dd4e2523c0121c7e8405977e1d3909a8631df313934e965c472efc941ee3484"
   ],
-  "cb5Note": "0xcb5bd7a2… Operation-witness ledger only; not merged.",
+  "cb5Note": "0xcb5bd7a2\u2026 Operation-witness ledger only; not merged.",
   "rules": {
     "caseSensitive": true,
     "firstDeployWins": true,
@@ -18,8 +18,8 @@
     "dgen"
   ],
   "progressPct": 100,
-  "progressLabel": "1430 ticks · 扫描到 2026-11-05 02:08:06 Asia/Shanghai · CP 341641212",
-  "scannedTo": "2026-11-04T18:08:06.986Z",
+  "progressLabel": "1430 ticks \u00b7 \u626b\u63cf\u5230 2026-11-05 02:19:15 Asia/Shanghai \u00b7 CP 341643941",
+  "scannedTo": "2026-11-04T18:19:15.523Z",
   "stats": {
     "mintTx": 28609260,
     "transferTx": 16438,
@@ -28,14 +28,14 @@
     "mintIgnored": 12723449,
     "transferAccepted": 10935,
     "transferIgnored": 5503,
-    "lastTs": "2026-11-04T18:08:06.986Z",
-    "lastCheckpoint": 341641212,
+    "lastTs": "2026-11-04T18:19:15.523Z",
+    "lastCheckpoint": 341643941,
     "startedAt": "2026-11-04T18:08:10.513Z",
     "finishedAt": "2026-11-04T18:17:13.443Z",
     "dupesSkipped": 0
   },
   "tickCount": 1430,
-  "updatedAtBeijing": "2026-11-05 02:17:13 Asia/Shanghai",
+  "updatedAtBeijing": "2026-11-05 02:19:25 Asia/Shanghai",
   "complete": true,
   "pipeline": "fetch-parallel+apply-ordered"
 }
