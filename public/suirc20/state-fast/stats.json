@@ -1,1 +1,1 @@
-{"mintTx":16491068,"transferTx":8932,"deployTx":1430,"mintAccepted":3986207,"mintIgnored":12504861,"transferAccepted":4927,"transferIgnored":4005,"lastTs":"2023-12-21T02:56:27.358Z","lastCheckpoint":21430796,"startedAt":"2026-11-04T15:29:41.993Z"}
+{"mintTx":28609260,"transferTx":16425,"deployTx":1430,"mintAccepted":15885811,"mintIgnored":12723449,"transferAccepted":10935,"transferIgnored":5490,"lastTs":"2025-05-03T19:18:52.118Z","lastCheckpoint":140975026,"startedAt":"2026-11-04T15:50:42.197Z","finishedAt":"2026-11-04T16:03:58.888Z","dupesSkipped":0}
