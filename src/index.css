@@ -855,5 +855,5 @@ td.num .smart-amount { text-align: right; margin-left: auto; }
 .toast-info .toast-title { color: #111827; }
 .toast-info .toast-progress-bar { background: #6b7280; }
 
-/* Index progress card keeps .banner.ok; message banners removed from flow */
+/* Index status banner is not a click target. */
 .banner.progress-card { cursor: default; }

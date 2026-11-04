@@ -5,7 +5,7 @@ import { ConnectWalletButton } from './ConnectWalletButton';
 import { SearchClearInput } from './SearchClearInput';
 import type { Transaction } from '@mysten/sui/transactions';
 import { ConfirmModal } from './ConfirmModal';
-import { formatShortDate, isValidSuiAddress, shortAddr } from '../lib/format';
+import { formatShanghai, formatShortDate, isValidSuiAddress, shortAddr } from '../lib/format';
 import { SmartAmount, SmartAmountRange } from './SmartAmount';
 import { dryRun, friendlyRpcError } from '../lib/sui';
 import { useToast } from '../lib/toast';
@@ -30,6 +30,14 @@ type Pending = {
 };
 
 const PAGE = 50;
+
+/** Chain cursor as Shanghai time. No index-progress percentage — that figure was capped and misleading. */
+function formatScannedTo(iso?: string): string | null {
+  if (!iso) return null;
+  const ms = Date.parse(iso);
+  if (!Number.isFinite(ms)) return null;
+  return formatShanghai(ms);
+}
 
 export function Suirc20Panel() {
   const account = useCurrentAccount();
@@ -193,6 +201,8 @@ export function Suirc20Panel() {
     return t ? BigInt(t.fee || '0') : 0n;
   };
 
+  const scannedLabel = formatScannedTo(meta?.scannedTo);
+
   return (
     <>
       <section className="hero">
@@ -202,11 +212,20 @@ export function Suirc20Panel() {
 
       {meta && (
         <div className="banner ok progress-card" style={{ cursor: 'default' }}>
-          {meta.progressLabel || 'Operation 索引'}
+          Operation 索引
           {meta.tickCount != null ? ` · ${meta.tickCount} ticks` : ''}
           <div className="muted" style={{ marginTop: 6, fontSize: 13 }}>
+            {meta.updatedAtBeijing ? <>最近更新：{meta.updatedAtBeijing}</> : null}
+            {scannedLabel ? (
+              <>
+                {meta.updatedAtBeijing ? ' · ' : null}
+                扫描到 {scannedLabel}
+              </>
+            ) : null}
+          </div>
+          <div className="muted" style={{ marginTop: 6, fontSize: 13 }}>
             数据源：<strong>Operation 见证索引</strong>
-            （包 e09b…）。进度、持有者与我的铭文来自索引快照；铸造、转账、部署调用{' '}
+            （包 e09b…）。列表、持有者与我的铭文来自索引快照；铸造、转账、部署调用{' '}
             <code>Operation::*</code>。
           </div>
         </div>

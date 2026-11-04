@@ -27,11 +27,11 @@ export type Suirc20Tick = {
 };
 
 export type Suirc20Meta = {
-  progressPct: number;
-  progressLabel: string;
   tickCount: number;
   complete?: boolean;
   updatedAtBeijing?: string;
+  /** Chain timestamp the indexer has scanned through (ISO), when present. */
+  scannedTo?: string;
   stats?: Record<string, unknown>;
 };
 
@@ -116,12 +116,12 @@ export async function loadSuirc20Ticks(): Promise<{ meta: Suirc20Meta; ticks: Su
   const mapped: Suirc20Tick[] = (data.ticks || []).map(normTick);
   const ticks = pinSuirc20Ticks(mapped);
   const m = data.meta || {};
+  const lastTs = m.stats?.lastTs;
   const meta: Suirc20Meta = {
-    progressPct: Number(m.progressPct ?? 0),
-    progressLabel: String(m.progressLabel ?? ''),
     tickCount: ticks.length,
     complete: m.complete,
     updatedAtBeijing: m.updatedAtBeijing,
+    scannedTo: typeof lastTs === 'string' && lastTs ? lastTs : undefined,
     stats: m.stats,
   };
   return { meta, ticks };

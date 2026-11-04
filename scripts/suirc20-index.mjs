@@ -337,17 +337,6 @@ function applyTransfer(state, tx) {
   state.stats.transferAccepted++;
 }
 
-function estimateProgress(state) {
-  // Blend chain-time span with mint volume heuristic (~1e6 lim-sized suis mints upper bound).
-  const start = Date.parse('2023-12-15T15:34:13.517Z');
-  const end = Date.parse('2025-05-03T17:57:09.272Z');
-  const last = state.stats.lastTs ? Date.parse(state.stats.lastTs) : start;
-  const timePct = Math.max(0, Math.min(99.9, ((last - start) / (end - start)) * 100));
-  const mintPct = Math.max(0, Math.min(99.9, (state.stats.mintTx / 1_000_000) * 100));
-  const pct = Math.max(timePct, mintPct);
-  return Math.round(pct * 10) / 10;
-}
-
 function pinSort(a, b) {
   const ra = PIN.indexOf(a.tick);
   const rb = PIN.indexOf(b.tick);
@@ -382,7 +371,6 @@ function publish(state) {
   });
   tickRows.sort(pinSort);
 
-  const progressPct = estimateProgress(state);
   const meta = {
     protocol: 'suirc-20',
     packages: PKGS,
@@ -397,8 +385,6 @@ function publish(state) {
       transferRequiresBalanceAndTo: true,
     },
     pinOrder: PIN,
-    progressPct,
-    progressLabel: `索引进度 ${progressPct}%（扫描到 ${toBeijing(state.stats.lastTs) || '—'}）`,
     stats: state.stats,
     tickCount: tickRows.length,
     updatedAtBeijing: toBeijing(new Date().toISOString()),
@@ -458,8 +444,8 @@ function publish(state) {
     'published',
     'ticks=',
     tickRows.length,
-    'progress=',
-    meta.progressLabel,
+    'scannedTo=',
+    toBeijing(state.stats.lastTs) || '—',
     'mintAcc=',
     state.stats.mintAccepted,
     'mintIgn=',
@@ -609,14 +595,12 @@ async function main() {
   const allDone = Object.values(state.cursors).every((c) => c.done);
   if (allDone) {
     meta.complete = true;
-    meta.progressPct = 100;
-    meta.progressLabel = `索引进度 100%（扫描完成 ${toBeijing(state.stats.lastTs) || ''}）`;
     writeJson(path.join(OUT, 'meta.json'), meta);
     const ticks = readJson(path.join(OUT, 'ticks.json'), {});
     ticks.meta = meta;
     writeJson(path.join(OUT, 'ticks.json'), ticks);
   }
-  console.log('done', meta.progressLabel);
+  console.log('done', allDone ? 'complete' : 'partial', toBeijing(state.stats.lastTs) || '');
 }
 
 /**
