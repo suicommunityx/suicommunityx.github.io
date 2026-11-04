@@ -1,11 +1,15 @@
 {
   "tick": "FUDS",
-  "updatedAtBeijing": "2026-11-04 15:11:00 Asia/Shanghai",
-  "totalHolders": 4,
+  "updatedAtBeijing": "2026-11-04 15:37:49 Asia/Shanghai",
+  "totalHolders": 5,
   "holders": [
     {
       "owner": "0x670d9cc700f7a8661079bd68ae1d966a9921a50b03a980d1f801c7c655da8ca6",
       "balance": "10000"
+    },
+    {
+      "owner": "0xe52175b4b59d3ecee6d66a139e770c7d8c44626af3200fbe2341758ea6b36726",
+      "balance": "1900"
     },
     {
       "owner": "0x6395bba59d8f24c490998bb070c31d599ac009a4219fac739fd16a7af4f0c008",
