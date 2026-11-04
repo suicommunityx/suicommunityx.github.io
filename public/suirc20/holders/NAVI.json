@@ -1,0 +1,15 @@
+{
+  "tick": "NAVI",
+  "updatedAtBeijing": "2026-11-04 10:06:17 Asia/Shanghai",
+  "totalHolders": 2,
+  "holders": [
+    {
+      "owner": "0x84402035b6074e01d925436c4922dd7ffbdb90fc362eae5f14876bb3d6336b2b",
+      "balance": "11952"
+    },
+    {
+      "owner": "0x88f2b44b8caf0cae6362d039670f3b9a1385f2180b383965b558eb72c86ca499",
+      "balance": "996"
+    }
+  ]
+}
