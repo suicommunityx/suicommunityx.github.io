@@ -1,7 +1,7 @@
 {
   "tick": "suin",
-  "updatedAtBeijing": "2026-11-04 19:30:02 Asia/Shanghai",
-  "totalHolders": 5,
+  "updatedAtBeijing": "2026-11-04 19:59:57 Asia/Shanghai",
+  "totalHolders": 6,
   "holders": [
     {
       "owner": "0xa4bd3aa24158047f28216e3082b010bec04541bcbdcdcda52a02ab7755b06eaa",
@@ -13,6 +13,10 @@
     },
     {
       "owner": "0x058bb41da42e9a9f39d680b966927db37b4996a1af9fda7c6ef309c6b2859c3d",
+      "balance": "10000"
+    },
+    {
+      "owner": "0xbf1a868f65f0d8ba72a82e6ed7fd485a31158e2dcdf3d1c919bd5b08b8d51b59",
       "balance": "10000"
     },
     {

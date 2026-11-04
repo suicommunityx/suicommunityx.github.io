@@ -1,8 +1,12 @@
 {
   "tick": "SAKE",
-  "updatedAtBeijing": "2026-11-04 19:30:02 Asia/Shanghai",
-  "totalHolders": 2,
+  "updatedAtBeijing": "2026-11-04 19:59:57 Asia/Shanghai",
+  "totalHolders": 3,
   "holders": [
+    {
+      "owner": "0x32604b18f1a32451e42416584084e93efe8bebee395170947d8f77550c47df44",
+      "balance": "10000000"
+    },
     {
       "owner": "0x4ba1f0ab8d6bd654839b309646959735e7d50f70b9b0056ffb8547f10dadfa74",
       "balance": "6000000"

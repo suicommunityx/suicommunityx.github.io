@@ -104,12 +104,12 @@
     "mintCount": 21258
   },
   "EVAN": {
-    "minted": "430",
-    "mintCount": 43
+    "minted": "500",
+    "mintCount": 50
   },
   "MIST": {
-    "minted": "69010010",
-    "mintCount": 80
+    "minted": "72020010",
+    "mintCount": 84
   },
   "SOJU": {
     "minted": "6200",
@@ -120,20 +120,20 @@
     "mintCount": 10
   },
   "SAKE": {
-    "minted": "6000900",
-    "mintCount": 15
+    "minted": "16000900",
+    "mintCount": 25
   },
   "SUIS": {
-    "minted": "788",
-    "mintCount": 788
+    "minted": "791",
+    "mintCount": 791
   },
   "pepe": {
-    "minted": "220000",
-    "mintCount": 220
+    "minted": "235000",
+    "mintCount": 235
   },
   "suin": {
-    "minted": "241001",
-    "mintCount": 26
+    "minted": "251001",
+    "mintCount": 27
   },
   "mist": {
     "minted": "27479666",
@@ -164,8 +164,8 @@
     "mintCount": 0
   },
   "suii": {
-    "minted": "36528",
-    "mintCount": 45
+    "minted": "44528",
+    "mintCount": 53
   },
   "yhc": {
     "minted": "0",
@@ -212,8 +212,8 @@
     "mintCount": 0
   },
   "meme": {
-    "minted": "1010",
-    "mintCount": 101
+    "minted": "1160",
+    "mintCount": 116
   },
   "bonk": {
     "minted": "498000",

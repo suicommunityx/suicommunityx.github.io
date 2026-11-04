@@ -1,11 +1,15 @@
 {
   "tick": "meme",
-  "updatedAtBeijing": "2026-11-04 19:30:02 Asia/Shanghai",
-  "totalHolders": 5,
+  "updatedAtBeijing": "2026-11-04 19:59:57 Asia/Shanghai",
+  "totalHolders": 6,
   "holders": [
     {
       "owner": "0x57a578809a310b58767cb714ea3236d7266b00abdaf63320b98ee95a6d08ec1a",
       "balance": "780"
+    },
+    {
+      "owner": "0x99e975a5619f8059c70bbabeffc9605925847c4757e5263f087b99d093c4d8e3",
+      "balance": "150"
     },
     {
       "owner": "0xe52175b4b59d3ecee6d66a139e770c7d8c44626af3200fbe2341758ea6b36726",
