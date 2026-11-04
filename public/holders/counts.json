@@ -1,44 +1,236 @@
 {
-  "updatedAt": "2026-11-03T03:57:05.308Z",
-  "source": "public/holders/*.json top-level holderCount (no live RPC)",
+  "updatedAt": "2026-11-04T10:15:10.465Z",
+  "source": "public/holders/*.json top-level holderCount after a full Movescription object-id scan",
   "counts": {
-    "DGEN": 5,
-    "GAME": 27,
-    "IKUN": 640,
-    "MOVE": 9816,
-    "SUIS": 1881,
-    "SUIZ": 146
+    "APTOS": 14,
+    "ASTR": 323,
+    "BLUEMOVE": 43,
+    "CALL": 3,
+    "CREATOR": 894,
+    "DGEN": 59,
+    "DOWN": 5,
+    "ERC3525": 1,
+    "FOCG": 57,
+    "GAME": 146,
+    "IKUN": 1086,
+    "KRISWU": 636,
+    "LONG": 10,
+    "LORDS": 49,
+    "LOVE": 11,
+    "LUCK": 18,
+    "MARS": 2,
+    "MOVE": 28168,
+    "MOVEER": 3728,
+    "MOVEFUN": 289,
+    "MRC20": 353,
+    "MRC3525": 3,
+    "MYWORLD": 8,
+    "NAME": 9,
+    "OTTER": 716,
+    "PEPE": 71,
+    "PLATON": 151,
+    "RARE": 25,
+    "SFT.": 17,
+    "SFTXMOVE": 4,
+    "SUIFREN": 232,
+    "SUIPLAY0X1": 2,
+    "SUIS": 2599,
+    "SUIZ": 390,
+    "TICK": 81,
+    "TROLL": 31,
+    "UPUP": 13,
+    "ZODI": 126
   },
   "meta": {
+    "APTOS": {
+      "holderCount": 14,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "ASTR": {
+      "holderCount": 323,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "BLUEMOVE": {
+      "holderCount": 43,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "CALL": {
+      "holderCount": 3,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "CREATOR": {
+      "holderCount": 894,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
     "DGEN": {
+      "holderCount": 59,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "DOWN": {
       "holderCount": 5,
-      "updatedAt": "2026-11-03T01:38:29.885Z",
-      "complete": false
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "ERC3525": {
+      "holderCount": 1,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "FOCG": {
+      "holderCount": 57,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
     },
     "GAME": {
-      "holderCount": 27,
-      "updatedAt": "2026-11-02T21:38:00.471Z",
-      "complete": false
+      "holderCount": 146,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
     },
     "IKUN": {
-      "holderCount": 640,
-      "updatedAt": "2026-11-02T21:38:00.471Z",
-      "complete": false
+      "holderCount": 1086,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "KRISWU": {
+      "holderCount": 636,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "LONG": {
+      "holderCount": 10,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "LORDS": {
+      "holderCount": 49,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "LOVE": {
+      "holderCount": 11,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "LUCK": {
+      "holderCount": 18,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "MARS": {
+      "holderCount": 2,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
     },
     "MOVE": {
-      "holderCount": 9816,
-      "updatedAt": "2026-11-02T21:38:00.471Z",
-      "complete": false
+      "holderCount": 28168,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "MOVEER": {
+      "holderCount": 3728,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "MOVEFUN": {
+      "holderCount": 289,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "MRC20": {
+      "holderCount": 353,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "MRC3525": {
+      "holderCount": 3,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "MYWORLD": {
+      "holderCount": 8,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "NAME": {
+      "holderCount": 9,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "OTTER": {
+      "holderCount": 716,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "PEPE": {
+      "holderCount": 71,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "PLATON": {
+      "holderCount": 151,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "RARE": {
+      "holderCount": 25,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "SFT.": {
+      "holderCount": 17,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "SFTXMOVE": {
+      "holderCount": 4,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "SUIFREN": {
+      "holderCount": 232,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "SUIPLAY0X1": {
+      "holderCount": 2,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
     },
     "SUIS": {
-      "holderCount": 1881,
-      "updatedAt": "2026-11-02T21:38:00.471Z",
-      "complete": false
+      "holderCount": 2599,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
     },
     "SUIZ": {
-      "holderCount": 146,
-      "updatedAt": "2026-11-02T21:38:00.471Z",
-      "complete": false
+      "holderCount": 390,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "TICK": {
+      "holderCount": 81,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "TROLL": {
+      "holderCount": 31,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "UPUP": {
+      "holderCount": 13,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
+    },
+    "ZODI": {
+      "holderCount": 126,
+      "updatedAt": "2026-11-04T10:15:10.465Z",
+      "complete": true
     }
   }
 }

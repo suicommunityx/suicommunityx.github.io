@@ -1,0 +1,845 @@
+{
+  "updatedAt": "2026-11-04T10:15:10.465Z",
+  "method": "object-id-partition",
+  "parts": 256,
+  "objectsScanned": 3940909,
+  "pages": 78941,
+  "checkpoints": {
+    "min": 341522500,
+    "max": 341524518
+  },
+  "ticks": {
+    "APTOS": {
+      "holders": 14,
+      "objects": 61,
+      "marketObjects": 0,
+      "accounted": "132702",
+      "currentSupply": "132702",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x684d1b747e5cd8410228879d6604afb9fb02e1f32c42fe6a482dd900b7a6d38a",
+          "amount": "55548"
+        },
+        {
+          "address": "0x9852797336e9f1a08f9ef2dfd7abbfc5fb55efae707586a15a77d3e2f1e647fd",
+          "amount": "23144"
+        },
+        {
+          "address": "0x593ff8df23fb244730c0e33ee1de2789304d5dbdf803be83b8ddf523cda20556",
+          "amount": "13116"
+        }
+      ]
+    },
+    "ASTR": {
+      "holders": 323,
+      "objects": 913,
+      "marketObjects": 0,
+      "accounted": "145486862",
+      "currentSupply": "145486862",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x5d6439ea5ec14ab8a67d94fe460f5479436f2e983a83e5f1d1b7b35da5bfcae7",
+          "amount": "30125000"
+        },
+        {
+          "address": "0x326e48004d2dcac2bd881704486b0829fbb50b60246718df25118a18ee5fdeee",
+          "amount": "13666665"
+        },
+        {
+          "address": "0xc8f89bc49f896d5660c8d89ecb839401177c33d76def190a0c390d4d1e72c423",
+          "amount": "11333332"
+        }
+      ]
+    },
+    "BLUEMOVE": {
+      "holders": 43,
+      "objects": 113,
+      "marketObjects": 1,
+      "accounted": "1034250",
+      "currentSupply": "1055250",
+      "ratio": 0.98,
+      "top3": [
+        {
+          "address": "0x9bcda90aec05c6d20db7a1723f16f63ac67f4be6fce944f5438e31474a0e37d9",
+          "amount": "141750"
+        },
+        {
+          "address": "0x5fb2f628cb8d109f6a8eba0d2e24ba461611463804f12bca283d50cc48a7823a",
+          "amount": "115500"
+        },
+        {
+          "address": "0x923ef9c83c8c8b3847c9c2c13b67ef5fc9df2cdd5712c3779f1cd130e3b59df2",
+          "amount": "105000"
+        }
+      ]
+    },
+    "CALL": {
+      "holders": 3,
+      "objects": 4,
+      "marketObjects": 0,
+      "accounted": "500000",
+      "currentSupply": "500000",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x79a2c1b3664e75e8b7b03e4529914f5f05ee9753b330452a5705e84b367d56ae",
+          "amount": "250000"
+        },
+        {
+          "address": "0x684d1b747e5cd8410228879d6604afb9fb02e1f32c42fe6a482dd900b7a6d38a",
+          "amount": "125000"
+        },
+        {
+          "address": "0x96ce3b6aecd4ece2f318c0494aca8e1732131435c318cd580c1908469a3bc5eb",
+          "amount": "125000"
+        }
+      ]
+    },
+    "CREATOR": {
+      "holders": 894,
+      "objects": 125800,
+      "marketObjects": 82,
+      "accounted": "973824",
+      "currentSupply": "952824",
+      "ratio": 1.022,
+      "top3": [
+        {
+          "address": "0x0486b8b50831f1fe88f49a3f02ac58e79b6f78e9b73d2293b0c72fd97afb7f9a",
+          "amount": "41011"
+        },
+        {
+          "address": "0xd4f73d7e095d364b1699148f187ddbfb205aa7087cb9f28d77c5d49c1f37ad29",
+          "amount": "33517"
+        },
+        {
+          "address": "0x0b5f05a3a23c284a1f0c726aaeecbb2eb9f27695b5a67ea5d6f45ba1ec77ba87",
+          "amount": "29352"
+        }
+      ]
+    },
+    "DGEN": {
+      "holders": 59,
+      "objects": 343,
+      "marketObjects": 0,
+      "accounted": "1096499",
+      "currentSupply": "1096499",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x9bcda90aec05c6d20db7a1723f16f63ac67f4be6fce944f5438e31474a0e37d9",
+          "amount": "545490"
+        },
+        {
+          "address": "0xbd2dfc3b5f181e51119a0de6668b25ac80cb2da5417f8ee4750e1b5503db9613",
+          "amount": "70528"
+        },
+        {
+          "address": "0x29cc6ba1a17c00f0b54e962cba5f498f3a180aee35bb4e019e193d5583b0e368",
+          "amount": "65129"
+        }
+      ]
+    },
+    "DOWN": {
+      "holders": 5,
+      "objects": 26,
+      "marketObjects": 0,
+      "accounted": "35000000",
+      "currentSupply": "35000000",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0xdfc4b0868ac60fd4c94252b0b1da57fd8dda6de557d00f84fe9d85b0ccf0c852",
+          "amount": "29000000"
+        },
+        {
+          "address": "0x645ef44f69a7de3db0306b6344ae9aa4d281dc5ae7916029b94df7da38809db4",
+          "amount": "3000000"
+        },
+        {
+          "address": "0x02020e56f428ca7b692e32a7aa9f7c36576ebcda754fd61a47221102b7d7ca57",
+          "amount": "1000000"
+        }
+      ]
+    },
+    "ERC3525": {
+      "holders": 1,
+      "objects": 1,
+      "marketObjects": 0,
+      "accounted": "892857",
+      "currentSupply": "892857",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x684d1b747e5cd8410228879d6604afb9fb02e1f32c42fe6a482dd900b7a6d38a",
+          "amount": "892857"
+        }
+      ]
+    },
+    "FOCG": {
+      "holders": 57,
+      "objects": 566,
+      "marketObjects": 0,
+      "accounted": "145051139",
+      "currentSupply": "145051139",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x997f6036c2a23a60b1cc0d3f47966d56aeee56d12a85179239a3b4922c19ab90",
+          "amount": "26457358"
+        },
+        {
+          "address": "0x9d924c320e45c9f2e755d1e21904cf016364766dcea48d8ee2b141ac4e61eede",
+          "amount": "20319398"
+        },
+        {
+          "address": "0x964d3d01b9b433cefa1ce518f05c825e6a7c61c3925ae13c2643aaaa9688ebda",
+          "amount": "18141637"
+        }
+      ]
+    },
+    "GAME": {
+      "holders": 146,
+      "objects": 954,
+      "marketObjects": 47,
+      "accounted": "10551064753",
+      "currentSupply": "10551064753",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x964d3d01b9b433cefa1ce518f05c825e6a7c61c3925ae13c2643aaaa9688ebda",
+          "amount": "1116666675"
+        },
+        {
+          "address": "0xb1df66dde2def1570abfcf444e706e9fc024e0a9cab782e0da63db1d5000a3f3",
+          "amount": "405000000"
+        },
+        {
+          "address": "0xa7fb1c995ff8d091190dfd5deb5bd7a7e2d709f5178ec14138a0093ff1043abc",
+          "amount": "306428567"
+        }
+      ]
+    },
+    "IKUN": {
+      "holders": 1086,
+      "objects": 364352,
+      "marketObjects": 185,
+      "accounted": "66034185393",
+      "currentSupply": "66034185393",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x90ee6773c444fe6c6ffb8bc1399d97a5d5a2add3dbee422f64ae4de83da4b086",
+          "amount": "5083152812"
+        },
+        {
+          "address": "0x0b5f05a3a23c284a1f0c726aaeecbb2eb9f27695b5a67ea5d6f45ba1ec77ba87",
+          "amount": "3916838104"
+        },
+        {
+          "address": "0xcc6fd197ddeaa78c74c156736620041f679071bdeca109eeb286f2708537caa2",
+          "amount": "2364352323"
+        }
+      ]
+    },
+    "KRISWU": {
+      "holders": 636,
+      "objects": 83787,
+      "marketObjects": 60,
+      "accounted": "598417585",
+      "currentSupply": "599938229",
+      "ratio": 0.9974,
+      "top3": [
+        {
+          "address": "0xd4f73d7e095d364b1699148f187ddbfb205aa7087cb9f28d77c5d49c1f37ad29",
+          "amount": "48121529"
+        },
+        {
+          "address": "0x58a2952863adc74cb9d18ec40780fb33bb912b3df49519bff6795c5ff4b85b5f",
+          "amount": "21332040"
+        },
+        {
+          "address": "0x1855ac70b3ce35f76f7a5c724cede2e41e9c8ed47b9353adf5bdc8954eea8dfa",
+          "amount": "18768240"
+        }
+      ]
+    },
+    "LONG": {
+      "holders": 10,
+      "objects": 50,
+      "marketObjects": 0,
+      "accounted": "832561",
+      "currentSupply": "832561",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x5c53f6accd456ca18636edbe846eae07e13693346bfa29fb97b28b80bcf47921",
+          "amount": "275844"
+        },
+        {
+          "address": "0x28094682552eb18d04120750267da48c1e4ac0b79acd953ccebc2c4b53d6613c",
+          "amount": "120370"
+        },
+        {
+          "address": "0xce458729ac531fd1216eece8d3c6ff872f2d8675fb73935516091a142c0b4ac3",
+          "amount": "90277"
+        }
+      ]
+    },
+    "LORDS": {
+      "holders": 49,
+      "objects": 469,
+      "marketObjects": 13,
+      "accounted": "37413881",
+      "currentSupply": "37413881",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x70432543f5c475a19c8013b7af4484e3b828764c2bce7e3dbd9adfa6053259bd",
+          "amount": "11582820"
+        },
+        {
+          "address": "0x93c3b76cb8c553b32311e9eca972473c06dd021c4653b63e80c30959e572565d",
+          "amount": "4374990"
+        },
+        {
+          "address": "0x911f56047eb9f4b4a4ef9e5496bd13266fbc352f85c8137eabf8109bed9d8169",
+          "amount": "3273142"
+        }
+      ]
+    },
+    "LOVE": {
+      "holders": 11,
+      "objects": 48,
+      "marketObjects": 0,
+      "accounted": "23140",
+      "currentSupply": "23140",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x37be66c40a575685950946a5bf9ab0becf3b99ac2a4e72d0e787692e3124517f",
+          "amount": "7800"
+        },
+        {
+          "address": "0x70ff68c11378f5b7bf3bf6cfd06bd1c01203c91b91b8ba85fde93629ea3d7422",
+          "amount": "7540"
+        },
+        {
+          "address": "0xcb107369e1c2308f3729482030a72091faef8058928c8ebc80c4db648cc6556a",
+          "amount": "4160"
+        }
+      ]
+    },
+    "LUCK": {
+      "holders": 18,
+      "objects": 39,
+      "marketObjects": 0,
+      "accounted": "132000",
+      "currentSupply": "132000",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x6c3a9557d4f54ae41194137991e2b1d8d12c6d7ca9fb15bb64041ec260bae8a5",
+          "amount": "85500"
+        },
+        {
+          "address": "0xf2744467b8c6aa67a279bf39ec46bda4018dba554a422ed05d781378c716ffb5",
+          "amount": "15000"
+        },
+        {
+          "address": "0x684d1b747e5cd8410228879d6604afb9fb02e1f32c42fe6a482dd900b7a6d38a",
+          "amount": "4500"
+        }
+      ]
+    },
+    "MARS": {
+      "holders": 2,
+      "objects": 2,
+      "marketObjects": 0,
+      "accounted": "250000",
+      "currentSupply": "250000",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0xc3da77d853bc1b7fcdad3416d612a62354c2befefd047cf295078943fd1121a4",
+          "amount": "125000"
+        },
+        {
+          "address": "0xc8841bb142dbbeda4d1c72ef8dbb7d6563f59c41f680a0f6c3bd07e4baece6ac",
+          "amount": "125000"
+        }
+      ]
+    },
+    "MOVE": {
+      "holders": 28168,
+      "objects": 1733128,
+      "marketObjects": 7664,
+      "accounted": "2702672901",
+      "currentSupply": "2995772538",
+      "ratio": 0.9021,
+      "top3": [
+        {
+          "address": "0x8f486d58014bec7042416d5e7560f05e1cafaf51017f2b6e9a44c91c1f793fb1",
+          "amount": "43316431"
+        },
+        {
+          "address": "0x041141318cec0118a33f8271f8573992a9a3a678e97541271904c3250b770b49",
+          "amount": "35207218"
+        },
+        {
+          "address": "0x2e2d7ea4f33714c7ef58f61ce69f67fdff3c3c6c532ed60c78635c2da80003cc",
+          "amount": "34764944"
+        }
+      ]
+    },
+    "MOVEER": {
+      "holders": 3728,
+      "objects": 1267305,
+      "marketObjects": 2099,
+      "accounted": "983305377",
+      "currentSupply": "981784733",
+      "ratio": 1.0015,
+      "top3": [
+        {
+          "address": "0x0486b8b50831f1fe88f49a3f02ac58e79b6f78e9b73d2293b0c72fd97afb7f9a",
+          "amount": "38329435"
+        },
+        {
+          "address": "0xe5bfb045bc3157e88d01e45a6b2d3adb3e3177d3aea99167b983f034acf5b983",
+          "amount": "37681501"
+        },
+        {
+          "address": "0xe6e58afffede4f901c8824f6fe94211c6ceefe6d13dda016f651ff6747ff3e38",
+          "amount": "30526352"
+        }
+      ]
+    },
+    "MOVEFUN": {
+      "holders": 289,
+      "objects": 12384,
+      "marketObjects": 1,
+      "accounted": "94493421",
+      "currentSupply": "94493421",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x8f450f20ce1592b6c3f536046ddd95c1e0b07a44996d326cf38c46490379b68f",
+          "amount": "37879083"
+        },
+        {
+          "address": "0x2966967872a4299316de03559ec430e7c19efdc8d7cd63dbb7d81e4318c66e62",
+          "amount": "18295833"
+        },
+        {
+          "address": "0xd35ae4f357d21f94ef57a8d76baf1818a7d6ed704c1dd8b0720df24a1df52b49",
+          "amount": "14165000"
+        }
+      ]
+    },
+    "MRC20": {
+      "holders": 353,
+      "objects": 3962,
+      "marketObjects": 79,
+      "accounted": "156593",
+      "currentSupply": "156593",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x9d924c320e45c9f2e755d1e21904cf016364766dcea48d8ee2b141ac4e61eede",
+          "amount": "10000"
+        },
+        {
+          "address": "0xdf1793b093f77f304a0ffb50d321b346c5935936b949c9deed4b7251989254c0",
+          "amount": "8450"
+        },
+        {
+          "address": "0x95a3398d84497ff2571445110c0c118c650510ed351beac7615cfaad8c3a565e",
+          "amount": "4957"
+        }
+      ]
+    },
+    "MRC3525": {
+      "holders": 3,
+      "objects": 4,
+      "marketObjects": 0,
+      "accounted": "892858",
+      "currentSupply": "892858",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x684d1b747e5cd8410228879d6604afb9fb02e1f32c42fe6a482dd900b7a6d38a",
+          "amount": "446429"
+        },
+        {
+          "address": "0xf7a344d02a42ac51d4b81e249a41d05ab681670f70e28419a0b98a12242a43aa",
+          "amount": "446428"
+        },
+        {
+          "address": "0xc8841bb142dbbeda4d1c72ef8dbb7d6563f59c41f680a0f6c3bd07e4baece6ac",
+          "amount": "1"
+        }
+      ]
+    },
+    "MYWORLD": {
+      "holders": 8,
+      "objects": 12,
+      "marketObjects": 2,
+      "accounted": "5500",
+      "currentSupply": "5500",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0xdeb1bd3633cd1e103e9903ff32f5c98ee8f59aef9654878af45c3adf92bffec5",
+          "amount": "1000"
+        },
+        {
+          "address": "0x1b79614dd651f80e1f5ca3177b9636d86d64c6b4f00840b1ef6ad30aec904990",
+          "amount": "900"
+        },
+        {
+          "address": "0x47ab00599d8d7f64bfd0cf306835912449b5a50fe64cfda3294b51e1d3e2a714",
+          "amount": "500"
+        }
+      ]
+    },
+    "NAME": {
+      "holders": 9,
+      "objects": 272,
+      "marketObjects": 0,
+      "accounted": "272",
+      "currentSupply": "272",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x8a73d4a65c93381a7126daa5e2ce4be93a45116ac21a81e4a3acdc820f451762",
+          "amount": "131"
+        },
+        {
+          "address": "0x28094682552eb18d04120750267da48c1e4ac0b79acd953ccebc2c4b53d6613c",
+          "amount": "75"
+        },
+        {
+          "address": "0x3c6dc40359d43904ac77c2566886f527f2da25a00edf62757a83f6c985eb404a",
+          "amount": "25"
+        }
+      ]
+    },
+    "OTTER": {
+      "holders": 716,
+      "objects": 880,
+      "marketObjects": 62,
+      "accounted": "2623834736",
+      "currentSupply": "3889912621",
+      "ratio": 0.6745,
+      "top3": [
+        {
+          "address": "0x734dcd33dd35e11bfa5c295d10e14fcfb97fd193a03190603258865b1792885f",
+          "amount": "207429345"
+        },
+        {
+          "address": "0x3b4a514e733108f460011824719bf4d703a9afe484fed00a247175247583ffc8",
+          "amount": "167200000"
+        },
+        {
+          "address": "0x2acbde3e6cbf3c8318ba3965ec76bf53eec6665185fa83fe6a23c629097ed023",
+          "amount": "54400000"
+        }
+      ]
+    },
+    "PEPE": {
+      "holders": 71,
+      "objects": 426,
+      "marketObjects": 1,
+      "accounted": "446",
+      "currentSupply": "446",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x442f6823b8d5f4449c522deaafaeea6b7ebdbf05209c529305567a179479051f",
+          "amount": "112"
+        },
+        {
+          "address": "0x9bcda90aec05c6d20db7a1723f16f63ac67f4be6fce944f5438e31474a0e37d9",
+          "amount": "72"
+        },
+        {
+          "address": "0xb38c508ce9719805ca96561126e32a393148dd5a30d31d3dcd4eefa9ca00b3cf",
+          "amount": "30"
+        }
+      ]
+    },
+    "PLATON": {
+      "holders": 151,
+      "objects": 28989,
+      "marketObjects": 48,
+      "accounted": "8373511143",
+      "currentSupply": "8373511143",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0xb02b228280134329e4841888659b3e797b74b6410462cdb7e3f91b5edcd76825",
+          "amount": "636076415"
+        },
+        {
+          "address": "0x67b2ec1d2a61d02821507d1f7ab7da5954c677b68f8003af6b9ea723ba54edeb",
+          "amount": "631673315"
+        },
+        {
+          "address": "0xc67f64579a1823b6d7b17d617a5be24c99542fa6672e501604d18708e554a7f7",
+          "amount": "594715858"
+        }
+      ]
+    },
+    "RARE": {
+      "holders": 25,
+      "objects": 80,
+      "marketObjects": 0,
+      "accounted": "3850000",
+      "currentSupply": "3850000",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0xb38c508ce9719805ca96561126e32a393148dd5a30d31d3dcd4eefa9ca00b3cf",
+          "amount": "1191668"
+        },
+        {
+          "address": "0x964d3d01b9b433cefa1ce518f05c825e6a7c61c3925ae13c2643aaaa9688ebda",
+          "amount": "750000"
+        },
+        {
+          "address": "0xff07ee54442d70ce9accb3511c6e86f29b0c1a50e7b69bf5ce21041923de5ed1",
+          "amount": "300000"
+        }
+      ]
+    },
+    "SFT.": {
+      "holders": 17,
+      "objects": 36,
+      "marketObjects": 0,
+      "accounted": "215000",
+      "currentSupply": "215000",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x684d1b747e5cd8410228879d6604afb9fb02e1f32c42fe6a482dd900b7a6d38a",
+          "amount": "60000"
+        },
+        {
+          "address": "0x219c0b1f9c737aef3cd241e6d94b4767871f4ef9aabef14f1f2cde1a16f31b68",
+          "amount": "30000"
+        },
+        {
+          "address": "0x70ff68c11378f5b7bf3bf6cfd06bd1c01203c91b91b8ba85fde93629ea3d7422",
+          "amount": "25000"
+        }
+      ]
+    },
+    "SFTXMOVE": {
+      "holders": 4,
+      "objects": 6,
+      "marketObjects": 0,
+      "accounted": "2500000",
+      "currentSupply": "2500000",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x219c0b1f9c737aef3cd241e6d94b4767871f4ef9aabef14f1f2cde1a16f31b68",
+          "amount": "1000000"
+        },
+        {
+          "address": "0x684d1b747e5cd8410228879d6604afb9fb02e1f32c42fe6a482dd900b7a6d38a",
+          "amount": "500000"
+        },
+        {
+          "address": "0x9360a2bb8329dab73d3fef9a3d88c43bae8fd1ce30e8a8911a83897368030528",
+          "amount": "500000"
+        }
+      ]
+    },
+    "SUIFREN": {
+      "holders": 232,
+      "objects": 3938,
+      "marketObjects": 1,
+      "accounted": "940860331",
+      "currentSupply": "940860331",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0xb57b93772054f8ce5650eb69ffffec1fa746d39a049cd4b161b467e93b5851f0",
+          "amount": "202281012"
+        },
+        {
+          "address": "0x3f6b4ae381a5e92d0cafa8a1085177cd5629e74075798e8dda030001addabbf2",
+          "amount": "131801316"
+        },
+        {
+          "address": "0xe2bd0e8a3449b0aed9b3dc3858f1260fb7712894317307d877ae1e877b477304",
+          "amount": "100497834"
+        }
+      ]
+    },
+    "SUIPLAY0X1": {
+      "holders": 2,
+      "objects": 2,
+      "marketObjects": 0,
+      "accounted": "2000",
+      "currentSupply": "2000",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x3a366b50f2aa962c4c17e56cdbd7592e5f60461a68edb48d55183c16a4ca3b84",
+          "amount": "1000"
+        },
+        {
+          "address": "0x6efdc64b1d63d2fbdb2831f832260e81542a4190179d364312fff9c4f19a40d8",
+          "amount": "1000"
+        }
+      ]
+    },
+    "SUIS": {
+      "holders": 2599,
+      "objects": 276709,
+      "marketObjects": 525,
+      "accounted": "9749354",
+      "currentSupply": "9749354",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x0486b8b50831f1fe88f49a3f02ac58e79b6f78e9b73d2293b0c72fd97afb7f9a",
+          "amount": "390267"
+        },
+        {
+          "address": "0x87d55d66c168e8acec2ffab46bf356d99319b3c9d6dda8fee670e8e3ee62cbeb",
+          "amount": "248899"
+        },
+        {
+          "address": "0xe8e65e02da11c7675277c75ac185d11d3f0f8b80f376e0c9d6c32cd31ab8cd4c",
+          "amount": "152327"
+        }
+      ]
+    },
+    "SUIZ": {
+      "holders": 390,
+      "objects": 32393,
+      "marketObjects": 69,
+      "accounted": "16028944",
+      "currentSupply": "16028944",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x5ca3bd8d86fd1fb4c3fd7413aacf78a20617c32164dd2184ec8f86d226ffb63d",
+          "amount": "1494074"
+        },
+        {
+          "address": "0x2fe8b55ed1b797056dc9a1be421cbdedb30ec573e5192649bbad8109c9217338",
+          "amount": "965486"
+        },
+        {
+          "address": "0x1211bedf34587e9cc117cf4f99787d9955c371befdd85d1f4f38634a86f6c794",
+          "amount": "949081"
+        }
+      ]
+    },
+    "TICK": {
+      "holders": 81,
+      "objects": 589,
+      "marketObjects": 0,
+      "accounted": "589",
+      "currentSupply": "589",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0xf2744467b8c6aa67a279bf39ec46bda4018dba554a422ed05d781378c716ffb5",
+          "amount": "96"
+        },
+        {
+          "address": "0x28094682552eb18d04120750267da48c1e4ac0b79acd953ccebc2c4b53d6613c",
+          "amount": "90"
+        },
+        {
+          "address": "0xbcab0a0401e81e2d636caeb2256d0dfba74d1aed870a450dd03e84c132c8d365",
+          "amount": "53"
+        }
+      ]
+    },
+    "TROLL": {
+      "holders": 31,
+      "objects": 84,
+      "marketObjects": 1,
+      "accounted": "62500000",
+      "currentSupply": "62500000",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0xac3a46147b0801a6f8d3468a9d1c06ef28addd9616685c74837016507e99a6c8",
+          "amount": "11833334"
+        },
+        {
+          "address": "0x684d1b747e5cd8410228879d6604afb9fb02e1f32c42fe6a482dd900b7a6d38a",
+          "amount": "7500000"
+        },
+        {
+          "address": "0x219c0b1f9c737aef3cd241e6d94b4767871f4ef9aabef14f1f2cde1a16f31b68",
+          "amount": "4500000"
+        }
+      ]
+    },
+    "UPUP": {
+      "holders": 13,
+      "objects": 45,
+      "marketObjects": 0,
+      "accounted": "125766666",
+      "currentSupply": "125766666",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x47ab00599d8d7f64bfd0cf306835912449b5a50fe64cfda3294b51e1d3e2a714",
+          "amount": "74000000"
+        },
+        {
+          "address": "0xdfc4b0868ac60fd4c94252b0b1da57fd8dda6de557d00f84fe9d85b0ccf0c852",
+          "amount": "16666666"
+        },
+        {
+          "address": "0x02020e56f428ca7b692e32a7aa9f7c36576ebcda754fd61a47221102b7d7ca57",
+          "amount": "13000000"
+        }
+      ]
+    },
+    "ZODI": {
+      "holders": 126,
+      "objects": 2137,
+      "marketObjects": 0,
+      "accounted": "241513028",
+      "currentSupply": "241513028",
+      "ratio": 1,
+      "top3": [
+        {
+          "address": "0x5d6439ea5ec14ab8a67d94fe460f5479436f2e983a83e5f1d1b7b35da5bfcae7",
+          "amount": "30125000"
+        },
+        {
+          "address": "0x6445bea92ae10f7bab31782551af84338add749ae3a19a50e204eed5ef55381f",
+          "amount": "17020835"
+        },
+        {
+          "address": "0xaea9d5ec937cddf3ce39b155bf3b68ed5443dcf7c5c41b5cf8f9102e9ec80bc8",
+          "amount": "15791668"
+        }
+      ]
+    }
+  },
+  "ikunVerification": {
+    "address": "0x87d55d66c168e8acec2ffab46bf356d99319b3c9d6dda8fee670e8e3ee62cbeb",
+    "amount": "2252056619",
+    "objects": 1,
+    "rank": 4,
+    "objectId": "0xfd87059fe73643c974bfe490adf426e169fd9d1d65d01a05979843125a76dac5",
+    "objectAmount": "2252056619",
+    "holderCount": 1086,
+    "accounted": "66034185393",
+    "currentSupply": "66034185393",
+    "ratio": 1
+  }
+}
