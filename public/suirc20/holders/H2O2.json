@@ -1,7 +1,7 @@
 {
   "tick": "H2O2",
-  "updatedAtBeijing": "2026-11-04 12:02:07 Asia/Shanghai",
-  "totalHolders": 494,
+  "updatedAtBeijing": "2026-11-04 12:22:10 Asia/Shanghai",
+  "totalHolders": 496,
   "holders": [
     {
       "owner": "0xfacc0cc1bb9f39a857185a6ce9bd424c80ebe58600f3284dbd76c11fca08ead0",
@@ -1948,7 +1948,15 @@
       "balance": "7"
     },
     {
+      "owner": "0xd4f6f3534c7f26661694a3f08f9127e12ef3bc23ed82ccbc6a460350577ae63b",
+      "balance": "3"
+    },
+    {
       "owner": "0x084af807a2bae84bd1b87f1a825f492677fb453f93affd74021703a703de846a",
+      "balance": "2"
+    },
+    {
+      "owner": "0x53c30f72d86a46d9cd8f6a856b0b8f74414f72d23043e370d712187816445ed7",
       "balance": "2"
     },
     {

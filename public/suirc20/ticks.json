@@ -19,20 +19,20 @@
       "dgen"
     ],
     "progressPct": 99.9,
-    "progressLabel": "索引进度 99.9%（扫描到 2023-12-16 12:30:49 Asia/Shanghai）",
+    "progressLabel": "索引进度 99.9%（扫描到 2023-12-16 12:51:26 Asia/Shanghai）",
     "stats": {
-      "mintTx": 3346400,
+      "mintTx": 3432400,
       "transferTx": 0,
       "deployTx": 1430,
-      "mintAccepted": 1027869,
-      "mintIgnored": 2318531,
+      "mintAccepted": 1027877,
+      "mintIgnored": 2404523,
       "transferAccepted": 0,
       "transferIgnored": 0,
-      "lastTs": "2023-12-16T04:30:49.955Z",
+      "lastTs": "2023-12-16T04:51:26.361Z",
       "startedAt": "2026-11-03T02:22:48.240Z"
     },
     "tickCount": 1430,
-    "updatedAtBeijing": "2026-11-04 12:02:07 Asia/Shanghai",
+    "updatedAtBeijing": "2026-11-04 12:22:10 Asia/Shanghai",
     "complete": false
   },
   "ticks": [
@@ -47,9 +47,9 @@
       "deployTimeBeijing": "2023-12-15 23:34:13 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T15:34:13.517Z",
       "digest": "2VyEi7pLvrieZgg3TisppDMtPm8B2unvWHLunhshofhZ",
-      "minted": "9999999946",
-      "mintCount": 1005960,
-      "holderCount": 1973,
+      "minted": "9999999949",
+      "mintCount": 1005963,
+      "holderCount": 1974,
       "progress": 99.99
     },
     {
@@ -9439,10 +9439,10 @@
       "deployTimeBeijing": "2023-12-15 23:40:52 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T15:40:52.464Z",
       "digest": "2Wj2mK4WP6CG4JiYjKFWdHV8rCGCBcL4AvJaFyYjJHeQ",
-      "minted": "20999995",
-      "mintCount": 21254,
-      "holderCount": 494,
-      "progress": 99.99
+      "minted": "21000000",
+      "mintCount": 21258,
+      "holderCount": 496,
+      "progress": 100
     },
     {
       "tick": "H3CN",
@@ -19519,10 +19519,10 @@
       "deployTimeBeijing": "2023-12-16 00:29:15 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T16:29:15Z",
       "digest": "59vfLFF7khaAbRs2KgvbAai42rVEgc7pHpZWQt8iwVmL",
-      "minted": "368",
-      "mintCount": 368,
-      "holderCount": 9,
-      "progress": 3.68
+      "minted": "369",
+      "mintCount": 369,
+      "holderCount": 10,
+      "progress": 3.69
     },
     {
       "tick": "suit",
