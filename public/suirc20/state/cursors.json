@@ -14,27 +14,27 @@
     "seededFrom": "/workspace/suimint/suirc20/deploys_raw.json"
   },
   "0xe09b37505173ae119a0ae3b1fdf9050a6b029391f9d9f10a3fff27e3f3115727:mint": {
-    "after": "AAABGSgBOgsIh+GCChDOlf7MA0oICIfhggoQgwEBAIewQAEAAAAAgwAAAAAAAAA=",
+    "after": "AAABGCgBOgsIzuGCChDx/v7MA0oHCM7hggoQOQEAzrBAAQAAAAA5AAAAAAAAAA==",
     "done": false,
-    "pages": 94369,
-    "processed": 4718450
+    "pages": 94610,
+    "processed": 4730500
   },
   "0xe09b37505173ae119a0ae3b1fdf9050a6b029391f9d9f10a3fff27e3f3115727:transfer": {
-    "after": "KAE6CwjaoowKEKDrzNID",
+    "after": "AAABGCgBOgsI8K2MChDzyNDSA0oHCPCtjAoQFAEA8BZDAQAAAAAUAAAAAAAAAA==",
     "done": false,
-    "pages": 3,
-    "processed": 150
+    "pages": 4,
+    "processed": 200
   },
   "0x2dd4e2523c0121c7e8405977e1d3909a8631df313934e965c472efc941ee3484:mint": {
-    "after": "KAE6CwjbhI8KEIH7sNMD",
+    "after": "AAABGCgBOgsI2oWPChDaj7HTA0oHCNqFjwoQDgEA2sJDAQAAAAAOAAAAAAAAAA==",
     "done": false,
-    "pages": 3,
-    "processed": 150
+    "pages": 4,
+    "processed": 200
   },
   "0x2dd4e2523c0121c7e8405977e1d3909a8631df313934e965c472efc941ee3484:transfer": {
-    "after": "KAE6Cwj4xo8KELf00NMD",
+    "after": "AAABGCgBOgsIrNOPChCZq9fTA0oHCKzTjwoQCwEArOlDAQAAAAALAAAAAAAAAA==",
     "done": false,
-    "pages": 3,
-    "processed": 150
+    "pages": 4,
+    "processed": 200
   }
 }
