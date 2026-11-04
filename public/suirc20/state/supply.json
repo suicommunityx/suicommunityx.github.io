@@ -148,8 +148,8 @@
     "mintCount": 127
   },
   "SUIs": {
-    "minted": "100",
-    "mintCount": 1
+    "minted": "200",
+    "mintCount": 2
   },
   "MOON": {
     "minted": "2000",
@@ -164,8 +164,8 @@
     "mintCount": 0
   },
   "suii": {
-    "minted": "25528",
-    "mintCount": 34
+    "minted": "27528",
+    "mintCount": 36
   },
   "yhc": {
     "minted": "0",
