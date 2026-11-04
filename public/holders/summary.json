@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-11-04T10:15:10.465Z",
+  "updatedAt": "2026-11-04T13:38:14.245Z",
   "method": "object-id-partition",
   "parts": 256,
   "objectsScanned": 3940909,
   "pages": 78941,
   "checkpoints": {
-    "min": 341522500,
-    "max": 341524518
+    "min": 341571229,
+    "max": 341574407
   },
   "ticks": {
     "APTOS": {
@@ -830,16 +830,11 @@
       ]
     }
   },
-  "ikunVerification": {
+  "ikun": {
     "address": "0x87d55d66c168e8acec2ffab46bf356d99319b3c9d6dda8fee670e8e3ee62cbeb",
     "amount": "2252056619",
     "objects": 1,
     "rank": 4,
-    "objectId": "0xfd87059fe73643c974bfe490adf426e169fd9d1d65d01a05979843125a76dac5",
-    "objectAmount": "2252056619",
-    "holderCount": 1086,
-    "accounted": "66034185393",
-    "currentSupply": "66034185393",
-    "ratio": 1
+    "holderCount": 1086
   }
 }
