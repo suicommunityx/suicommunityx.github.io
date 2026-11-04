@@ -108,12 +108,12 @@
     "mintCount": 24
   },
   "MIST": {
-    "minted": "21000000",
-    "mintCount": 21
+    "minted": "34010000",
+    "mintCount": 35
   },
   "SOJU": {
-    "minted": "4900",
-    "mintCount": 58
+    "minted": "5100",
+    "mintCount": 60
   },
   "FOMO": {
     "minted": "0",
@@ -124,12 +124,12 @@
     "mintCount": 15
   },
   "SUIS": {
-    "minted": "673",
-    "mintCount": 673
+    "minted": "704",
+    "mintCount": 704
   },
   "pepe": {
-    "minted": "57000",
-    "mintCount": 57
+    "minted": "92000",
+    "mintCount": 92
   },
   "suin": {
     "minted": "41001",
@@ -216,8 +216,8 @@
     "mintCount": 101
   },
   "bonk": {
-    "minted": "220000",
-    "mintCount": 22
+    "minted": "270000",
+    "mintCount": 27
   },
   "suix": {
     "minted": "0",
