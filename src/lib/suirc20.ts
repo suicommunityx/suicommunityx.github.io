@@ -145,6 +145,8 @@ export async function loadSuirc20Holders(tick: string): Promise<{
   totalHolders: number;
   holders: Suirc20Holder[];
   source?: string;
+  /** Beijing clock stamp from the Operation holder snapshot, when the file includes one. */
+  updatedAtBeijing?: string;
 }> {
   const data = await fetchHolders(tick);
   if (data) return { ...data, source: 'suirc20/holders' };
