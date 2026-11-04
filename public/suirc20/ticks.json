@@ -19,20 +19,20 @@
       "dgen"
     ],
     "progressPct": 99.9,
-    "progressLabel": "索引进度 99.9%（扫描到 2023-12-16 14:15:18 Asia/Shanghai）",
+    "progressLabel": "索引进度 99.9%（扫描到 2023-12-16 14:29:24 Asia/Shanghai）",
     "stats": {
-      "mintTx": 3757400,
+      "mintTx": 3823400,
       "transferTx": 0,
       "deployTx": 1430,
-      "mintAccepted": 1027963,
-      "mintIgnored": 2729437,
+      "mintAccepted": 1027971,
+      "mintIgnored": 2795429,
       "transferAccepted": 0,
       "transferIgnored": 0,
-      "lastTs": "2023-12-16T06:15:18.202Z",
+      "lastTs": "2023-12-16T06:29:24.844Z",
       "startedAt": "2026-11-03T02:22:48.240Z"
     },
     "tickCount": 1430,
-    "updatedAtBeijing": "2026-11-04 14:23:34 Asia/Shanghai",
+    "updatedAtBeijing": "2026-11-04 14:47:17 Asia/Shanghai",
     "complete": false
   },
   "ticks": [
@@ -3359,10 +3359,10 @@
       "deployTimeBeijing": "2023-12-16 04:32:16 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T20:32:16.956Z",
       "digest": "HjTmC7VQzzPRnbLYBc2k8NiGsp57N7ESJw8VUy9WcMoj",
-      "minted": "110000",
-      "mintCount": 11,
-      "holderCount": 1,
-      "progress": 0.11
+      "minted": "120000",
+      "mintCount": 12,
+      "holderCount": 2,
+      "progress": 0.12
     },
     {
       "tick": "Bonk",
@@ -14623,10 +14623,10 @@
       "deployTimeBeijing": "2023-12-16 01:01:26 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T17:01:26.235Z",
       "digest": "3UgPYD9FEJ4U4Dxg2usX4bgSBNbmJNqHkpgAFXKPGK5K",
-      "minted": "25000",
-      "mintCount": 25,
-      "holderCount": 6,
-      "progress": 0.25
+      "minted": "26000",
+      "mintCount": 26,
+      "holderCount": 7,
+      "progress": 0.26
     },
     {
       "tick": "Pepe",
@@ -19519,10 +19519,10 @@
       "deployTimeBeijing": "2023-12-16 00:29:15 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T16:29:15Z",
       "digest": "59vfLFF7khaAbRs2KgvbAai42rVEgc7pHpZWQt8iwVmL",
-      "minted": "393",
-      "mintCount": 393,
-      "holderCount": 16,
-      "progress": 3.93
+      "minted": "399",
+      "mintCount": 399,
+      "holderCount": 18,
+      "progress": 3.99
     },
     {
       "tick": "suit",
