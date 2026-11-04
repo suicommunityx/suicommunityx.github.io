@@ -1,11 +1,15 @@
 {
   "tick": "pepe",
-  "updatedAtBeijing": "2026-11-04 18:24:12 Asia/Shanghai",
-  "totalHolders": 11,
+  "updatedAtBeijing": "2026-11-04 18:48:24 Asia/Shanghai",
+  "totalHolders": 14,
   "holders": [
     {
       "owner": "0x27b584b88559b00623d0014948ebc86a0a7eb1f66551cf7963566a27aaabbf23",
       "balance": "40000"
+    },
+    {
+      "owner": "0xb4449d513ccd3c7d3f54c1326b98f8e9d93c381aff7e3dd17c1158bb1f25519b",
+      "balance": "38000"
     },
     {
       "owner": "0xcbe6bc64c01f8179d15ee5002ea9864e0629651ac5c3fe86cd3249a20467e323",
@@ -16,12 +20,12 @@
       "balance": "11000"
     },
     {
-      "owner": "0x01e9a94235c63c7452a9ee6c5e9e8afda38a6f029eeb2c28ed3a6ee7f0602fd7",
-      "balance": "6000"
+      "owner": "0xf7b13ee2a4635ab99875c4070e8d18225e8f09b85b7d07d544537386097ca221",
+      "balance": "10000"
     },
     {
-      "owner": "0xb4449d513ccd3c7d3f54c1326b98f8e9d93c381aff7e3dd17c1158bb1f25519b",
-      "balance": "4000"
+      "owner": "0x01e9a94235c63c7452a9ee6c5e9e8afda38a6f029eeb2c28ed3a6ee7f0602fd7",
+      "balance": "6000"
     },
     {
       "owner": "0xaf61eb7ce951bba3dd96b9e5a969bbca0ea066398304260d823a2bcffe0911d6",
@@ -32,7 +36,15 @@
       "balance": "3000"
     },
     {
+      "owner": "0x1a4f1626cf9f89d0363f751dcba70067ef5e55823da35b9c0f48b73f7b482582",
+      "balance": "3000"
+    },
+    {
       "owner": "0xd199772c60a4a5dd8ec9983963f52587d32e472229407f70df00c47c9b44bfbc",
+      "balance": "2000"
+    },
+    {
+      "owner": "0x726780cb60d5c85e9d243b96516186b3d3d8cf194c2c34a8f16e1e909dc2cf3b",
       "balance": "2000"
     },
     {
