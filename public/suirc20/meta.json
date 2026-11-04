@@ -4,7 +4,7 @@
     "0xe09b37505173ae119a0ae3b1fdf9050a6b029391f9d9f10a3fff27e3f3115727",
     "0x2dd4e2523c0121c7e8405977e1d3909a8631df313934e965c472efc941ee3484"
   ],
-  "cb5Note": "0xcb5bd7a2… is also SuiMint (archived app mainnet package) with on-chain SUIRC20Tick; not merged into this Operation-witness ledger. Index Operation JSON only.",
+  "cb5Note": "0xcb5bd7a2… Operation-witness ledger only; not merged.",
   "rules": {
     "caseSensitive": true,
     "firstDeployWins": true,
@@ -17,18 +17,22 @@
     "suis",
     "dgen"
   ],
+  "progressPct": 99.9,
+  "progressLabel": "索引进度 99.9%（扫描到 2023-12-21 10:56:27 Asia/Shanghai）",
   "stats": {
-    "mintTx": 4710400,
-    "transferTx": 0,
+    "mintTx": 16491068,
+    "transferTx": 8932,
     "deployTx": 1430,
-    "mintAccepted": 1029066,
-    "mintIgnored": 3681334,
-    "transferAccepted": 0,
-    "transferIgnored": 0,
-    "lastTs": "2023-12-16T08:53:20.222Z",
-    "startedAt": "2026-11-03T02:22:48.240Z"
+    "mintAccepted": 3986207,
+    "mintIgnored": 12504861,
+    "transferAccepted": 4927,
+    "transferIgnored": 4005,
+    "lastTs": "2023-12-21T02:56:27.358Z",
+    "lastCheckpoint": 21430796,
+    "startedAt": "2026-11-04T15:29:41.993Z"
   },
   "tickCount": 1430,
-  "updatedAtBeijing": "2026-11-04 20:29:57 Asia/Shanghai",
-  "complete": false
+  "updatedAtBeijing": "2026-11-04 23:37:05 Asia/Shanghai",
+  "complete": false,
+  "pipeline": "fetch-parallel+apply-ordered"
 }

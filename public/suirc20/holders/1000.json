@@ -1,6 +1,1 @@
-{
-  "tick": "1000",
-  "updatedAtBeijing": "2026-11-03 10:28:55 Asia/Shanghai",
-  "totalHolders": 0,
-  "holders": []
-}
+{"tick":"1000","updatedAtBeijing":"2026-11-04 23:36:04 Asia/Shanghai","totalHolders":4,"holders":[{"owner":"0xdd2d2d93e450f04bb58b005e338844f67d43964e808e0ab6a9c582b4629c8fec","balance":"7000"},{"owner":"0x3e2d05dce65f7fedb90321a36350f5306255ee04b963bfff73843e0a2891d132","balance":"6000"},{"owner":"0xf55db781a3592895eb271b40bd1252a54bcd186371d39a0cb133164b38c255d8","balance":"6000"},{"owner":"0x5c6f8b0dab09ffe75862a7772261d48a0848de82b4417485905cd17f68a01c09","balance":"3"}]}

@@ -1,9 +1,1 @@
-{
-  "0x6d5c64ddb4aabe5c967c4dcdb534a22acd9265a97a28676f90f42664c39e2b7b": {
-    "H2O2": "1000",
-    "suis": "20000"
-  },
-  "0x6d5cfb30f8c0f8ccc02e38f094c1c57c3b67b478521790ff2ce95160c2c4d5bd": {
-    "suis": "5000000"
-  }
-}
+{"0x6d5c64ddb4aabe5c967c4dcdb534a22acd9265a97a28676f90f42664c39e2b7b":{"H2O2":"1000","suis":"20000"},"0x6d5cfb30f8c0f8ccc02e38f094c1c57c3b67b478521790ff2ce95160c2c4d5bd":{"suis":"9230000"}}
