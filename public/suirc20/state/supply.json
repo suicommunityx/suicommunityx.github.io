@@ -104,12 +104,12 @@
     "mintCount": 21258
   },
   "EVAN": {
-    "minted": "210",
-    "mintCount": 21
+    "minted": "240",
+    "mintCount": 24
   },
   "MIST": {
-    "minted": "11000000",
-    "mintCount": 11
+    "minted": "21000000",
+    "mintCount": 21
   },
   "SOJU": {
     "minted": "4900",
@@ -124,12 +124,12 @@
     "mintCount": 15
   },
   "SUIS": {
-    "minted": "637",
-    "mintCount": 637
+    "minted": "673",
+    "mintCount": 673
   },
   "pepe": {
-    "minted": "48000",
-    "mintCount": 48
+    "minted": "57000",
+    "mintCount": 57
   },
   "suin": {
     "minted": "41001",
@@ -224,8 +224,8 @@
     "mintCount": 0
   },
   "SUIX": {
-    "minted": "0",
-    "mintCount": 0
+    "minted": "2000",
+    "mintCount": 2
   },
   "sus": {
     "minted": "0",

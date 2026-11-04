@@ -1,0 +1,11 @@
+{
+  "tick": "SUIX",
+  "updatedAtBeijing": "2026-11-04 18:00:28 Asia/Shanghai",
+  "totalHolders": 1,
+  "holders": [
+    {
+      "owner": "0xd575c6b8134917118ff50f2dd05e743fb3eb6e42763f7ab3d628be0ab89727af",
+      "balance": "2000"
+    }
+  ]
+}
