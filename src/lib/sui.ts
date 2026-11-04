@@ -12,6 +12,7 @@ import {
   MOVESCRIPTION_TYPE,
   TYPE_PACKAGE,
 } from './constants';
+import { readInscriptionName, readMoveString } from './inscriptionName';
 import {
   cacheGet,
   cacheSet,
@@ -125,7 +126,13 @@ export async function enrichTickStartTimes(ticks: TickInfo[]): Promise<TickInfo[
 
 export type MovescriptionHolding = {
   objectId: string;
+  /** Protocol tick (`MOVE`, `TICK`, …). Case-sensitive. TICK/NAME objects do not store the inscribed string here. */
   tick: string;
+  /**
+   * Human-readable string from metadata (e.g. a TICK name such as `SUIFRENS`, or a NAME such as `berich`).
+   * Null when the object has no text metadata — use `tick` for ordinary inscriptions.
+   */
+  inscriptionName: string | null;
   amount: bigint;
   acc: bigint;
   version: string;
@@ -320,7 +327,8 @@ export async function loadOwnedMovescriptions(owner: string): Promise<Movescript
           : BigInt(accRaw || 0);
       out.push({
         objectId: row.data!.objectId,
-        tick: f.tick,
+        tick: readMoveString(f.tick),
+        inscriptionName: readInscriptionName(f.metadata),
         amount: BigInt(f.amount || 0),
         acc,
         version: String(row.data!.version),

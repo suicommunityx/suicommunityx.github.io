@@ -26,6 +26,7 @@ import {
   enrichTickStartTimes,
 } from './lib/sui';
 import { formatAmount, formatShanghai, isValidSuiAddress, mistToSui, shortAddr } from './lib/format';
+import { holdingLabel } from './lib/inscriptionName';
 import { SITE_NAME } from './lib/constants';
 import { useToast } from './lib/toast';
 import { useSignAndExecuteTransaction } from '@mysten/dapp-kit';
@@ -130,11 +131,13 @@ export default function App() {
   const [xferSheet, setXferSheet] = useState<null | {
     objectId: string;
     tick: string;
+    inscriptionName: string | null;
     amount: bigint;
   }>(null);
   const [listSheet, setListSheet] = useState<null | {
     objectId: string;
     tick: string;
+    inscriptionName: string | null;
     amount: bigint;
     marketId: string;
   }>(null);
@@ -564,7 +567,7 @@ useEffect(() => {
                   <option value="">选择钱包中的铭文对象</option>
                   {holdings.map((h) => (
                     <option key={h.objectId} value={h.objectId}>
-                      {h.tick} · {formatAmount(h.amount)} · {shortAddr(h.objectId, 8)}
+                      {holdingLabel(h)} · {formatAmount(h.amount)} · {shortAddr(h.objectId, 8)}
                     </option>
                   ))}
                 </select>
@@ -659,7 +662,7 @@ useEffect(() => {
                     .filter((h) => h.tick === 'TICK')
                     .map((h) => (
                       <option key={h.objectId} value={h.objectId}>
-                        {h.objectId.slice(0, 10)}…{h.objectId.slice(-6)}
+                        {holdingLabel(h)} · {shortAddr(h.objectId, 10)}
                       </option>
                     ))}
                 </select>
@@ -789,7 +792,10 @@ useEffect(() => {
                     {items.map((h) => (
                       <li key={h.objectId}>
                         <div>
-                          <div className="mono">{shortAddr(h.objectId, 10)}</div>
+                          <div className="obj-tick-name">{holdingLabel(h)}</div>
+                          <div className="mono obj-id" title={h.objectId}>
+                            {shortAddr(h.objectId, 10)}
+                          </div>
                           <div className="muted">数量 {formatAmount(h.amount)}</div>
                         </div>
                         <div className="row gap wrap">
@@ -802,6 +808,7 @@ useEffect(() => {
                               setXferSheet({
                                 objectId: h.objectId,
                                 tick: h.tick,
+                                inscriptionName: h.inscriptionName,
                                 amount: h.amount,
                               });
                             }}
@@ -819,6 +826,7 @@ useEffect(() => {
                               setListSheet({
                                 objectId: h.objectId,
                                 tick: h.tick,
+                                inscriptionName: h.inscriptionName,
                                 amount: h.amount,
                                 marketId,
                               });
@@ -1086,7 +1094,11 @@ useEffect(() => {
       <FormModal
         open={!!xferSheet}
         title="转账铭文"
-        subtitle={xferSheet ? `${xferSheet.tick} · 数量 ${formatAmount(xferSheet.amount)}` : undefined}
+        subtitle={
+          xferSheet
+            ? `${holdingLabel(xferSheet)} · 数量 ${formatAmount(xferSheet.amount)}`
+            : undefined
+        }
         busy={busy}
         onClose={() => {
           if (!busy) {
@@ -1138,7 +1150,7 @@ useEffect(() => {
                     title: '拆分并转账',
                     summary: (
                       <ul className="summary">
-                        <li>Tick：{h.tick}</li>
+                        <li>Tick：{holdingLabel(h)}</li>
                         <li>
                           对象：<span className="mono-break">{h.objectId}</span>
                         </li>
@@ -1156,7 +1168,7 @@ useEffect(() => {
                   title: '转账铭文',
                   summary: (
                     <ul className="summary">
-                      <li>Tick：{h.tick}</li>
+                      <li>Tick：{holdingLabel(h)}</li>
                       <li>
                         对象：<span className="mono-break">{h.objectId}</span>
                       </li>
@@ -1180,7 +1192,7 @@ useEffect(() => {
             <div className="sheet-meta">
               <div className="sheet-meta-row">
                 <span className="label">铭文</span>
-                <span className="value">{xferSheet.tick}</span>
+                <span className="value">{holdingLabel(xferSheet)}</span>
               </div>
               <div className="sheet-meta-row">
                 <span className="label">数量</span>
@@ -1221,7 +1233,7 @@ useEffect(() => {
 
       <FormModal
         open={!!listSheet}
-        title={listSheet ? `挂单 ${listSheet.tick}` : '挂单'}
+        title={listSheet ? `挂单 ${holdingLabel(listSheet)}` : '挂单'}
         subtitle="设置单价后确认签名"
         busy={busy}
         onClose={() => {
@@ -1264,7 +1276,7 @@ useEffect(() => {
                 setListSheet(null);
                 setSheetErr(null);
                 ask({
-                  title: `挂单 ${h.tick}`,
+                  title: `挂单 ${holdingLabel(h)}`,
                   summary: (
                     <ul className="summary">
                       <li>
@@ -1291,7 +1303,7 @@ useEffect(() => {
             <div className="sheet-meta">
               <div className="sheet-meta-row">
                 <span className="label">铭文</span>
-                <span className="value">{listSheet.tick}</span>
+                <span className="value">{holdingLabel(listSheet)}</span>
               </div>
               <div className="sheet-meta-row">
                 <span className="label">数量</span>
