@@ -1,7 +1,7 @@
 {
   "tick": "SUIS",
-  "updatedAtBeijing": "2026-11-04 13:32:11 Asia/Shanghai",
-  "totalHolders": 13,
+  "updatedAtBeijing": "2026-11-04 14:02:17 Asia/Shanghai",
+  "totalHolders": 15,
   "holders": [
     {
       "owner": "0xa979c47a282f116d2e03b1fd0ab5b8d47a9afc1f1def8fc7b643b84ef5ef8491",
@@ -32,6 +32,10 @@
       "balance": "5"
     },
     {
+      "owner": "0xa376e409e28dfc84e54ea4a7cb83b372b8c258fe2520c661e3588bf99e4aa0c0",
+      "balance": "4"
+    },
+    {
       "owner": "0x144dcdce794c0a43317be66ab3f526e4faf5ff2da33500c8792a6d3c991a4855",
       "balance": "2"
     },
@@ -53,6 +57,10 @@
     },
     {
       "owner": "0x746e277daad210edce0cead5587f91974fd06ae123a858bed20f3dbafffb9343",
+      "balance": "1"
+    },
+    {
+      "owner": "0x5e74da7e37a86760a5de29ed21e54141ed6165e9e96df7d7c96c77369adcb386",
       "balance": "1"
     }
   ]
