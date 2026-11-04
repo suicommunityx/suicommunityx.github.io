@@ -1,7 +1,7 @@
 {
   "tick": "EVAN",
-  "updatedAtBeijing": "2026-11-04 19:09:54 Asia/Shanghai",
-  "totalHolders": 15,
+  "updatedAtBeijing": "2026-11-04 19:30:02 Asia/Shanghai",
+  "totalHolders": 16,
   "holders": [
     {
       "owner": "0x4784532e1a7e092fe1fa70ada21d1f56d2222e666cdc53dee75a1c2d898c5419",
@@ -61,6 +61,10 @@
     },
     {
       "owner": "0x0585ec44b095538536ccfc1f8d689be468bab9175c5d8ab53e3df313e1ccd176",
+      "balance": "10"
+    },
+    {
+      "owner": "0x85bcb68a3727942590aa692dc43ed74402b4a324713c80476421942570f40616",
       "balance": "10"
     }
   ]

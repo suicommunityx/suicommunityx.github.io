@@ -19,20 +19,20 @@
       "dgen"
     ],
     "progressPct": 99.9,
-    "progressLabel": "索引进度 99.9%（扫描到 2023-12-16 16:28:35 Asia/Shanghai）",
+    "progressLabel": "索引进度 99.9%（扫描到 2023-12-16 16:36:01 Asia/Shanghai）",
     "stats": {
-      "mintTx": 4504400,
+      "mintTx": 4574400,
       "transferTx": 0,
       "deployTx": 1430,
-      "mintAccepted": 1028879,
-      "mintIgnored": 3475521,
+      "mintAccepted": 1028936,
+      "mintIgnored": 3545464,
       "transferAccepted": 0,
       "transferIgnored": 0,
-      "lastTs": "2023-12-16T08:28:35.305Z",
+      "lastTs": "2023-12-16T08:36:01.924Z",
       "startedAt": "2026-11-03T02:22:48.240Z"
     },
     "tickCount": 1430,
-    "updatedAtBeijing": "2026-11-04 19:09:54 Asia/Shanghai",
+    "updatedAtBeijing": "2026-11-04 19:30:02 Asia/Shanghai",
     "complete": false
   },
   "ticks": [
@@ -3359,10 +3359,10 @@
       "deployTimeBeijing": "2023-12-16 04:32:16 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T20:32:16.956Z",
       "digest": "HjTmC7VQzzPRnbLYBc2k8NiGsp57N7ESJw8VUy9WcMoj",
-      "minted": "408000",
-      "mintCount": 48,
-      "holderCount": 8,
-      "progress": 0.4
+      "minted": "498000",
+      "mintCount": 57,
+      "holderCount": 10,
+      "progress": 0.49
     },
     {
       "tick": "Bonk",
@@ -7263,9 +7263,9 @@
       "deployTimeBeijing": "2023-12-15 23:59:40 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T15:59:40.658Z",
       "digest": "XhVAckfNcRfA9WQ8H8faebWQSMHvaNRgJfTjt6SefFZ",
-      "minted": "420",
-      "mintCount": 42,
-      "holderCount": 15,
+      "minted": "430",
+      "mintCount": 43,
+      "holderCount": 16,
       "progress": 0
     },
     {
@@ -8015,10 +8015,10 @@
       "deployTimeBeijing": "2023-12-16 00:21:30 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T16:21:30.881Z",
       "digest": "AkP85eHAKghhfRBURe846hZScrG8UVy4KrmPCPa8MnfF",
-      "minted": "0",
-      "mintCount": 0,
-      "holderCount": 0,
-      "progress": 0
+      "minted": "100000",
+      "mintCount": 10,
+      "holderCount": 1,
+      "progress": 0.01
     },
     {
       "tick": "FOND",
@@ -12687,8 +12687,8 @@
       "deployTimeBeijing": "2023-12-16 01:19:09 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T17:19:09.339Z",
       "digest": "88gzsyFHaXgeR6pEa85VimWKRw9m8VuiefcttQWmN4tx",
-      "minted": "27469666",
-      "mintCount": 64,
+      "minted": "27479666",
+      "mintCount": 65,
       "holderCount": 11,
       "progress": 0
     },
@@ -12703,8 +12703,8 @@
       "deployTimeBeijing": "2023-12-16 00:11:38 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T16:11:38.484Z",
       "digest": "Hyk12TzurpELwSwGB2khAmxUA5LhoS2HwqwJ5iBSQfXh",
-      "minted": "48010010",
-      "mintCount": 59,
+      "minted": "69010010",
+      "mintCount": 80,
       "holderCount": 9,
       "progress": 0
     },
@@ -17903,9 +17903,9 @@
       "deployTimeBeijing": "2023-12-16 00:16:43 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T16:16:43.242Z",
       "digest": "CKhvmME3zmvbjiiE7HTmPGoFXHq3qZULh1h3HKzT5bgc",
-      "minted": "5200",
-      "mintCount": 61,
-      "holderCount": 5,
+      "minted": "6200",
+      "mintCount": 71,
+      "holderCount": 6,
       "progress": 0
     },
     {
@@ -19327,10 +19327,10 @@
       "deployTimeBeijing": "2023-12-16 01:02:01 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T17:02:01.955Z",
       "digest": "8g3hRdQWsqn4Lsje9oocFLN26tjsef8RKEypW4GwLLen",
-      "minted": "201001",
-      "mintCount": 22,
+      "minted": "241001",
+      "mintCount": 26,
       "holderCount": 5,
-      "progress": 0.2
+      "progress": 0.24
     },
     {
       "tick": "SUIN",
@@ -19519,10 +19519,10 @@
       "deployTimeBeijing": "2023-12-16 00:29:15 Asia/Shanghai",
       "deployTimeUtc": "2023-12-15T16:29:15Z",
       "digest": "59vfLFF7khaAbRs2KgvbAai42rVEgc7pHpZWQt8iwVmL",
-      "minted": "787",
-      "mintCount": 787,
-      "holderCount": 50,
-      "progress": 7.87
+      "minted": "788",
+      "mintCount": 788,
+      "holderCount": 51,
+      "progress": 7.88
     },
     {
       "tick": "suit",
