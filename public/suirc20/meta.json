@@ -18,8 +18,8 @@
     "dgen"
   ],
   "progressPct": 100,
-  "progressLabel": "1430 ticks \u00b7 \u626b\u63cf\u5230 2026-11-06 00:34:20 Asia/Shanghai \u00b7 CP 341974346",
-  "scannedTo": "2026-11-05T16:34:20.136Z",
+  "progressLabel": "1430 ticks \u00b7 \u626b\u63cf\u5230 2026-11-06 02:37:08 Asia/Shanghai \u00b7 CP 342005051",
+  "scannedTo": "2026-11-05T18:37:08.187Z",
   "stats": {
     "mintTx": 28609260,
     "transferTx": 16438,
@@ -28,14 +28,14 @@
     "mintIgnored": 12723449,
     "transferAccepted": 10935,
     "transferIgnored": 5503,
-    "lastTs": "2026-11-05T16:34:20.136Z",
-    "lastCheckpoint": 341974346,
+    "lastTs": "2026-11-05T18:37:08.187Z",
+    "lastCheckpoint": 342005051,
     "startedAt": "2026-11-04T18:08:10.513Z",
     "finishedAt": "2026-11-04T18:17:13.443Z",
     "dupesSkipped": 0
   },
   "tickCount": 1430,
-  "updatedAtBeijing": "2026-11-06 00:34:23 Asia/Shanghai",
+  "updatedAtBeijing": "2026-11-06 02:37:30 Asia/Shanghai",
   "complete": true,
   "pipeline": "fetch-parallel+apply-ordered"
 }
