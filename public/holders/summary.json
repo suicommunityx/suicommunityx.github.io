@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-11-07T07:39:31.939Z",
+  "updatedAt": "2026-11-07T13:24:29.614Z",
   "method": "object-id-partition",
   "parts": 256,
   "objectsScanned": 3940909,
   "pages": 78941,
   "checkpoints": {
-    "min": 342561056,
-    "max": 342566285
+    "min": 342648627,
+    "max": 342652423
   },
   "ticks": {
     "APTOS": {
