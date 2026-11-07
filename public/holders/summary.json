@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-11-07T01:32:04.589Z",
+  "updatedAt": "2026-11-07T07:39:31.939Z",
   "method": "object-id-partition",
   "parts": 256,
   "objectsScanned": 3940909,
   "pages": 78941,
   "checkpoints": {
-    "min": 342469780,
-    "max": 342473136
+    "min": 342561056,
+    "max": 342566285
   },
   "ticks": {
     "APTOS": {
@@ -372,7 +372,7 @@
       ]
     },
     "MOVE": {
-      "holders": 28168,
+      "holders": 28167,
       "objects": 1733128,
       "marketObjects": 7664,
       "accounted": "2702672901",
